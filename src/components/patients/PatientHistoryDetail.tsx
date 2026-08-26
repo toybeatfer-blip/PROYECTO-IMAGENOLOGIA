@@ -1,5 +1,4 @@
-import React from 'react';
-import { Patient, MedicalStudy, Appointment } from '../../types';
+import { Patient, MedicalStudy, Appointment, ClinicSettings } from '../../types';
 import {
   User,
   ArrowLeft,
@@ -17,13 +16,16 @@ import {
   Activity,
   AlertTriangle,
   ExternalLink,
+  Share2,
 } from 'lucide-react';
 import { openStudyInStandaloneWindow } from '../../utils/windowSync';
+import { ShareStudyModal } from '../studies/ShareStudyModal';
 
 interface PatientHistoryDetailProps {
   patient: Patient;
   studies: MedicalStudy[];
   appointments: Appointment[];
+  clinicSettings?: ClinicSettings;
   onBack: () => void;
   onOpenViewerWithStudy: (studyId: string) => void;
   onOpenNewAppointmentForPatient: (patientId: string) => void;
@@ -35,6 +37,7 @@ export const PatientHistoryDetail: React.FC<PatientHistoryDetailProps> = ({
   patient,
   studies,
   appointments,
+  clinicSettings,
   onBack,
   onOpenViewerWithStudy,
   onOpenNewAppointmentForPatient,
@@ -42,6 +45,7 @@ export const PatientHistoryDetail: React.FC<PatientHistoryDetailProps> = ({
   onOpenPatientPortal,
 }) => {
   const [copiedCredentials, setCopiedCredentials] = React.useState(false);
+  const [selectedStudyForShare, setSelectedStudyForShare] = React.useState<MedicalStudy | null>(null);
 
   // Find all studies belonging to this patient
   const patientStudies = studies.filter(
@@ -336,6 +340,14 @@ export const PatientHistoryDetail: React.FC<PatientHistoryDetailProps> = ({
                         <ExternalLink className="w-3.5 h-3.5" />
                         <span className="hidden sm:inline">Pantalla 2</span>
                       </button>
+
+                      <button
+                        onClick={() => setSelectedStudyForShare(st)}
+                        className="p-2 bg-emerald-950/80 hover:bg-emerald-900 text-emerald-300 border border-emerald-700/80 rounded-lg text-xs font-bold transition-all cursor-pointer"
+                        title="Compartir estudio por WhatsApp o enlace"
+                      >
+                        <Share2 className="w-3.5 h-3.5" />
+                      </button>
                     </div>
                   </div>
                 );
@@ -344,6 +356,15 @@ export const PatientHistoryDetail: React.FC<PatientHistoryDetailProps> = ({
           )}
         </div>
       </div>
+
+      {/* Share Study Modal */}
+      {selectedStudyForShare && (
+        <ShareStudyModal
+          study={selectedStudyForShare}
+          clinicSettings={clinicSettings}
+          onClose={() => setSelectedStudyForShare(null)}
+        />
+      )}
     </div>
   );
 };

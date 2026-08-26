@@ -1070,6 +1070,7 @@ export default function App() {
               patient={currentPatientDetail}
               studies={studies}
               appointments={appointments}
+              clinicSettings={clinicSettings}
               onBack={() => setSelectedPatientIdForDetail(null)}
               onOpenViewerWithStudy={handleOpenViewerWithStudy}
               onOpenNewAppointmentForPatient={handleOpenNewAppointmentForPatient}
@@ -1094,6 +1095,7 @@ export default function App() {
         {activeTab === 'ESTUDIOS' && (
           <StudiesDirectory
             studies={studies}
+            clinicSettings={clinicSettings}
             onOpenViewerWithStudy={handleOpenViewerWithStudy}
             onSelectPatient={handleSelectPatientProfile}
             onOpenUploadModal={() => setShowUploadStudyModal(true)}

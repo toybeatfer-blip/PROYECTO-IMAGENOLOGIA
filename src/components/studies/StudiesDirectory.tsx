@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MedicalStudy, ModalityType } from '../../types';
+import { MedicalStudy, ModalityType, ClinicSettings } from '../../types';
 import { MODALITY_CONFIG } from '../../data/initialData';
 import {
   Layers,
@@ -15,11 +15,14 @@ import {
   Upload,
   Plus,
   ExternalLink,
+  Share2,
 } from 'lucide-react';
 import { openStudyInStandaloneWindow } from '../../utils/windowSync';
+import { ShareStudyModal } from './ShareStudyModal';
 
 interface StudiesDirectoryProps {
   studies: MedicalStudy[];
+  clinicSettings?: ClinicSettings;
   onOpenViewerWithStudy: (studyId: string) => void;
   onSelectPatient: (patientId: string) => void;
   onOpenUploadModal?: () => void;
@@ -27,6 +30,7 @@ interface StudiesDirectoryProps {
 
 export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
   studies,
+  clinicSettings,
   onOpenViewerWithStudy,
   onSelectPatient,
   onOpenUploadModal,
@@ -34,8 +38,9 @@ export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedModality, setSelectedModality] = useState<string>('ALL');
   const [reportStatusFilter, setReportStatusFilter] = useState<'ALL' | 'SIGNED' | 'PENDING'>('ALL');
+  const [selectedStudyForShare, setSelectedStudyForShare] = useState<MedicalStudy | null>(null);
 
-  // Custom ordered modalities as requested by user
+  // Custom ordered modalities
   const MODALITY_ORDER: { key: string; label: string }[] = [
     { key: 'ULTRASONIDO', label: 'Ultrasonido' },
     { key: 'DENSITOMETRIA', label: 'Densitometría' },
@@ -65,7 +70,7 @@ export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
   });
 
   return (
-    <div className="flex-1 flex flex-col h-full bg-zinc-950 text-zinc-100 overflow-hidden select-none">
+    <div className="flex-1 flex flex-col h-full bg-zinc-950 text-zinc-100 overflow-hidden select-none antialiased">
       {/* Top Header */}
       <div className="p-4 bg-zinc-900 border-b border-zinc-800 flex flex-wrap items-center justify-between gap-4">
         <div>
@@ -74,7 +79,7 @@ export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
             <span>Repositorio de Estudios e Imágenes Médicas (PACS)</span>
           </h2>
           <p className="text-xs text-zinc-400">
-            Catálogo central de ultrasonidos, densitometrías, radiografías y resonancias magnéticas
+            Archivo digital central de ultrasonidos, densitometrías, radiografías y resonancias magnéticas
           </p>
         </div>
 
@@ -86,7 +91,7 @@ export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
           {onOpenUploadModal && (
             <button
               onClick={onOpenUploadModal}
-              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl text-xs font-bold transition-all shadow-md active:scale-[0.99]"
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl text-xs font-bold transition-all shadow-md active:scale-[0.99] cursor-pointer"
             >
               <Upload className="w-4 h-4" />
               <span>Cargar / Importar Estudio</span>
@@ -102,39 +107,39 @@ export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
           <Search className="w-4 h-4 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Buscar por paciente, DNI, accession # o indicación..."
+            placeholder="Buscar por paciente, DNI, accession, estudio o indicación..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            className="w-full bg-zinc-950 border border-zinc-800 rounded-lg pl-9 pr-4 py-1.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-500"
+            className="w-full bg-zinc-950 border border-zinc-700 rounded-lg pl-9 pr-4 py-1.5 text-xs text-white placeholder-zinc-500 focus:outline-hidden focus:border-cyan-500"
           />
         </div>
 
-        {/* Modality Filter Pills - User Requested Order */}
+        {/* Modality Filter Pills */}
         <div className="flex items-center gap-1.5 overflow-x-auto py-1">
           <button
             onClick={() => setSelectedModality('ALL')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
+            className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
               selectedModality === 'ALL'
-                ? 'bg-neutral-800 text-white border-white/20 shadow-xs'
-                : 'bg-neutral-950 text-neutral-400 border-neutral-800 hover:text-white hover:border-neutral-700'
+                ? 'bg-cyan-600 text-white font-semibold'
+                : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
             }`}
           >
             Todas ({studies.length})
           </button>
-          {MODALITY_ORDER.map(item => {
-            const isSel = selectedModality === item.key;
-            const count = studies.filter(s => s.modality === item.key).length;
+          {MODALITY_ORDER.map(mod => {
+            const count = studies.filter(s => s.modality === mod.key).length;
+            const isSelected = selectedModality === mod.key;
             return (
               <button
-                key={item.key}
-                onClick={() => setSelectedModality(item.key)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
-                  isSel
-                    ? 'bg-cyan-950 text-cyan-300 border-cyan-500 shadow-xs'
-                    : 'bg-neutral-950 text-neutral-400 border-neutral-800 hover:text-white hover:border-neutral-700'
+                key={mod.key}
+                onClick={() => setSelectedModality(mod.key)}
+                className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors whitespace-nowrap cursor-pointer ${
+                  isSelected
+                    ? 'bg-cyan-600 text-white font-semibold'
+                    : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
                 }`}
               >
-                {item.label} ({count})
+                {mod.label} ({count})
               </button>
             );
           })}
@@ -144,7 +149,7 @@ export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
         <select
           value={reportStatusFilter}
           onChange={e => setReportStatusFilter(e.target.value as any)}
-          className="bg-zinc-950 border border-zinc-800 text-zinc-300 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-cyan-500"
+          className="bg-zinc-950 border border-zinc-800 text-zinc-300 text-xs rounded-lg px-3 py-1.5 focus:outline-hidden focus:border-cyan-500 cursor-pointer"
         >
           <option value="ALL">Todos los Informes</option>
           <option value="SIGNED">Solo con Informe Firmado</option>
@@ -241,10 +246,10 @@ export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
                   </div>
 
                   {/* Actions */}
-                  <div className="flex items-center gap-2 pt-1">
+                  <div className="flex items-center gap-1.5 pt-1">
                     <button
                       onClick={() => onOpenViewerWithStudy(st.id)}
-                      className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg text-xs font-semibold shadow-sm transition-all cursor-pointer"
+                      className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg text-xs font-semibold shadow-xs transition-all cursor-pointer"
                     >
                       <Eye className="w-3.5 h-3.5" />
                       <span>Abrir Visor</span>
@@ -252,11 +257,19 @@ export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
 
                     <button
                       onClick={() => openStudyInStandaloneWindow(st.id)}
-                      className="flex items-center justify-center gap-1.5 py-2 px-3 bg-zinc-800 hover:bg-cyan-950 text-cyan-300 hover:text-cyan-200 border border-zinc-700 hover:border-cyan-600 rounded-lg text-xs font-bold transition-all cursor-pointer"
+                      className="flex items-center justify-center gap-1.5 py-2 px-2.5 bg-zinc-800 hover:bg-cyan-950 text-cyan-300 hover:text-cyan-200 border border-zinc-700 hover:border-cyan-600 rounded-lg text-xs font-bold transition-all cursor-pointer"
                       title="Abrir estudio en ventana independiente para segunda pantalla"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                       <span className="hidden sm:inline">Pantalla 2</span>
+                    </button>
+
+                    <button
+                      onClick={() => setSelectedStudyForShare(st)}
+                      className="p-2 bg-emerald-950/80 hover:bg-emerald-900 text-emerald-300 border border-emerald-700/80 rounded-lg text-xs font-bold transition-all cursor-pointer"
+                      title="Compartir por WhatsApp o enlace rápido"
+                    >
+                      <Share2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
                 </div>
@@ -265,6 +278,15 @@ export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
           })
         )}
       </div>
+
+      {/* Share Study Modal */}
+      {selectedStudyForShare && (
+        <ShareStudyModal
+          study={selectedStudyForShare}
+          clinicSettings={clinicSettings}
+          onClose={() => setSelectedStudyForShare(null)}
+        />
+      )}
     </div>
   );
 };
