@@ -107,18 +107,37 @@ export const PatientList: React.FC<PatientListProps> = ({
       {/* Patient List */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {filteredPatients.length === 0 ? (
-          <div className="text-center py-16 text-neutral-500 space-y-2">
-            <Users className="w-10 h-10 mx-auto text-neutral-600 opacity-50" />
-            <p className="text-sm font-medium">No se encontraron pacientes con los criterios de búsqueda.</p>
-            <button
-              onClick={() => {
-                setSearchQuery('');
-                setFilterSafetyAlert(false);
-              }}
-              className="text-xs text-cyan-400 hover:underline"
-            >
-              Restablecer búsqueda
-            </button>
+          <div className="text-center py-16 text-neutral-500 space-y-3">
+            <Users className="w-12 h-12 mx-auto text-neutral-600 opacity-50" />
+            <div>
+              <p className="text-sm font-bold text-white">
+                {patients.length === 0 ? 'No hay pacientes registrados todavía' : 'No se encontraron pacientes'}
+              </p>
+              <p className="text-xs text-neutral-400 mt-1 max-w-sm mx-auto">
+                {patients.length === 0
+                  ? 'Comience registrando el expediente del primer paciente de su consultorio.'
+                  : 'Ningún paciente coincide con los filtros o término de búsqueda.'}
+              </p>
+            </div>
+            {patients.length === 0 ? (
+              <button
+                onClick={onOpenNewPatientModal}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl text-xs font-bold shadow-md cursor-pointer transition-all"
+              >
+                <Plus className="w-4 h-4" />
+                <span>+ Registrar Primer Paciente</span>
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  setSearchQuery('');
+                  setFilterSafetyAlert(false);
+                }}
+                className="text-xs text-cyan-400 hover:underline cursor-pointer"
+              >
+                Restablecer búsqueda
+              </button>
+            )}
           </div>
         ) : (
           filteredPatients.map(patient => {

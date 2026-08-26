@@ -155,9 +155,27 @@ export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
       {/* Studies Grid */}
       <div className="flex-1 overflow-y-auto p-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {filteredStudies.length === 0 ? (
-          <div className="col-span-full text-center py-16 text-zinc-500 space-y-2">
-            <Layers className="w-10 h-10 mx-auto text-zinc-600 opacity-50" />
-            <p className="text-sm font-medium">No se encontraron estudios con los filtros seleccionados.</p>
+          <div className="col-span-full text-center py-16 text-zinc-500 space-y-3">
+            <Layers className="w-12 h-12 mx-auto text-zinc-600 opacity-50" />
+            <div>
+              <p className="text-sm font-bold text-white">
+                {studies.length === 0 ? 'No hay estudios en el archivo PACS todavía' : 'No se encontraron estudios'}
+              </p>
+              <p className="text-xs text-zinc-400 mt-1 max-w-sm mx-auto">
+                {studies.length === 0
+                  ? 'Cargue o importe estudios de ultrasonido, densitometría, rayos X o resonancia para visualizarlos.'
+                  : 'Ningún estudio coincide con los filtros aplicados.'}
+              </p>
+            </div>
+            {studies.length === 0 && onOpenUploadModal && (
+              <button
+                onClick={onOpenUploadModal}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl text-xs font-bold shadow-md cursor-pointer transition-all"
+              >
+                <Plus className="w-4 h-4" />
+                <span>+ Cargar / Importar Primer Estudio</span>
+              </button>
+            )}
           </div>
         ) : (
           filteredStudies.map(st => {
