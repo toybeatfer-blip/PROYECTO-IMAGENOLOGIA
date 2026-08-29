@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Patient, MedicalStudy, Appointment, ClinicSettings } from '../../types';
 import {
   User,

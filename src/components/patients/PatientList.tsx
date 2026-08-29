@@ -10,6 +10,7 @@ import {
   Activity,
   FileCheck2,
   Calendar,
+  Plus,
 } from 'lucide-react';
 
 interface PatientListProps {

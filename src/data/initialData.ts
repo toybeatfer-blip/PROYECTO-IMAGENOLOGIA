@@ -53,6 +53,12 @@ export const MODALITY_CONFIG: Record<
     badgeBg: 'bg-rose-950 text-rose-300',
     badgeBorder: 'border-rose-800',
   },
+  MEDICINA_NUCLEAR: {
+    label: 'Medicina Nuclear',
+    color: 'indigo',
+    badgeBg: 'bg-indigo-950 text-indigo-300',
+    badgeBorder: 'border-indigo-800',
+  },
 };
 
 export const INITIAL_CLINIC_SETTINGS: ClinicSettings = {

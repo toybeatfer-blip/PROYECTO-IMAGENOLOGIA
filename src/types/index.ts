@@ -199,6 +199,7 @@ export interface MedicalStudy {
 
 export type DicomWindowPreset =
   | 'DEFAULT'
+  | 'AUTO'
   | 'BONE'
   | 'SOFT_TISSUE'
   | 'LUNG'
@@ -272,11 +273,18 @@ export interface NotificationSettings {
   senderPhone?: string;
   smsSenderId?: string;
   whatsappBusinessEnabled?: boolean;
+  whatsappEnabled?: boolean;
   smsEnabled?: boolean;
   emailEnabled?: boolean;
+  reminder24hBefore?: boolean;
+  reminder2hBefore?: boolean;
+  notifyOnReportReady?: boolean;
+  notifyOnAppointmentCreated?: boolean;
+  clinicHeaderName?: string;
   includePreparationChecklist?: boolean;
   autoSendEnabled?: boolean;
   rules?: any;
+  customTemplates?: Record<string, any>;
   defaultEmailTemplate?: string;
   defaultSmsTemplate?: string;
   templatesByModality?: Record<string, { emailText: string; smsText: string; prepNotes: string }>;
