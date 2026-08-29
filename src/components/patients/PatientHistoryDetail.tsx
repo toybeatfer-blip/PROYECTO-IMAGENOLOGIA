@@ -193,7 +193,9 @@ export const PatientHistoryDetail: React.FC<PatientHistoryDetailProps> = ({
                   <ShieldCheck className="w-5 h-5 text-emerald-400" />
                   <span>Perfil de Seguridad y Precauciones Radiológicas</span>
                 </div>
-                <span className="text-xs text-neutral-400 font-mono">Última actualización: Agosto 2026</span>
+                <span className="text-xs text-neutral-400 font-mono">
+                  Última actualización: {new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}
+                </span>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">

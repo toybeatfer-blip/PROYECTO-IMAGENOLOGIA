@@ -55,13 +55,31 @@ export const AppointmentCalendar: React.FC<AppointmentCalendarProps> = ({
   onReviewPortalRequests,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedModality, setSelectedModality] = useState<string>('ALL');
-  const [selectedStatus, setSelectedStatus] = useState<string>('ALL');
   const [selectedDateFilter, setSelectedDateFilter] = useState<'TODAY' | 'TOMORROW' | 'ALL'>('ALL');
   const [viewMode, setViewMode] = useState<'LIST' | 'TIMELINE'>('LIST');
 
-  const todayStr = '2026-08-14';
-  const tomorrowStr = '2026-08-15';
+  // Dynamic live dates calculation based on current system time
+  const now = new Date();
+  const formatIso = (d: Date) => {
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const formatShortDisplay = (d: Date) => {
+    const day = d.getDate();
+    const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    return `${day} ${months[d.getMonth()]}`;
+  };
+
+  const todayStr = formatIso(now);
+  const tomorrowDate = new Date(now);
+  tomorrowDate.setDate(now.getDate() + 1);
+  const tomorrowStr = formatIso(tomorrowDate);
+
+  const todayLabel = `Hoy (${formatShortDisplay(now)})`;
+  const tomorrowLabel = `Mañana (${formatShortDisplay(tomorrowDate)})`;
 
   const pendingRequests = appointmentRequests.filter(r => r.status === 'PENDIENTE_REVISION');
 
@@ -171,7 +189,7 @@ export const AppointmentCalendar: React.FC<AppointmentCalendarProps> = ({
                   : 'text-neutral-400 hover:text-neutral-200'
               }`}
             >
-              Hoy (14 Ago)
+              {todayLabel}
             </button>
             <button
               onClick={() => setSelectedDateFilter('TOMORROW')}
@@ -181,7 +199,7 @@ export const AppointmentCalendar: React.FC<AppointmentCalendarProps> = ({
                   : 'text-neutral-400 hover:text-neutral-200'
               }`}
             >
-              Mañana (15 Ago)
+              {tomorrowLabel}
             </button>
           </div>
 
