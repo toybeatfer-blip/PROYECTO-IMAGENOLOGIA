@@ -29,12 +29,14 @@ interface StudiesDirectoryProps {
 }
 
 export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
-  studies,
+  studies = [],
   clinicSettings,
   onOpenViewerWithStudy,
   onSelectPatient,
   onOpenUploadModal,
 }) => {
+  const safeStudies = Array.isArray(studies) ? studies : [];
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedModality, setSelectedModality] = useState<string>('ALL');
   const [reportStatusFilter, setReportStatusFilter] = useState<'ALL' | 'SIGNED' | 'PENDING'>('ALL');
@@ -48,7 +50,8 @@ export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
     { key: 'RESONANCIA', label: 'Resonancia Magnética' },
   ];
 
-  const filteredStudies = studies.filter(st => {
+  const filteredStudies = safeStudies.filter(st => {
+    if (!st) return false;
     const q = (searchQuery || '').toLowerCase();
     const matchesSearch =
       (st.patientName || '').toLowerCase().includes(q) ||
@@ -85,7 +88,7 @@ export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
 
         <div className="flex items-center gap-3">
           <span className="text-xs text-zinc-400 font-mono bg-zinc-950 px-3 py-1.5 rounded-lg border border-zinc-800">
-            Total en PACS: <strong className="text-white">{studies.length}</strong> estudios
+            Total en PACS: <strong className="text-white">{safeStudies.length}</strong> estudios
           </span>
 
           {onOpenUploadModal && (
@@ -124,10 +127,10 @@ export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
                 : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
             }`}
           >
-            Todas ({studies.length})
+            Todas ({safeStudies.length})
           </button>
           {MODALITY_ORDER.map(mod => {
-            const count = studies.filter(s => s.modality === mod.key).length;
+            const count = safeStudies.filter(s => s && s.modality === mod.key).length;
             const isSelected = selectedModality === mod.key;
             return (
               <button
@@ -164,15 +167,15 @@ export const StudiesDirectory: React.FC<StudiesDirectoryProps> = ({
             <Layers className="w-12 h-12 mx-auto text-zinc-600 opacity-50" />
             <div>
               <p className="text-sm font-bold text-white">
-                {studies.length === 0 ? 'No hay estudios en el archivo PACS todavía' : 'No se encontraron estudios'}
+                {safeStudies.length === 0 ? 'No hay estudios en el archivo PACS todavía' : 'No se encontraron estudios'}
               </p>
               <p className="text-xs text-zinc-400 mt-1 max-w-sm mx-auto">
-                {studies.length === 0
+                {safeStudies.length === 0
                   ? 'Cargue o importe estudios de ultrasonido, densitometría, rayos X o resonancia para visualizarlos.'
                   : 'Ningún estudio coincide con los filtros aplicados.'}
               </p>
             </div>
-            {studies.length === 0 && onOpenUploadModal && (
+            {safeStudies.length === 0 && onOpenUploadModal && (
               <button
                 onClick={onOpenUploadModal}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl text-xs font-bold shadow-md cursor-pointer transition-all"

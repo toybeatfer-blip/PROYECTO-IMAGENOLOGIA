@@ -142,29 +142,31 @@ export function createNewTenant(data: {
 }
 
 // ==========================================
+// ==========================================
 // PATIENTS STORAGE (MULTI-TENANT)
 // ==========================================
 
 export function getStoredPatients(tenantId?: string): Patient[] {
   try {
     const raw = localStorage.getItem(PATIENTS_STORAGE_KEY);
-    const allPatients: Patient[] = raw ? JSON.parse(raw) : INITIAL_PATIENTS;
+    const parsed = raw ? JSON.parse(raw) : INITIAL_PATIENTS;
+    const allPatients: Patient[] = Array.isArray(parsed) ? parsed : (Array.isArray(INITIAL_PATIENTS) ? INITIAL_PATIENTS : []);
     if (!raw) {
-      savePatients(INITIAL_PATIENTS);
+      savePatients(allPatients);
     }
     if (tenantId) {
-      return allPatients.filter(p => (p.tenantId || DEFAULT_TENANT_ID) === tenantId);
+      return allPatients.filter(p => p && (p.tenantId || DEFAULT_TENANT_ID) === tenantId);
     }
     return allPatients;
   } catch (e) {
     console.error('Error reading patients from storage:', e);
-    return tenantId ? INITIAL_PATIENTS.filter(p => p.tenantId === tenantId) : INITIAL_PATIENTS;
+    return [];
   }
 }
 
 export function savePatients(patients: Patient[]): void {
   try {
-    localStorage.setItem(PATIENTS_STORAGE_KEY, JSON.stringify(patients));
+    localStorage.setItem(PATIENTS_STORAGE_KEY, JSON.stringify(Array.isArray(patients) ? patients : []));
   } catch (e) {
     console.error('Error saving patients to storage:', e);
   }
@@ -181,23 +183,24 @@ export function saveStoredPatients(patients: Patient[]): void {
 export function getStoredAppointments(tenantId?: string): Appointment[] {
   try {
     const raw = localStorage.getItem(APPOINTMENTS_STORAGE_KEY);
-    const allApps: Appointment[] = raw ? JSON.parse(raw) : INITIAL_APPOINTMENTS;
+    const parsed = raw ? JSON.parse(raw) : INITIAL_APPOINTMENTS;
+    const allApps: Appointment[] = Array.isArray(parsed) ? parsed : (Array.isArray(INITIAL_APPOINTMENTS) ? INITIAL_APPOINTMENTS : []);
     if (!raw) {
-      saveAppointments(INITIAL_APPOINTMENTS);
+      saveAppointments(allApps);
     }
     if (tenantId) {
-      return allApps.filter(a => (a.tenantId || DEFAULT_TENANT_ID) === tenantId);
+      return allApps.filter(a => a && (a.tenantId || DEFAULT_TENANT_ID) === tenantId);
     }
     return allApps;
   } catch (e) {
     console.error('Error reading appointments from storage:', e);
-    return tenantId ? INITIAL_APPOINTMENTS.filter(a => a.tenantId === tenantId) : INITIAL_APPOINTMENTS;
+    return [];
   }
 }
 
 export function saveAppointments(appointments: Appointment[]): void {
   try {
-    localStorage.setItem(APPOINTMENTS_STORAGE_KEY, JSON.stringify(appointments));
+    localStorage.setItem(APPOINTMENTS_STORAGE_KEY, JSON.stringify(Array.isArray(appointments) ? appointments : []));
   } catch (e) {
     console.error('Error saving appointments to storage:', e);
   }
@@ -214,23 +217,24 @@ export function saveStoredAppointments(appointments: Appointment[]): void {
 export function getStoredStudies(tenantId?: string): MedicalStudy[] {
   try {
     const raw = localStorage.getItem(STUDIES_STORAGE_KEY);
-    const allStudies: MedicalStudy[] = raw ? JSON.parse(raw) : INITIAL_STUDIES;
+    const parsed = raw ? JSON.parse(raw) : INITIAL_STUDIES;
+    const allStudies: MedicalStudy[] = Array.isArray(parsed) ? parsed : (Array.isArray(INITIAL_STUDIES) ? INITIAL_STUDIES : []);
     if (!raw) {
-      saveStudies(INITIAL_STUDIES);
+      saveStudies(allStudies);
     }
     if (tenantId) {
-      return allStudies.filter(s => (s.tenantId || DEFAULT_TENANT_ID) === tenantId);
+      return allStudies.filter(s => s && (s.tenantId || DEFAULT_TENANT_ID) === tenantId);
     }
     return allStudies;
   } catch (e) {
     console.error('Error reading studies from storage:', e);
-    return tenantId ? INITIAL_STUDIES.filter(s => s.tenantId === tenantId) : INITIAL_STUDIES;
+    return [];
   }
 }
 
 export function saveStudies(studies: MedicalStudy[]): void {
   try {
-    localStorage.setItem(STUDIES_STORAGE_KEY, JSON.stringify(studies));
+    localStorage.setItem(STUDIES_STORAGE_KEY, JSON.stringify(Array.isArray(studies) ? studies : []));
   } catch (e) {
     console.error('Error saving studies to storage:', e);
   }
@@ -279,23 +283,24 @@ export function saveStoredNotificationSettings(settings: NotificationSettings, t
 export function getStoredNotificationLogs(tenantId?: string): NotificationLog[] {
   try {
     const raw = localStorage.getItem(NOTIFICATION_LOGS_KEY);
-    const allLogs: NotificationLog[] = raw ? JSON.parse(raw) : INITIAL_NOTIFICATION_LOGS;
+    const parsed = raw ? JSON.parse(raw) : INITIAL_NOTIFICATION_LOGS;
+    const allLogs: NotificationLog[] = Array.isArray(parsed) ? parsed : (Array.isArray(INITIAL_NOTIFICATION_LOGS) ? INITIAL_NOTIFICATION_LOGS : []);
     if (!raw) {
-      saveStoredNotificationLogs(INITIAL_NOTIFICATION_LOGS);
+      saveStoredNotificationLogs(allLogs);
     }
     if (tenantId) {
-      return allLogs.filter(l => (l.tenantId || DEFAULT_TENANT_ID) === tenantId);
+      return allLogs.filter(l => l && (l.tenantId || DEFAULT_TENANT_ID) === tenantId);
     }
     return allLogs;
   } catch (e) {
     console.error('Error reading notification logs:', e);
-    return tenantId ? INITIAL_NOTIFICATION_LOGS.filter(l => l.tenantId === tenantId) : INITIAL_NOTIFICATION_LOGS;
+    return [];
   }
 }
 
 export function saveStoredNotificationLogs(logs: NotificationLog[]): void {
   try {
-    localStorage.setItem(NOTIFICATION_LOGS_KEY, JSON.stringify(logs));
+    localStorage.setItem(NOTIFICATION_LOGS_KEY, JSON.stringify(Array.isArray(logs) ? logs : []));
   } catch (e) {
     console.error('Error saving notification logs:', e);
   }
@@ -308,23 +313,24 @@ export function saveStoredNotificationLogs(logs: NotificationLog[]): void {
 export function getStoredAppointmentRequests(tenantId?: string): PatientAppointmentRequest[] {
   try {
     const raw = localStorage.getItem(APPOINTMENT_REQUESTS_KEY);
-    const allRequests: PatientAppointmentRequest[] = raw ? JSON.parse(raw) : INITIAL_APPOINTMENT_REQUESTS;
+    const parsed = raw ? JSON.parse(raw) : INITIAL_APPOINTMENT_REQUESTS;
+    const allRequests: PatientAppointmentRequest[] = Array.isArray(parsed) ? parsed : (Array.isArray(INITIAL_APPOINTMENT_REQUESTS) ? INITIAL_APPOINTMENT_REQUESTS : []);
     if (!raw) {
-      saveStoredAppointmentRequests(INITIAL_APPOINTMENT_REQUESTS);
+      saveStoredAppointmentRequests(allRequests);
     }
     if (tenantId) {
-      return allRequests.filter(r => (r.tenantId || DEFAULT_TENANT_ID) === tenantId);
+      return allRequests.filter(r => r && (r.tenantId || DEFAULT_TENANT_ID) === tenantId);
     }
     return allRequests;
   } catch (e) {
     console.error('Error reading appointment requests:', e);
-    return tenantId ? INITIAL_APPOINTMENT_REQUESTS.filter(r => r.tenantId === tenantId) : INITIAL_APPOINTMENT_REQUESTS;
+    return [];
   }
 }
 
 export function saveStoredAppointmentRequests(requests: PatientAppointmentRequest[]): void {
   try {
-    localStorage.setItem(APPOINTMENT_REQUESTS_KEY, JSON.stringify(requests));
+    localStorage.setItem(APPOINTMENT_REQUESTS_KEY, JSON.stringify(Array.isArray(requests) ? requests : []));
   } catch (e) {
     console.error('Error saving appointment requests:', e);
   }

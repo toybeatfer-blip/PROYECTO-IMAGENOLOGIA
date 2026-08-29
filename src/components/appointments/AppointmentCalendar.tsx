@@ -42,8 +42,8 @@ interface AppointmentCalendarProps {
 }
 
 export const AppointmentCalendar: React.FC<AppointmentCalendarProps> = ({
-  appointments,
-  patients,
+  appointments = [],
+  patients = [],
   appointmentRequests = [],
   onOpenNewAppointmentModal,
   onOpenViewerWithStudy,
@@ -54,6 +54,10 @@ export const AppointmentCalendar: React.FC<AppointmentCalendarProps> = ({
   onSendReminder,
   onReviewPortalRequests,
 }) => {
+  const safeAppointments = Array.isArray(appointments) ? appointments : [];
+  const safePatients = Array.isArray(patients) ? patients : [];
+  const safeRequests = Array.isArray(appointmentRequests) ? appointmentRequests : [];
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedModality, setSelectedModality] = useState<string>('ALL');
   const [selectedStatus, setSelectedStatus] = useState<string>('ALL');
@@ -83,16 +87,17 @@ export const AppointmentCalendar: React.FC<AppointmentCalendarProps> = ({
   const todayLabel = `Hoy (${formatShortDisplay(now)})`;
   const tomorrowLabel = `Mañana (${formatShortDisplay(tomorrowDate)})`;
 
-  const pendingRequests = appointmentRequests.filter(r => r.status === 'PENDIENTE_REVISION');
+  const pendingRequests = safeRequests.filter(r => r && r.status === 'PENDIENTE_REVISION');
 
-  const filteredAppointments = appointments.filter(app => {
+  const filteredAppointments = safeAppointments.filter(app => {
+    if (!app) return false;
     // Search matching
-    const q = searchQuery.toLowerCase();
+    const q = (searchQuery || '').toLowerCase();
     const matchesSearch =
-      app.patientName.toLowerCase().includes(q) ||
-      app.patientDni.includes(q) ||
-      app.accessionNumber.toLowerCase().includes(q) ||
-      app.studyName.toLowerCase().includes(q);
+      (app.patientName || '').toLowerCase().includes(q) ||
+      (app.patientDni || '').includes(q) ||
+      (app.accessionNumber || '').toLowerCase().includes(q) ||
+      (app.studyName || '').toLowerCase().includes(q);
 
     // Modality matching
     const matchesModality = selectedModality === 'ALL' || app.modality === selectedModality;
@@ -239,7 +244,7 @@ export const AppointmentCalendar: React.FC<AppointmentCalendarProps> = ({
                 : 'bg-neutral-950 text-neutral-400 border-neutral-800 hover:text-white hover:border-neutral-700'
             }`}
           >
-            Todas ({appointments.length})
+            Todas ({safeAppointments.length})
           </button>
           {[
             { key: 'ULTRASONIDO', label: 'Ultrasonido' },
@@ -248,7 +253,7 @@ export const AppointmentCalendar: React.FC<AppointmentCalendarProps> = ({
             { key: 'RESONANCIA', label: 'Resonancia Magnética' },
           ].map(item => {
             const isSel = selectedModality === item.key;
-            const count = appointments.filter(a => a.modality === item.key).length;
+            const count = safeAppointments.filter(a => a && a.modality === item.key).length;
             return (
               <button
                 key={item.key}
@@ -269,7 +274,7 @@ export const AppointmentCalendar: React.FC<AppointmentCalendarProps> = ({
         <select
           value={selectedStatus}
           onChange={e => setSelectedStatus(e.target.value)}
-          className="bg-neutral-950 border border-neutral-800 text-neutral-300 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-cyan-500"
+          className="bg-neutral-950 border border-neutral-800 text-neutral-300 text-xs rounded-lg px-3 py-1.5 focus:outline-hidden focus:border-cyan-500"
         >
           <option value="ALL">Todos los Estados</option>
           <option value="PROGRAMADA">Programada</option>
@@ -287,15 +292,15 @@ export const AppointmentCalendar: React.FC<AppointmentCalendarProps> = ({
             <CalendarIcon className="w-12 h-12 mx-auto text-neutral-600 opacity-50" />
             <div>
               <p className="text-sm font-bold text-white">
-                {appointments.length === 0 ? 'No hay citas agendadas todavía' : 'No se encontraron citas'}
+                {safeAppointments.length === 0 ? 'No hay citas agendadas todavía' : 'No se encontraron citas'}
               </p>
               <p className="text-xs text-neutral-400 mt-1 max-w-sm mx-auto">
-                {appointments.length === 0
+                {safeAppointments.length === 0
                   ? 'Organice el flujo de su consultorio agendando la primera cita de estudio.'
                   : 'Ninguna cita coincide con los filtros aplicados.'}
               </p>
             </div>
-            {appointments.length === 0 ? (
+            {safeAppointments.length === 0 ? (
               <button
                 onClick={onOpenNewAppointmentModal}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl text-xs font-bold shadow-md cursor-pointer transition-all"

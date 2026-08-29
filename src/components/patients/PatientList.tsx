@@ -22,17 +22,21 @@ interface PatientListProps {
 }
 
 export const PatientList: React.FC<PatientListProps> = ({
-  patients,
-  studies,
+  patients = [],
+  studies = [],
   onSelectPatient,
   onOpenNewPatientModal,
   onOpenNewAppointmentForPatient,
   onOpenCredentialsModal,
 }) => {
+  const safePatients = Array.isArray(patients) ? patients : [];
+  const safeStudies = Array.isArray(studies) ? studies : [];
+
   const [searchQuery, setSearchQuery] = useState('');
   const [filterSafetyAlert, setFilterSafetyAlert] = useState(false);
 
-  const filteredPatients = patients.filter(p => {
+  const filteredPatients = safePatients.filter(p => {
+    if (!p) return false;
     const q = (searchQuery || '').toLowerCase();
     const matchesSearch =
       (p.fullName || '').toLowerCase().includes(q) ||
@@ -114,12 +118,12 @@ export const PatientList: React.FC<PatientListProps> = ({
                 {patients.length === 0 ? 'No hay pacientes registrados todavía' : 'No se encontraron pacientes'}
               </p>
               <p className="text-xs text-neutral-400 mt-1 max-w-sm mx-auto">
-                {patients.length === 0
+                {safePatients.length === 0
                   ? 'Comience registrando el expediente del primer paciente de su consultorio.'
                   : 'Ningún paciente coincide con los filtros o término de búsqueda.'}
               </p>
             </div>
-            {patients.length === 0 ? (
+            {safePatients.length === 0 ? (
               <button
                 onClick={onOpenNewPatientModal}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl text-xs font-bold shadow-md cursor-pointer transition-all"
@@ -141,8 +145,8 @@ export const PatientList: React.FC<PatientListProps> = ({
           </div>
         ) : (
           filteredPatients.map(patient => {
-            const patientStudies = studies.filter(
-              s => s.patientDni === patient.dni || s.patientName === patient.fullName
+            const patientStudies = safeStudies.filter(
+              s => s && (s.patientDni === patient.dni || s.patientName === patient.fullName)
             );
             const hasAlerts =
               patient.safetyProfile.allergies.length > 0 ||

@@ -251,27 +251,27 @@ export default function App() {
   // FILTERED ENTITIES FOR ACTIVE TENANT
   // ==========================================
   const patients = useMemo(() => {
-    return allPatients.filter(p => (p.tenantId || DEFAULT_TENANT_ID) === activeTenantId);
+    return (Array.isArray(allPatients) ? allPatients : []).filter(p => p && (p.tenantId || DEFAULT_TENANT_ID) === activeTenantId);
   }, [allPatients, activeTenantId]);
 
   const appointments = useMemo(() => {
-    return allAppointments.filter(a => (a.tenantId || DEFAULT_TENANT_ID) === activeTenantId);
+    return (Array.isArray(allAppointments) ? allAppointments : []).filter(a => a && (a.tenantId || DEFAULT_TENANT_ID) === activeTenantId);
   }, [allAppointments, activeTenantId]);
 
   const studies = useMemo(() => {
-    return allStudies.filter(s => (s.tenantId || DEFAULT_TENANT_ID) === activeTenantId);
+    return (Array.isArray(allStudies) ? allStudies : []).filter(s => s && (s.tenantId || DEFAULT_TENANT_ID) === activeTenantId);
   }, [allStudies, activeTenantId]);
 
   const notificationLogs = useMemo(() => {
-    return allNotificationLogs.filter(l => (l.tenantId || DEFAULT_TENANT_ID) === activeTenantId);
+    return (Array.isArray(allNotificationLogs) ? allNotificationLogs : []).filter(l => l && (l.tenantId || DEFAULT_TENANT_ID) === activeTenantId);
   }, [allNotificationLogs, activeTenantId]);
 
   const appointmentRequests = useMemo(() => {
-    return allAppointmentRequests.filter(r => (r.tenantId || DEFAULT_TENANT_ID) === activeTenantId);
+    return (Array.isArray(allAppointmentRequests) ? allAppointmentRequests : []).filter(r => r && (r.tenantId || DEFAULT_TENANT_ID) === activeTenantId);
   }, [allAppointmentRequests, activeTenantId]);
 
   const tenantStaffUsers = useMemo(() => {
-    return staffUsers.filter(u => (u.tenantId || DEFAULT_TENANT_ID) === activeTenantId);
+    return (Array.isArray(staffUsers) ? staffUsers : []).filter(u => u && (u.tenantId || DEFAULT_TENANT_ID) === activeTenantId);
   }, [staffUsers, activeTenantId]);
 
   // Synchronize with LocalStorage
