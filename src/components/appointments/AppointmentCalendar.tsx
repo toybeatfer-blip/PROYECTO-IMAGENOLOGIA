@@ -55,6 +55,8 @@ export const AppointmentCalendar: React.FC<AppointmentCalendarProps> = ({
   onReviewPortalRequests,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedModality, setSelectedModality] = useState<string>('ALL');
+  const [selectedStatus, setSelectedStatus] = useState<string>('ALL');
   const [selectedDateFilter, setSelectedDateFilter] = useState<'TODAY' | 'TOMORROW' | 'ALL'>('ALL');
   const [viewMode, setViewMode] = useState<'LIST' | 'TIMELINE'>('LIST');
 
