@@ -31,13 +31,15 @@ interface UploadMedicalStudyModalProps {
 }
 
 export const UploadMedicalStudyModal: React.FC<UploadMedicalStudyModalProps> = ({
-  patients,
+  patients = [],
   onSaveStudy,
   onClose,
 }) => {
+  const safePatients = Array.isArray(patients) ? patients : [];
+
   // Form State
   const [selectedPatientId, setSelectedPatientId] = useState<string>(
-    patients.length > 0 ? patients[0].id : ''
+    safePatients.length > 0 ? safePatients[0].id : ''
   );
   const [isNewPatient, setIsNewPatient] = useState(false);
   const [newPatientDni, setNewPatientDni] = useState('');

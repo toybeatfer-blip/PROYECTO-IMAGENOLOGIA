@@ -39,15 +39,20 @@ interface TenantSwitcherModalProps {
 }
 
 export const TenantSwitcherModal: React.FC<TenantSwitcherModalProps> = ({
-  tenants,
+  tenants = [],
   activeTenantId,
-  allPatients,
-  allAppointments,
-  allStudies,
+  allPatients = [],
+  allAppointments = [],
+  allStudies = [],
   onSelectTenant,
   onCreateTenant,
   onClose,
 }) => {
+  const safeTenants = Array.isArray(tenants) ? tenants : [];
+  const safePatients = Array.isArray(allPatients) ? allPatients : [];
+  const safeAppointments = Array.isArray(allAppointments) ? allAppointments : [];
+  const safeStudies = Array.isArray(allStudies) ? allStudies : [];
+
   const [showCreateForm, setShowCreateForm] = useState(false);
 
   // New Tenant Form State
@@ -328,11 +333,11 @@ export const TenantSwitcherModal: React.FC<TenantSwitcherModalProps> = ({
           ) : (
             /* Tenant Cards List */
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {tenants.map(tenant => {
+              {safeTenants.map(tenant => {
                 const isActive = tenant.id === activeTenantId;
-                const tenantPatients = allPatients.filter(p => (p.tenantId || 'tenant-imagis-central') === tenant.id);
-                const tenantAppointments = allAppointments.filter(a => (a.tenantId || 'tenant-imagis-central') === tenant.id);
-                const tenantStudies = allStudies.filter(s => (s.tenantId || 'tenant-imagis-central') === tenant.id);
+                const tenantPatients = safePatients.filter(p => p && (p.tenantId || 'tenant-imagis-central') === tenant.id);
+                const tenantAppointments = safeAppointments.filter(a => a && (a.tenantId || 'tenant-imagis-central') === tenant.id);
+                const tenantStudies = safeStudies.filter(s => s && (s.tenantId || 'tenant-imagis-central') === tenant.id);
 
                 return (
                   <div

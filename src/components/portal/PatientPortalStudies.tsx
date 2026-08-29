@@ -28,7 +28,7 @@ interface PatientPortalStudiesProps {
 
 export const PatientPortalStudies: React.FC<PatientPortalStudiesProps> = ({
   patient,
-  studies,
+  studies = [],
   onOpenViewer,
   onOpenReport,
 }) => {
@@ -38,8 +38,9 @@ export const PatientPortalStudies: React.FC<PatientPortalStudiesProps> = ({
   const [aiExplanation, setAiExplanation] = useState<string | null>(null);
   const [isGeneratingExplanation, setIsGeneratingExplanation] = useState(false);
 
-  const patientStudies = studies.filter(
-    s => s.patientId === patient.id || s.patientDni === patient.dni || s.patientName?.toLowerCase() === patient.fullName?.toLowerCase()
+  const safeStudies = Array.isArray(studies) ? studies : [];
+  const patientStudies = safeStudies.filter(
+    s => s && (s.patientId === patient?.id || s.patientDni === patient?.dni || (s.patientName && patient?.fullName && s.patientName.toLowerCase() === patient.fullName.toLowerCase()))
   );
 
   const filteredStudies = patientStudies.filter(s => {

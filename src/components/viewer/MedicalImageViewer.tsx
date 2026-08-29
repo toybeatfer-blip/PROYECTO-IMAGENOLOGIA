@@ -42,7 +42,7 @@ interface MedicalImageViewerProps {
 }
 
 export const MedicalImageViewer: React.FC<MedicalImageViewerProps> = ({
-  studies,
+  studies = [],
   initialStudyId,
   clinicSettings,
   onSaveReport,
@@ -50,24 +50,26 @@ export const MedicalImageViewer: React.FC<MedicalImageViewerProps> = ({
   isStandaloneWindow = false,
   onOpenInStandaloneWindow,
 }) => {
+  const safeStudies = Array.isArray(studies) ? studies : [];
+
   const [selectedStudyId, setSelectedStudyId] = useState<string>(
-    initialStudyId || (studies.length > 0 ? studies[0].id : '')
+    initialStudyId || (safeStudies.length > 0 ? safeStudies[0].id : '')
   );
 
   // Synchronize when initialStudyId or studies list updates from outer navigation
   useEffect(() => {
-    if (initialStudyId && studies.some(s => s.id === initialStudyId)) {
+    if (initialStudyId && safeStudies.some(s => s && s.id === initialStudyId)) {
       setSelectedStudyId(initialStudyId);
       setActiveSeriesIndex(0);
       setSliceIndex(0);
-    } else if (studies.length > 0 && !studies.some(s => s.id === selectedStudyId)) {
-      setSelectedStudyId(studies[0].id);
+    } else if (safeStudies.length > 0 && !safeStudies.some(s => s && s.id === selectedStudyId)) {
+      setSelectedStudyId(safeStudies[0].id);
       setActiveSeriesIndex(0);
       setSliceIndex(0);
     }
-  }, [initialStudyId, studies]);
+  }, [initialStudyId, safeStudies]);
 
-  const currentStudy = studies.find(s => s.id === selectedStudyId) || studies[0];
+  const currentStudy = safeStudies.find(s => s && s.id === selectedStudyId) || safeStudies[0];
 
   const [activeSeriesIndex, setActiveSeriesIndex] = useState<number>(0);
   const [sliceIndex, setSliceIndex] = useState<number>(0);

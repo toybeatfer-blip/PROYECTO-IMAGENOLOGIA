@@ -145,13 +145,16 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
   };
 
   // KPI Calculations
+  const safeClinics = Array.isArray(clinics) ? clinics : [];
+
   const metrics = useMemo(() => {
     let active = 0;
     let suspended = 0;
     let expired = 0;
     let totalPatients = 0;
 
-    for (const c of clinics) {
+    for (const c of safeClinics) {
+      if (!c) continue;
       const evalInfo = calculateLicenseDays(c.licenseValidUntil, c.licenseStatus);
       if (evalInfo.isSuspended) suspended++;
       else if (evalInfo.isExpired) expired++;
@@ -159,40 +162,41 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
 
       // Count patient records inside this clinic's database
       const patients = getClinicPatients(c.id);
-      totalPatients += patients.length;
+      totalPatients += (Array.isArray(patients) ? patients.length : 0);
     }
 
     return {
-      totalClinics: clinics.length,
+      totalClinics: safeClinics.length,
       activeClinics: active,
       inactiveClinics: suspended + expired,
       totalPatients,
     };
-  }, [clinics]);
+  }, [safeClinics]);
 
   // Filtered Clinics
   const filteredClinics = useMemo(() => {
-    return clinics.filter(c => {
+    return safeClinics.filter(c => {
+      if (!c) return false;
       const evalInfo = calculateLicenseDays(c.licenseValidUntil, c.licenseStatus);
 
       if (filterStatus === 'ACTIVE' && (evalInfo.isExpired || evalInfo.isSuspended)) return false;
       if (filterStatus === 'SUSPENDED' && !evalInfo.isSuspended) return false;
       if (filterStatus === 'EXPIRED' && (!evalInfo.isExpired || evalInfo.isSuspended)) return false;
 
-      const q = searchTerm.toLowerCase().trim();
+      const q = (searchTerm || '').toLowerCase().trim();
       if (!q) return true;
 
       return (
-        c.clinicName.toLowerCase().includes(q) ||
-        c.branch.toLowerCase().includes(q) ||
-        c.doctorName.toLowerCase().includes(q) ||
-        c.username.toLowerCase().includes(q) ||
+        (c.clinicName || '').toLowerCase().includes(q) ||
+        (c.branch || '').toLowerCase().includes(q) ||
+        (c.doctorName || '').toLowerCase().includes(q) ||
+        (c.username || '').toLowerCase().includes(q) ||
         (c.generalLicense && c.generalLicense.toLowerCase().includes(q)) ||
         (c.email && c.email.toLowerCase().includes(q)) ||
         (c.phone && c.phone.includes(q))
       );
     });
-  }, [clinics, searchTerm, filterStatus]);
+  }, [safeClinics, searchTerm, filterStatus]);
 
   // ==========================================
   // QUICK ACTIONS

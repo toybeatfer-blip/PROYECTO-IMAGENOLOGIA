@@ -48,11 +48,13 @@ export const StaffLogin: React.FC<StaffLoginProps> = ({
   tenants = [],
   activeTenantId,
   onSelectTenant,
-  staffUsers,
+  staffUsers = [],
   clinicSettings,
   onLoginSuccess,
   onSwitchToPatientPortal,
 }) => {
+  const safeStaffUsers = Array.isArray(staffUsers) ? staffUsers : [];
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -260,8 +262,8 @@ export const StaffLogin: React.FC<StaffLoginProps> = ({
     // ==========================================
     // C. LEGACY / PRE-LOADED STAFF ACCOUNTS FALLBACK
     // ==========================================
-    let foundUser = staffUsers.find(
-      u => u.username.toLowerCase() === cleanUser || u.email.toLowerCase() === cleanUser
+    let foundUser = safeStaffUsers.find(
+      u => u && (u.username.toLowerCase() === cleanUser || (u.email && u.email.toLowerCase() === cleanUser))
     );
 
     if (!foundUser) {

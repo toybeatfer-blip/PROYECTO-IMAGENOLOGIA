@@ -45,9 +45,9 @@ interface PatientPortalProps {
 
 export const PatientPortal: React.FC<PatientPortalProps> = ({
   patient,
-  studies,
-  appointments,
-  notifications,
+  studies = [],
+  appointments = [],
+  notifications = [],
   clinicSettings,
   onOpenViewer,
   onOpenReport,
@@ -63,12 +63,18 @@ export const PatientPortal: React.FC<PatientPortalProps> = ({
   const clinicAddress = clinicSettings?.address || 'Av. Javier Prado Este 2840';
   const clinicPhone = clinicSettings?.phone || '(01) 710-2000';
 
-  const patientStudies = studies.filter(s => s.patientId === patient.id);
-  const patientAppointments = appointments.filter(
-    a => a.patientId === patient.id || a.patientDni === patient.dni
+  const safeStudies = Array.isArray(studies) ? studies : [];
+  const safeAppointments = Array.isArray(appointments) ? appointments : [];
+  const safeNotifications = Array.isArray(notifications) ? notifications : [];
+
+  const patientStudies = safeStudies.filter(
+    s => s && (s.patientId === patient?.id || s.patientDni === patient?.dni || (s.patientName && patient?.fullName && s.patientName.toLowerCase() === patient.fullName.toLowerCase()))
   );
-  const unreadNotifs = notifications.filter(
-    n => (n.patientId === patient.id || n.patientDni === patient.dni) && n.status !== 'LEIDO'
+  const patientAppointments = safeAppointments.filter(
+    a => a && (a.patientId === patient?.id || a.patientDni === patient?.dni)
+  );
+  const unreadNotifs = safeNotifications.filter(
+    n => n && (n.patientId === patient?.id || n.patientDni === patient?.dni) && n.status !== 'LEIDO'
   );
 
   return (

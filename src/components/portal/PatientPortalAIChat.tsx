@@ -28,10 +28,13 @@ interface PatientPortalAIChatProps {
 
 export const PatientPortalAIChat: React.FC<PatientPortalAIChatProps> = ({
   patient,
-  upcomingAppointments,
-  completedStudies,
+  upcomingAppointments = [],
+  completedStudies = [],
 }) => {
-  const displayName = patient.fullName || (patient as any).name || 'Paciente';
+  const safeAppointments = Array.isArray(upcomingAppointments) ? upcomingAppointments : [];
+  const safeStudies = Array.isArray(completedStudies) ? completedStudies : [];
+
+  const displayName = patient?.fullName || (patient as any)?.name || 'Paciente';
   const firstName = displayName.split(' ')[0] || 'Paciente';
 
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -70,15 +73,15 @@ Puedo orientarte sobre tu preparación para los estudios (ayuno, toma de agua, r
       const response = await requestPortalChatAssistant({
         message: query,
         patientName: displayName,
-        patientAge: patient.age,
-        upcomingAppointments: upcomingAppointments.map(a => ({
+        patientAge: patient?.age,
+        upcomingAppointments: safeAppointments.map(a => ({
           study: a.studyName,
           modality: a.modality,
           date: a.scheduledDate,
           time: a.scheduledTime,
           requiresContrast: a.requiresContrast,
         })),
-        completedStudies: completedStudies.map(s => ({
+        completedStudies: safeStudies.map(s => ({
           study: s.studyName,
           modality: s.modality,
           date: s.studyDate,

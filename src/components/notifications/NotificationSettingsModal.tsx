@@ -43,6 +43,33 @@ interface NotificationSettingsModalProps {
   onClose: () => void;
 }
 
+const DEFAULT_RULES: NotificationAdvanceRule[] = [
+  {
+    id: 'rule-48h',
+    label: '48 horas antes (2 días)',
+    hoursBefore: 48,
+    enabled: true,
+    channels: { email: true, sms: false, whatsapp: false },
+    customNote: 'Aviso inicial de confirmación y preparación.',
+  },
+  {
+    id: 'rule-24h',
+    label: '24 horas antes (1 día)',
+    hoursBefore: 24,
+    enabled: true,
+    channels: { email: true, sms: true, whatsapp: true },
+    customNote: 'Recordatorio principal con instrucciones de ayuno y contraste.',
+  },
+  {
+    id: 'rule-2h',
+    label: '2 horas antes (Mismo día)',
+    hoursBefore: 2,
+    enabled: true,
+    channels: { email: false, sms: true, whatsapp: true },
+    customNote: 'Aviso urgente de presentación en sala de espera.',
+  },
+];
+
 export const NotificationSettingsModal: React.FC<NotificationSettingsModalProps> = ({
   settings,
   logs = [],
@@ -53,7 +80,11 @@ export const NotificationSettingsModal: React.FC<NotificationSettingsModalProps>
   onClose,
 }) => {
   const [activeSubTab, setActiveSubTab] = useState<'RULES' | 'TEMPLATES' | 'SIMULATOR' | 'LOGS'>('RULES');
-  const [localSettings, setLocalSettings] = useState<NotificationSettings>(settings);
+  const [localSettings, setLocalSettings] = useState<NotificationSettings>(() => ({
+    ...settings,
+    rules: Array.isArray(settings?.rules) && settings.rules.length > 0 ? settings.rules : DEFAULT_RULES,
+    customTemplates: settings?.customTemplates || {},
+  }));
   const [saveSuccess, setSaveSuccess] = useState(false);
 
   // New Rule form state
@@ -68,8 +99,10 @@ export const NotificationSettingsModal: React.FC<NotificationSettingsModalProps>
   const [selectedModalityForTemplate, setSelectedModalityForTemplate] = useState<string>('ULTRASONIDO');
 
   // Simulator state
+  const safeAppointments = Array.isArray(appointments) ? appointments : [];
+  const safeLogs = Array.isArray(logs) ? logs : [];
   const [simSelectedAppId, setSimSelectedAppId] = useState<string>(
-    appointments && appointments.length > 0 ? appointments[0].id : ''
+    safeAppointments.length > 0 ? safeAppointments[0].id : ''
   );
   const [simChannel, setSimChannel] = useState<'EMAIL' | 'SMS' | 'WHATSAPP'>('EMAIL');
   const [simAdvanceLabel, setSimAdvanceLabel] = useState('24 horas antes');
@@ -84,8 +117,8 @@ export const NotificationSettingsModal: React.FC<NotificationSettingsModalProps>
   const [logChannelFilter, setLogChannelFilter] = useState<string>('ALL');
   const [logStatusFilter, setLogStatusFilter] = useState<string>('ALL');
 
-  const selectedApp = appointments && appointments.length > 0
-    ? appointments.find(a => a.id === simSelectedAppId) || appointments[0]
+  const selectedApp = safeAppointments.length > 0
+    ? safeAppointments.find(a => a.id === simSelectedAppId) || safeAppointments[0]
     : undefined;
 
   const handleToggleAutoSend = () => {
@@ -98,14 +131,14 @@ export const NotificationSettingsModal: React.FC<NotificationSettingsModalProps>
   const handleToggleRule = (ruleId: string) => {
     setLocalSettings(prev => ({
       ...prev,
-      rules: prev.rules.map(r => (r.id === ruleId ? { ...r, enabled: !r.enabled } : r)),
+      rules: (prev.rules || DEFAULT_RULES).map(r => (r.id === ruleId ? { ...r, enabled: !r.enabled } : r)),
     }));
   };
 
   const handleToggleRuleChannel = (ruleId: string, channel: 'email' | 'sms' | 'whatsapp') => {
     setLocalSettings(prev => ({
       ...prev,
-      rules: prev.rules.map(r =>
+      rules: (prev.rules || DEFAULT_RULES).map(r =>
         r.id === ruleId
           ? {
               ...r,
@@ -122,7 +155,7 @@ export const NotificationSettingsModal: React.FC<NotificationSettingsModalProps>
   const handleDeleteRule = (ruleId: string) => {
     setLocalSettings(prev => ({
       ...prev,
-      rules: prev.rules.filter(r => r.id !== ruleId),
+      rules: (prev.rules || DEFAULT_RULES).filter(r => r.id !== ruleId),
     }));
   };
 
@@ -142,7 +175,7 @@ export const NotificationSettingsModal: React.FC<NotificationSettingsModalProps>
     };
     setLocalSettings(prev => ({
       ...prev,
-      rules: [...prev.rules, newRule].sort((a, b) => b.hoursBefore - a.hoursBefore),
+      rules: [...(prev.rules || DEFAULT_RULES), newRule].sort((a, b) => b.hoursBefore - a.hoursBefore),
     }));
     setShowAddRule(false);
   };
@@ -178,7 +211,8 @@ export const NotificationSettingsModal: React.FC<NotificationSettingsModalProps>
     }
   };
 
-  const filteredLogs = logs.filter(log => {
+  const filteredLogs = safeLogs.filter(log => {
+    if (!log) return false;
     const matchesChannel = logChannelFilter === 'ALL' || log.channel === logChannelFilter;
     const matchesStatus = logStatusFilter === 'ALL' || log.status === logStatusFilter;
     return matchesChannel && matchesStatus;
@@ -246,7 +280,7 @@ export const NotificationSettingsModal: React.FC<NotificationSettingsModalProps>
               }`}
             >
               <Sliders className="w-3.5 h-3.5" />
-              <span>Reglas de Antelación ({localSettings.rules.filter(r => r.enabled).length} activas)</span>
+              <span>Reglas de Antelación ({(localSettings.rules || DEFAULT_RULES).filter(r => r.enabled).length} activas)</span>
             </button>
 
             <button
@@ -414,7 +448,7 @@ export const NotificationSettingsModal: React.FC<NotificationSettingsModalProps>
 
               {/* Rules List */}
               <div className="space-y-3">
-                {localSettings.rules.map(rule => (
+                {(localSettings.rules || DEFAULT_RULES).map(rule => (
                   <div
                     key={rule.id}
                     className={`p-4 rounded-xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${

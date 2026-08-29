@@ -33,7 +33,7 @@ export const ShareStudyModal: React.FC<ShareStudyModalProps> = ({
 
   const messageText =
     recipientType === 'DOCTOR'
-      ? `🏥 *${clinicName}* — *Entrega de Estudio Radiológico*\n\nEstimado/a *Dr(a). ${study.referringDoctor || 'Colega Médico'}*:\nLe compartimos el informe e imágenes diagnósticas de su paciente:\n\n👤 *Paciente:* ${study.patientName} (${study.patientAge} años)\n📋 *Estudio:* ${study.studyName} (${study.modality})\n📅 *Fecha:* ${study.studyDate}\n🔒 *Acceso Directo al Visor PACS:* ${viewerUrl}\n\nQuedamos a su disposición para cualquier correlación clínica.`
+      ? `🏥 *${clinicName}* — *Entrega de Estudio Radiológico*\n\nEstimado/a *Dr(a). ${study.referringDoctor || study.orderingPhysician || 'Colega Médico'}*:\nLe compartimos el informe e imágenes diagnósticas de su paciente:\n\n👤 *Paciente:* ${study.patientName} (${study.patientAge} años)\n📋 *Estudio:* ${study.studyName} (${study.modality})\n📅 *Fecha:* ${study.studyDate}\n🔒 *Acceso Directo al Visor PACS:* ${viewerUrl}\n\nQuedamos a su disposición para cualquier correlación clínica.`
       : `🏥 *${clinicName}* — *Resultados de su Estudio*\n\nEstimado/a *${study.patientName}*:\nSu estudio de *${study.studyName}* realizado el *${study.studyDate}* ya se encuentra disponible.\n\n🔗 *Puede visualizar sus imágenes e informe aquí:* ${viewerUrl}\n\nRecuerde presentar este informe a su médico tratante.`;
 
   const handleCopyLink = () => {

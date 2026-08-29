@@ -27,22 +27,25 @@ interface PatientPortalAppointmentsProps {
 
 export const PatientPortalAppointments: React.FC<PatientPortalAppointmentsProps> = ({
   patient,
-  appointments,
-  notifications,
+  appointments = [],
+  notifications = [],
   onRequestNewAppointmentClick,
   onConfirmAppointment,
 }) => {
   const [activeTab, setActiveTab] = useState<'UPCOMING' | 'HISTORY' | 'NOTIFICATIONS'>('UPCOMING');
 
-  const patientAppointments = appointments.filter(a => a.patientId === patient.id || a.patientDni === patient.dni);
-  const patientNotifs = notifications.filter(n => n.patientId === patient.id || n.patientDni === patient.dni);
+  const safeAppointments = Array.isArray(appointments) ? appointments : [];
+  const safeNotifications = Array.isArray(notifications) ? notifications : [];
+
+  const patientAppointments = safeAppointments.filter(a => a && (a.patientId === patient?.id || a.patientDni === patient?.dni));
+  const patientNotifs = safeNotifications.filter(n => n && (n.patientId === patient?.id || n.patientDni === patient?.dni));
 
   const upcomingApps = patientAppointments.filter(
-    a => a.status !== 'COMPLETADO' && a.status !== 'INFORME_FIRMADO' && a.status !== 'CANCELADO'
+    a => a && a.status !== 'COMPLETADO' && a.status !== 'INFORME_FIRMADO' && a.status !== 'CANCELADO'
   );
 
   const pastApps = patientAppointments.filter(
-    a => a.status === 'COMPLETADO' || a.status === 'INFORME_FIRMADO' || a.status === 'CANCELADO'
+    a => a && (a.status === 'COMPLETADO' || a.status === 'INFORME_FIRMADO' || a.status === 'CANCELADO')
   );
 
   return (

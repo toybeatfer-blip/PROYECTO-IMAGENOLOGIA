@@ -27,20 +27,23 @@ interface ReviewAppointmentRequestsModalProps {
 }
 
 export const ReviewAppointmentRequestsModal: React.FC<ReviewAppointmentRequestsModalProps> = ({
-  requests,
-  patients,
+  requests = [],
+  patients = [],
   onAcceptRequest,
   onRejectRequest,
   onClose,
 }) => {
+  const safeRequests = Array.isArray(requests) ? requests : [];
+  const safePatients = Array.isArray(patients) ? patients : [];
+
   const [selectedRequestId, setSelectedRequestId] = useState<string>(
-    requests.length > 0 ? requests[0].id : ''
+    safeRequests.length > 0 ? safeRequests[0].id : ''
   );
   const [scheduledTime, setScheduledTime] = useState('09:30');
   const [rejectReason, setRejectReason] = useState('');
   const [showRejectBox, setShowRejectBox] = useState(false);
 
-  const activeRequest = requests.find(r => r.id === selectedRequestId) || requests[0];
+  const activeRequest = safeRequests.find(r => r && r.id === selectedRequestId) || safeRequests[0];
 
   return (
     <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
@@ -55,7 +58,7 @@ export const ReviewAppointmentRequestsModal: React.FC<ReviewAppointmentRequestsM
               <div className="flex items-center gap-2">
                 <h3 className="text-base font-bold text-white">Solicitudes de Citas del Portal Web</h3>
                 <span className="px-2 py-0.5 rounded-full bg-purple-950 text-purple-300 border border-purple-800 text-[10px] font-bold">
-                  {requests.filter(r => r.status === 'PENDIENTE_REVISION').length} Pendientes
+                  {safeRequests.filter(r => r && r.status === 'PENDIENTE_REVISION').length} Pendientes
                 </span>
               </div>
               <p className="text-xs text-neutral-400">

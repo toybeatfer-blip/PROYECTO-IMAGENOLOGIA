@@ -11,13 +11,15 @@ interface NewAppointmentModalProps {
 }
 
 export const NewAppointmentModal: React.FC<NewAppointmentModalProps> = ({
-  patients,
+  patients = [],
   onSaveAppointment,
   onClose,
   onOpenNewPatientModal,
 }) => {
+  const safePatients = Array.isArray(patients) ? patients : [];
+
   const [selectedPatientId, setSelectedPatientId] = useState<string>(
-    patients[0]?.id || ''
+    safePatients[0]?.id || ''
   );
   const [modality, setModality] = useState<ModalityType>('ULTRASONIDO');
   const [studyName, setStudyName] = useState('Ecografía Abdominal Completa');
@@ -35,7 +37,7 @@ export const NewAppointmentModal: React.FC<NewAppointmentModalProps> = ({
   const [technologistName, setTechnologistName] = useState('Lic. Andrés Salcedo');
   const [notes, setNotes] = useState('');
 
-  const selectedPatient = patients.find(p => p.id === selectedPatientId) || patients[0];
+  const selectedPatient = safePatients.find(p => p && p.id === selectedPatientId) || safePatients[0];
 
   const handleModalityChange = (newMod: ModalityType) => {
     setModality(newMod);

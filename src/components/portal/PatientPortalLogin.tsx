@@ -32,13 +32,14 @@ interface PatientPortalLoginProps {
 }
 
 export const PatientPortalLogin: React.FC<PatientPortalLoginProps> = ({
-  patients,
+  patients = [],
   clinicSettings,
   onLoginSuccess,
   onLogin,
   onBackToStaff,
   onBackToStaffPortal,
 }) => {
+  const safePatients = Array.isArray(patients) ? patients : [];
   const clinicName = clinicSettings?.name || 'IMAGIS';
   const clinicTagline = clinicSettings?.tagline || 'Centro de Diagnóstico por Imágenes & Radiología Médica';
 
@@ -95,8 +96,9 @@ export const PatientPortalLogin: React.FC<PatientPortalLoginProps> = ({
       return;
     }
 
-    const matched = patients.find(
+    const matched = safePatients.find(
       p =>
+        p &&
         (p.dni === cleanDni || p.documentNumber === cleanDni) &&
         (p.portalPin === cleanPin || p.portalAccessCode?.toLowerCase() === cleanPin.toLowerCase())
     );

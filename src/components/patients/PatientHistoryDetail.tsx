@@ -47,14 +47,17 @@ export const PatientHistoryDetail: React.FC<PatientHistoryDetailProps> = ({
   const [copiedCredentials, setCopiedCredentials] = React.useState(false);
   const [selectedStudyForShare, setSelectedStudyForShare] = React.useState<MedicalStudy | null>(null);
 
+  const safeStudies = Array.isArray(studies) ? studies : [];
+  const safeAppointments = Array.isArray(appointments) ? appointments : [];
+
   // Find all studies belonging to this patient
-  const patientStudies = studies.filter(
-    s => s.patientDni === patient.dni || s.patientName === patient.fullName
+  const patientStudies = safeStudies.filter(
+    s => s && (s.patientId === patient?.id || s.patientDni === patient?.dni || s.patientName === patient?.fullName)
   );
 
   // Find all appointments belonging to this patient
-  const patientAppointments = appointments.filter(
-    a => a.patientId === patient.id || a.patientDni === patient.dni
+  const patientAppointments = safeAppointments.filter(
+    a => a && (a.patientId === patient?.id || a.patientDni === patient?.dni)
   );
 
   const username = patient.dni;

@@ -56,14 +56,15 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
   onSaveStaffUsers,
   onClose,
 }) => {
-  const [formData, setFormData] = useState<ClinicSettings>({
-    ...settings,
-    enableDemoMode: settings.enableDemoMode ?? false,
-    enableBruteForceProtection: settings.enableBruteForceProtection ?? true,
-    sessionTimeoutMinutes: settings.sessionTimeoutMinutes ?? 30,
-    license: settings.license || createDefaultTenantLicense('MONTHLY', 1),
-  });
-  const [staffList, setStaffList] = useState<StaffUser[]>(staffUsers);
+  const [formData, setFormData] = useState<ClinicSettings>(() => ({
+    ...INITIAL_CLINIC_SETTINGS,
+    ...(settings || {}),
+    enableDemoMode: settings?.enableDemoMode ?? false,
+    enableBruteForceProtection: settings?.enableBruteForceProtection ?? true,
+    sessionTimeoutMinutes: settings?.sessionTimeoutMinutes ?? 30,
+    license: settings?.license || createDefaultTenantLicense('MONTHLY', 1),
+  }));
+  const [staffList, setStaffList] = useState<StaffUser[]>(() => Array.isArray(staffUsers) ? staffUsers : INITIAL_STAFF_USERS);
   const [activeTab, setActiveTab] = useState<
     'BRANDING' | 'CONTACT' | 'MEDICAL_DIRECTION' | 'USERS' | 'SECURITY' | 'LICENSE' | 'PREVIEW'
   >('BRANDING');

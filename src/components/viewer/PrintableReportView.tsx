@@ -97,7 +97,7 @@ export const PrintableReportView: React.FC<PrintableReportViewProps> = ({ study,
             </div>
             <div>
               <span className="text-neutral-500 block font-medium">Médico Solicitante:</span>
-              <span className="font-semibold text-neutral-900">{study.referringDoctor || 'A quien corresponda'}</span>
+              <span className="font-semibold text-neutral-900">{study.referringDoctor || study.orderingPhysician || 'A quien corresponda'}</span>
             </div>
             <div className="col-span-2">
               <span className="text-neutral-500 block font-medium">Estudio Realizado:</span>

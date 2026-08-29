@@ -145,6 +145,11 @@ export const RadiologyReportEditor: React.FC<RadiologyReportEditorProps> = ({
 
   // Native Speech-to-Text Voice Dictation State
   const [activeSpeechField, setActiveSpeechField] = useState<'technique' | 'findings' | 'impression' | 'recommendations' | null>(null);
+  const activeSpeechFieldRef = useRef(activeSpeechField);
+  useEffect(() => {
+    activeSpeechFieldRef.current = activeSpeechField;
+  }, [activeSpeechField]);
+
   const [speechSupported, setSpeechSupported] = useState(false);
   const recognitionRef = useRef<any>(null);
 
@@ -170,13 +175,14 @@ export const RadiologyReportEditor: React.FC<RadiologyReportEditorProps> = ({
 
           if (transcript.trim()) {
             const cleanText = transcript.trim();
-            if (activeSpeechField === 'findings') {
+            const currentTarget = activeSpeechFieldRef.current;
+            if (currentTarget === 'findings') {
               setFindings(prev => (prev ? `${prev}\n• ${cleanText}` : `• ${cleanText}`));
-            } else if (activeSpeechField === 'impression') {
+            } else if (currentTarget === 'impression') {
               setImpression(prev => (prev ? `${prev}\n${cleanText}` : cleanText));
-            } else if (activeSpeechField === 'technique') {
+            } else if (currentTarget === 'technique') {
               setTechnique(prev => (prev ? `${prev} ${cleanText}` : cleanText));
-            } else if (activeSpeechField === 'recommendations') {
+            } else if (currentTarget === 'recommendations') {
               setRecommendations(prev => (prev ? `${prev} ${cleanText}` : cleanText));
             }
           }
@@ -196,7 +202,7 @@ export const RadiologyReportEditor: React.FC<RadiologyReportEditorProps> = ({
         console.warn('SpeechRecognition setup failed:', e);
       }
     }
-  }, [activeSpeechField]);
+  }, []);
 
   const toggleVoiceDictation = (field: 'technique' | 'findings' | 'impression' | 'recommendations') => {
     if (!speechSupported || !recognitionRef.current) {
