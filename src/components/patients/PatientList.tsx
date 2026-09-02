@@ -59,22 +59,22 @@ export const PatientList: React.FC<PatientListProps> = ({
   });
 
   return (
-    <div className="flex-1 flex flex-col h-full bg-neutral-950 text-neutral-100 overflow-hidden select-none">
+    <div className="flex-1 flex flex-col h-full bg-slate-50 text-slate-800 overflow-hidden select-none">
       {/* Top Header */}
-      <div className="p-4 bg-neutral-900 border-b border-neutral-800 flex flex-wrap items-center justify-between gap-4">
+      <div className="p-4 bg-white border-b border-slate-200 flex flex-wrap items-center justify-between gap-4 shadow-xs">
         <div>
-          <h2 className="text-lg font-bold text-white tracking-tight flex items-center gap-2">
-            <Users className="w-5 h-5 text-cyan-400" />
+          <h2 className="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
+            <Users className="w-5 h-5 text-cyan-600" />
             <span>Directorio de Pacientes e Historiales</span>
           </h2>
-          <p className="text-xs text-neutral-400">
+          <p className="text-xs text-slate-500">
             Registro clínico de filiación, antecedentes, estudios previos y seguridad
           </p>
         </div>
 
         <button
           onClick={onOpenNewPatientModal}
-          className="flex items-center gap-1.5 px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg text-xs font-semibold shadow-md shadow-cyan-600/30 transition-all"
+          className="flex items-center gap-1.5 px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg text-xs font-semibold shadow-sm transition-all cursor-pointer"
         >
           <UserPlus className="w-4 h-4" />
           <span>Registrar Paciente</span>
@@ -82,28 +82,28 @@ export const PatientList: React.FC<PatientListProps> = ({
       </div>
 
       {/* Search and Filters Bar */}
-      <div className="p-3.5 bg-neutral-900/60 border-b border-neutral-800 px-4 flex flex-wrap items-center justify-between gap-3">
+      <div className="p-3.5 bg-white border-b border-slate-200 px-4 flex flex-wrap items-center justify-between gap-3">
         <div className="relative flex-1 min-w-[240px] max-w-md">
-          <Search className="w-4 h-4 text-neutral-500 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Buscar por nombre, DNI, teléfono o seguro..."
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            className="w-full bg-neutral-950 border border-neutral-800 rounded-lg pl-9 pr-4 py-1.5 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-cyan-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-4 py-1.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:bg-white focus:border-cyan-600"
           />
         </div>
 
         <div className="flex items-center gap-2">
           <button
             onClick={() => setFilterSafetyAlert(!filterSafetyAlert)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors cursor-pointer ${
               filterSafetyAlert
-                ? 'bg-amber-950 text-amber-300 border-amber-600 shadow-xs'
-                : 'bg-neutral-950 text-neutral-400 border-neutral-800 hover:text-neutral-200'
+                ? 'bg-amber-50 text-amber-800 border-amber-300 shadow-xs font-bold'
+                : 'bg-white text-slate-600 border-slate-200 hover:text-slate-900 hover:border-slate-300'
             }`}
           >
-            <ShieldAlert className="w-3.5 h-3.5" />
+            <ShieldAlert className="w-3.5 h-3.5 text-amber-600" />
             <span>Solo con Alertas de Seguridad</span>
           </button>
         </div>
@@ -112,13 +112,13 @@ export const PatientList: React.FC<PatientListProps> = ({
       {/* Patient List */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {filteredPatients.length === 0 ? (
-          <div className="text-center py-16 text-neutral-500 space-y-3">
-            <Users className="w-12 h-12 mx-auto text-neutral-600 opacity-50" />
+          <div className="text-center py-16 text-slate-400 space-y-3 bg-white rounded-2xl border border-slate-200 p-8 shadow-xs">
+            <Users className="w-12 h-12 mx-auto text-slate-300" />
             <div>
-              <p className="text-sm font-bold text-white">
+              <p className="text-sm font-bold text-slate-800">
                 {patients.length === 0 ? 'No hay pacientes registrados todavía' : 'No se encontraron pacientes'}
               </p>
-              <p className="text-xs text-neutral-400 mt-1 max-w-sm mx-auto">
+              <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
                 {safePatients.length === 0
                   ? 'Comience registrando el expediente del primer paciente de su consultorio.'
                   : 'Ningún paciente coincide con los filtros o término de búsqueda.'}
@@ -127,7 +127,7 @@ export const PatientList: React.FC<PatientListProps> = ({
             {safePatients.length === 0 ? (
               <button
                 onClick={onOpenNewPatientModal}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl text-xs font-bold shadow-md cursor-pointer transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white rounded-xl text-xs font-bold shadow-md cursor-pointer transition-all"
               >
                 <Plus className="w-4 h-4" />
                 <span>+ Registrar Primer Paciente</span>
@@ -138,7 +138,7 @@ export const PatientList: React.FC<PatientListProps> = ({
                   setSearchQuery('');
                   setFilterSafetyAlert(false);
                 }}
-                className="text-xs text-cyan-400 hover:underline cursor-pointer"
+                className="text-xs text-cyan-700 hover:underline cursor-pointer font-semibold"
               >
                 Restablecer búsqueda
               </button>
@@ -158,37 +158,37 @@ export const PatientList: React.FC<PatientListProps> = ({
               <div
                 key={patient.id}
                 onClick={() => onSelectPatient(patient.id)}
-                className="bg-neutral-900/80 hover:bg-neutral-900 border border-neutral-800/80 hover:border-cyan-500/50 rounded-xl p-4 transition-all duration-150 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer group"
+                className="bg-white hover:bg-slate-50/90 border border-slate-200 hover:border-cyan-400 rounded-2xl p-4 transition-all duration-150 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer group"
               >
                 {/* Left Patient Identification */}
                 <div className="flex items-start gap-3.5 flex-1">
-                  <div className="w-11 h-11 rounded-full bg-neutral-950 border border-neutral-800 text-cyan-400 flex items-center justify-center font-bold text-sm group-hover:border-cyan-500 transition-colors shrink-0">
+                  <div className="w-11 h-11 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-800 flex items-center justify-center font-bold text-sm group-hover:border-cyan-500 transition-colors shrink-0">
                     {patient.fullName.substring(0, 2).toUpperCase()}
                   </div>
 
                   <div className="space-y-1">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h4 className="text-sm font-bold text-white group-hover:text-cyan-400 transition-colors">
+                      <h4 className="text-sm font-bold text-slate-900 group-hover:text-cyan-700 transition-colors">
                         {patient.fullName}
                       </h4>
-                      <span className="text-xs font-mono text-neutral-400">DNI: {patient.dni}</span>
-                      <span className="text-[11px] text-neutral-500">• {patient.age} años ({patient.gender === 'M' ? 'M' : 'F'})</span>
+                      <span className="text-xs font-mono text-slate-500">DNI: {patient.dni}</span>
+                      <span className="text-[11px] text-slate-500">• {patient.age} años ({patient.gender === 'M' ? 'M' : 'F'})</span>
                       {hasAlerts && (
-                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800 flex items-center gap-1">
-                          <ShieldAlert className="w-3 h-3" />
+                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 flex items-center gap-1">
+                          <ShieldAlert className="w-3 h-3 text-amber-600" />
                           <span>Precaución</span>
                         </span>
                       )}
                     </div>
 
-                    <div className="flex items-center gap-3 text-xs text-neutral-400">
+                    <div className="flex items-center gap-3 text-xs text-slate-500">
                       <span>Tel: {patient.phone}</span>
                       <span>• Seguro: {patient.insuranceProvider}</span>
                       <span>• Sangre: {patient.bloodType}</span>
                     </div>
 
                     {patient.safetyProfile.allergies.length > 0 && (
-                      <div className="text-[11px] text-rose-300 font-medium">
+                      <div className="text-[11px] text-rose-700 font-medium">
                         Alergias: {patient.safetyProfile.allergies.join(', ')}
                       </div>
                     )}
@@ -196,12 +196,12 @@ export const PatientList: React.FC<PatientListProps> = ({
                 </div>
 
                 {/* Right Studies Count & Fast Action */}
-                <div className="flex items-center gap-3 shrink-0 border-t md:border-t-0 pt-2 md:pt-0 border-neutral-800 justify-between md:justify-end">
+                <div className="flex items-center gap-3 shrink-0 border-t md:border-t-0 pt-2 md:pt-0 border-slate-200 justify-between md:justify-end">
                   <div className="text-right">
-                    <span className="text-xs font-semibold text-neutral-300 block">
+                    <span className="text-xs font-bold text-slate-800 block">
                       {patientStudies.length} {patientStudies.length === 1 ? 'Estudio' : 'Estudios'}
                     </span>
-                    <span className="text-[10px] text-neutral-500 block">
+                    <span className="text-[10px] text-slate-400 block">
                       {patientStudies.length > 0 ? `Último: ${patientStudies[0].studyDate}` : 'Sin estudios'}
                     </span>
                   </div>
@@ -213,7 +213,7 @@ export const PatientList: React.FC<PatientListProps> = ({
                         onOpenCredentialsModal(patient);
                       }}
                       title="Ver e imprimir credenciales del expediente para el paciente"
-                      className="p-2 bg-neutral-800 hover:bg-cyan-950 text-cyan-300 border border-neutral-700/80 hover:border-cyan-500 rounded-lg transition-colors text-xs flex items-center gap-1 cursor-pointer"
+                      className="p-2 bg-slate-100 hover:bg-cyan-50 text-slate-700 hover:text-cyan-800 border border-slate-200 hover:border-cyan-300 rounded-lg transition-colors text-xs flex items-center gap-1 cursor-pointer"
                     >
                       <span>🔑</span>
                       <span className="hidden lg:inline text-[11px] font-semibold">Credenciales</span>
@@ -226,13 +226,13 @@ export const PatientList: React.FC<PatientListProps> = ({
                       onOpenNewAppointmentForPatient(patient.id);
                     }}
                     title="Agendar cita para este paciente"
-                    className="p-2 bg-neutral-800 hover:bg-cyan-600 hover:text-white text-neutral-300 rounded-lg transition-colors text-xs flex items-center gap-1 cursor-pointer"
+                    className="p-2 bg-slate-100 hover:bg-cyan-600 hover:text-white text-slate-700 border border-slate-200 rounded-lg transition-colors text-xs flex items-center gap-1 cursor-pointer"
                   >
-                    <Calendar className="w-4 h-4" />
-                    <span className="hidden sm:inline">Agendar</span>
+                    <Calendar className="w-4 h-4 text-cyan-700" />
+                    <span className="hidden sm:inline font-semibold">Agendar</span>
                   </button>
 
-                  <div className="p-1.5 text-neutral-500 group-hover:text-cyan-400 transition-colors">
+                  <div className="p-1.5 text-slate-400 group-hover:text-cyan-700 transition-colors">
                     <ChevronRight className="w-5 h-5" />
                   </div>
                 </div>

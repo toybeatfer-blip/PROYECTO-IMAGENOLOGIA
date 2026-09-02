@@ -93,22 +93,22 @@ Técnica: ${study.report?.technique || 'Estudio de imagen digital'}`,
   return (
     <div className="space-y-6">
       {/* Top Header Card */}
-      <div className="bg-gradient-to-r from-neutral-900 via-cyan-950/30 to-neutral-900 border border-neutral-800 rounded-2xl p-5 shadow-lg">
+      <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-400">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-700">
               Historial Radiológico Digital
             </span>
-            <h2 className="text-xl font-bold text-white mt-1">Mis Estudios Médicos & Resultados</h2>
-            <p className="text-xs text-neutral-400 mt-1">
+            <h2 className="text-xl font-bold text-slate-900 mt-1">Mis Estudios Médicos & Resultados</h2>
+            <p className="text-xs text-slate-500 mt-1">
               Visualice sus imágenes diagnósticas en alta resolución, descargue informes oficiales con firma y consulte explicaciones claras asistidas por IA.
             </p>
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="text-right">
-              <span className="text-xs text-neutral-400 block">Total de Estudios:</span>
-              <span className="text-xl font-extrabold text-white">{patientStudies.length}</span>
+            <div className="text-right bg-slate-50 px-4 py-2 rounded-2xl border border-slate-200">
+              <span className="text-xs text-slate-400 block">Total de Estudios:</span>
+              <span className="text-xl font-extrabold text-cyan-700">{patientStudies.length}</span>
             </div>
           </div>
         </div>
@@ -117,22 +117,22 @@ Técnica: ${study.report?.technique || 'Estudio de imagen digital'}`,
       {/* Filter and Search Bar */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
         <div className="relative flex-1">
-          <Search className="w-4 h-4 text-neutral-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Buscar por nombre del estudio, médico solicitante o código..."
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="w-full bg-neutral-900/90 border border-neutral-800 rounded-xl pl-10 pr-4 py-2 text-xs text-white placeholder:text-neutral-500 focus:outline-hidden focus:border-cyan-500"
+            className="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:border-cyan-600 shadow-xs"
           />
         </div>
 
         <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-neutral-400 shrink-0" />
+          <Filter className="w-4 h-4 text-slate-400 shrink-0" />
           <select
             value={selectedModality}
             onChange={e => setSelectedModality(e.target.value)}
-            className="bg-neutral-900 border border-neutral-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+            className="bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-700 focus:outline-hidden focus:border-cyan-600 shadow-xs cursor-pointer"
           >
             <option value="ALL">Todas las modalidades</option>
             <option value="ULTRASONIDO">Ultrasonido (Ecografía)</option>
@@ -145,10 +145,10 @@ Técnica: ${study.report?.technique || 'Estudio de imagen digital'}`,
 
       {/* Studies Grid / List */}
       {filteredStudies.length === 0 ? (
-        <div className="bg-neutral-900/60 border border-neutral-800 rounded-2xl p-12 text-center space-y-3">
-          <FileText className="w-12 h-12 text-neutral-600 mx-auto" />
-          <h3 className="text-base font-bold text-neutral-300">No se encontraron estudios</h3>
-          <p className="text-xs text-neutral-500 max-w-md mx-auto">
+        <div className="bg-white border border-slate-200 rounded-3xl p-12 text-center space-y-3 shadow-xs">
+          <FileText className="w-12 h-12 text-slate-300 mx-auto" />
+          <h3 className="text-base font-bold text-slate-800">No se encontraron estudios</h3>
+          <p className="text-xs text-slate-500 max-w-md mx-auto">
             No hay registros que coincidan con los filtros aplicados o aún no cuenta con estudios archivados en esta categoría.
           </p>
         </div>
@@ -157,8 +157,8 @@ Técnica: ${study.report?.technique || 'Estudio de imagen digital'}`,
           {filteredStudies.map(study => {
             const modConfig = MODALITY_CONFIG[study.modality] || {
               label: study.modality,
-              badgeBg: 'bg-neutral-800 text-neutral-300',
-              badgeBorder: 'border-neutral-700',
+              badgeBg: 'bg-cyan-50 text-cyan-700',
+              badgeBorder: 'border-cyan-200',
             };
 
             const isReportReady = study.report?.status === 'FIRMADO_FINAL' || study.status === 'FIRMADO';
@@ -166,7 +166,7 @@ Técnica: ${study.report?.technique || 'Estudio de imagen digital'}`,
             return (
               <div
                 key={study.id}
-                className="bg-neutral-900/90 border border-neutral-800 hover:border-neutral-700 rounded-2xl p-5 shadow-md flex flex-col justify-between space-y-4 transition-all"
+                className="bg-white border border-slate-200 hover:border-cyan-300 rounded-3xl p-5 shadow-xs flex flex-col justify-between space-y-4 transition-all"
               >
                 {/* Header */}
                 <div className="space-y-2">
@@ -176,48 +176,48 @@ Técnica: ${study.report?.technique || 'Estudio de imagen digital'}`,
                     >
                       {modConfig.label}
                     </span>
-                    <span className="text-[11px] text-neutral-400 flex items-center gap-1 font-mono">
-                      <Calendar className="w-3.5 h-3.5 text-neutral-500" />
+                    <span className="text-[11px] text-slate-500 flex items-center gap-1 font-mono">
+                      <Calendar className="w-3.5 h-3.5 text-slate-400" />
                       <span>{study.studyDate}</span>
                     </span>
                   </div>
 
                   <div>
-                    <h3 className="text-sm font-bold text-white leading-snug">{study.studyName}</h3>
-                    <p className="text-xs text-neutral-400 mt-0.5">
-                      Médico solicitante: <strong className="text-neutral-300">{study.orderingPhysician}</strong>
+                    <h3 className="text-sm font-bold text-slate-900 leading-snug">{study.studyName}</h3>
+                    <p className="text-xs text-slate-500 mt-0.5">
+                      Médico solicitante: <strong className="text-slate-700">{study.orderingPhysician}</strong>
                     </p>
                   </div>
                 </div>
 
                 {/* Key Findings Box */}
-                <div className="bg-neutral-950/80 p-3 rounded-xl border border-neutral-800/80 space-y-1.5">
+                <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 space-y-1.5">
                   <div className="flex items-center justify-between text-[11px]">
-                    <span className="font-bold text-neutral-300 flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                    <span className="font-bold text-slate-700 flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                       <span>Conclusión Diagnóstica:</span>
                     </span>
                     <span
-                      className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                         isReportReady
-                          ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800'
-                          : 'bg-amber-950/80 text-amber-300 border border-amber-800'
+                          ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                          : 'bg-amber-50 text-amber-800 border border-amber-200'
                       }`}
                     >
                       {isReportReady ? 'Informe Firmado' : 'En Interpretación'}
                     </span>
                   </div>
-                  <p className="text-xs text-neutral-300 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-slate-700 line-clamp-2 leading-relaxed">
                     {study.keyFindingsSummary || study.report?.impression || 'Estudio completado. Informe en proceso de firma.'}
                   </p>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="pt-2 border-t border-neutral-800/80 flex flex-wrap items-center justify-between gap-2">
+                <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => onOpenViewer(study)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-cyan-600 hover:bg-cyan-500 text-white shadow-xs transition-all"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-cyan-600 hover:bg-cyan-700 text-white shadow-xs transition-all cursor-pointer"
                     >
                       <Eye className="w-3.5 h-3.5" />
                       <span>Ver Imágenes ({study.seriesCount} series)</span>
@@ -225,19 +225,19 @@ Técnica: ${study.report?.technique || 'Estudio de imagen digital'}`,
 
                     <button
                       onClick={() => onOpenReport(study)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-700 transition-all"
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition-all cursor-pointer"
                     >
-                      <FileText className="w-3.5 h-3.5 text-cyan-400" />
+                      <FileText className="w-3.5 h-3.5 text-cyan-700" />
                       <span>Informe PDF</span>
                     </button>
                   </div>
 
                   <button
                     onClick={() => handleRequestAIExplanation(study)}
-                    className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold text-emerald-400 hover:text-emerald-300 bg-emerald-950/30 hover:bg-emerald-950/60 border border-emerald-800/60 transition-all"
+                    className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold text-emerald-800 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-all cursor-pointer"
                     title="Explicar en palabras sencillas con Inteligencia Artificial"
                   >
-                    <Sparkles className="w-3.5 h-3.5" />
+                    <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Explicar (IA)</span>
                   </button>
                 </div>
@@ -249,51 +249,51 @@ Técnica: ${study.report?.technique || 'Estudio de imagen digital'}`,
 
       {/* AI Explanation Modal */}
       {explainingStudy && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs">
-          <div className="bg-neutral-900 border border-neutral-700 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden animate-fadeIn">
-            <div className="p-4 bg-gradient-to-r from-emerald-950/60 via-neutral-900 to-neutral-900 border-b border-neutral-800 flex items-center justify-between">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-2xl shadow-2xl overflow-hidden animate-fadeIn">
+            <div className="p-4 bg-gradient-to-r from-emerald-50 via-white to-white border-b border-slate-200 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400">
+                <div className="p-2 bg-emerald-100 border border-emerald-200 rounded-xl text-emerald-700">
                   <Sparkles className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-white">Explicación Clara para el Paciente</h3>
-                  <p className="text-xs text-neutral-400">
+                  <h3 className="text-sm font-bold text-slate-900">Explicación Clara para el Paciente</h3>
+                  <p className="text-xs text-slate-500">
                     Estudio: {explainingStudy.studyName} ({explainingStudy.studyDate})
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setExplainingStudy(null)}
-                className="p-1.5 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-lg"
+                className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="p-6 space-y-4 text-xs text-neutral-200">
+            <div className="p-6 space-y-4 text-xs text-slate-700">
               {isGeneratingExplanation ? (
                 <div className="py-12 text-center space-y-3">
-                  <Sparkles className="w-8 h-8 text-emerald-400 animate-spin mx-auto" />
-                  <p className="font-semibold text-neutral-300">
+                  <Sparkles className="w-8 h-8 text-emerald-600 animate-spin mx-auto" />
+                  <p className="font-bold text-slate-800">
                     Traduciendo los términos médicos a un lenguaje claro y comprensible...
                   </p>
-                  <p className="text-neutral-500 text-[11px]">
+                  <p className="text-slate-500 text-[11px]">
                     El asistente inteligente está preparando un resumen personalizado para usted.
                   </p>
                 </div>
               ) : (
                 <div className="space-y-4">
-                  <div className="bg-emerald-950/30 border border-emerald-800/80 rounded-xl p-4 space-y-2 text-neutral-200 leading-relaxed text-xs">
-                    <p className="font-semibold text-emerald-300 flex items-center gap-1.5">
-                      <ShieldCheck className="w-4 h-4" />
+                  <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-4.5 space-y-2 text-slate-800 leading-relaxed text-xs">
+                    <p className="font-bold text-emerald-900 flex items-center gap-1.5">
+                      <ShieldCheck className="w-4 h-4 text-emerald-600" />
                       <span>Resumen en Lenguaje Cotidiano:</span>
                     </p>
-                    <p className="whitespace-pre-line">{aiExplanation}</p>
+                    <p className="whitespace-pre-line text-slate-700">{aiExplanation}</p>
                   </div>
 
-                  <div className="bg-neutral-950 p-3.5 rounded-xl border border-neutral-800 space-y-1 text-neutral-400 text-[11px]">
-                    <span className="font-bold text-neutral-300 block">Nota Importante de Salud:</span>
+                  <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 space-y-1 text-slate-500 text-[11px]">
+                    <span className="font-bold text-slate-800 block">Nota Importante de Salud:</span>
                     <span>
                       Esta explicación orientativa está diseñada para facilitarle la comprensión de su estudio. Siempre debe comentar los resultados con su médico tratante, quien conoce su historial clínico completo y determinará el plan a seguir.
                     </span>
@@ -302,10 +302,10 @@ Técnica: ${study.report?.technique || 'Estudio de imagen digital'}`,
               )}
             </div>
 
-            <div className="p-4 bg-neutral-950 border-t border-neutral-800 flex justify-end">
+            <div className="p-4 bg-slate-50 border-t border-slate-200 flex justify-end">
               <button
                 onClick={() => setExplainingStudy(null)}
-                className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded-xl text-xs font-semibold"
+                className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-semibold cursor-pointer shadow-xs"
               >
                 Entendido / Cerrar
               </button>

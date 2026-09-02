@@ -47,23 +47,23 @@ export class ErrorBoundary extends React.Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen w-screen bg-neutral-950 text-neutral-100 flex items-center justify-center p-6 font-sans select-none antialiased">
-          <div className="max-w-lg w-full bg-neutral-900 border-2 border-rose-600/40 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 text-center animate-in fade-in zoom-in-95 duration-200">
-            <div className="w-16 h-16 rounded-2xl bg-rose-950/80 border border-rose-700/60 flex items-center justify-center text-rose-400 mx-auto shadow-lg shadow-rose-950/40">
+        <div className="min-h-screen w-screen bg-slate-50 text-slate-800 flex items-center justify-center p-6 font-sans select-none antialiased">
+          <div className="max-w-lg w-full bg-white border border-rose-200 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 text-center animate-in fade-in zoom-in-95 duration-200">
+            <div className="w-16 h-16 rounded-2xl bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600 mx-auto shadow-xs">
               <ShieldAlert className="w-8 h-8" />
             </div>
 
             <div className="space-y-2">
-              <h2 className="text-xl font-bold text-white tracking-tight">
+              <h2 className="text-xl font-bold text-slate-900 tracking-tight">
                 Protección contra Fallos Activa
               </h2>
-              <p className="text-xs text-neutral-400 leading-relaxed">
+              <p className="text-xs text-slate-500 leading-relaxed">
                 El sistema aisló una excepción de interfaz para evitar la pérdida de información de sus pacientes y expedientes.
               </p>
             </div>
 
             {this.state.error && (
-              <div className="p-3.5 rounded-2xl bg-neutral-950 border border-neutral-800 text-left font-mono text-[11px] text-rose-300 max-h-36 overflow-y-auto break-all select-text">
+              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-left font-mono text-[11px] text-rose-800 max-h-36 overflow-y-auto break-all select-text font-semibold">
                 <strong>Error:</strong> {this.state.error.toString()}
               </div>
             )}
@@ -72,14 +72,14 @@ export class ErrorBoundary extends React.Component<Props, State> {
               <button
                 type="button"
                 onClick={this.handleSafeReset}
-                className="flex-1 flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-bold text-xs shadow-lg shadow-rose-900/30 transition-all cursor-pointer"
+                className="flex-1 flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs shadow-xs transition-all cursor-pointer"
               >
                 <RefreshCw className="w-4 h-4" />
                 <span>Reiniciar Aplicación de Forma Segura</span>
               </button>
             </div>
 
-            <p className="text-[10px] text-neutral-500 font-mono">
+            <p className="text-[10px] text-slate-400 font-mono font-semibold">
               IMAGIS Multi-Tenant Core • Sus datos permanecen seguros en la base local y en la nube.
             </p>
           </div>

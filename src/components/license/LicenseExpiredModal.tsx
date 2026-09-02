@@ -42,61 +42,61 @@ export const LicenseExpiredModal: React.FC<LicenseExpiredModalProps> = ({
   const mailtoUrl = `mailto:${superAdminContact.email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md select-none">
-      <div className="bg-neutral-900 border-2 border-amber-500/50 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col max-h-[95vh] animate-in fade-in zoom-in-95 duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs select-none">
+      <div className="bg-white border-2 border-amber-300 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col max-h-[95vh] animate-in fade-in zoom-in-95 duration-150">
         {/* Top Header */}
-        <div className="p-5 bg-gradient-to-r from-amber-950 via-neutral-900 to-neutral-900 border-b border-neutral-800 flex items-center justify-between">
+        <div className="p-5 bg-amber-50 border-b border-amber-200 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-amber-500/20 border border-amber-500/40 rounded-2xl text-amber-400">
+            <div className="p-2.5 bg-amber-100 border border-amber-300 rounded-2xl text-amber-800">
               <ShieldAlert className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white tracking-tight">
+              <h3 className="text-base font-bold text-amber-950 tracking-tight">
                 {isSuspended ? 'Acceso Suspendido' : 'Licencia Mensual Vencida'}
               </h3>
-              <p className="text-xs text-amber-300/80 font-mono">
+              <p className="text-xs text-amber-800 font-mono font-bold">
                 {isSuspended ? 'Bloqueado por Administración' : evalInfo.label}
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-xl transition-colors cursor-pointer"
+            className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 overflow-y-auto space-y-5 text-neutral-300 text-xs">
+        <div className="p-6 overflow-y-auto space-y-5 text-slate-700 text-xs">
           {/* Clinic Overview Box */}
-          <div className="p-4 rounded-2xl bg-neutral-950 border border-neutral-800 space-y-2">
-            <div className="flex items-center justify-between border-b border-neutral-900 pb-2">
+          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-2">
               <div className="flex items-center gap-2">
-                <Building2 className="w-4 h-4 text-cyan-400" />
-                <span className="font-bold text-sm text-white">{clinic.clinicName}</span>
+                <Building2 className="w-4 h-4 text-cyan-700" />
+                <span className="font-bold text-sm text-slate-900">{clinic.clinicName}</span>
               </div>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-800">
+              <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 font-bold">
                 {clinic.branch}
               </span>
             </div>
 
             <div className="grid grid-cols-2 gap-2 text-[11px] pt-1">
               <div>
-                <span className="text-neutral-500 block text-[10px]">Médico Titular:</span>
-                <span className="text-neutral-200 font-semibold">{clinic.doctorPrefix} {clinic.doctorName}</span>
+                <span className="text-slate-500 block text-[10px] font-semibold">Médico Titular:</span>
+                <span className="text-slate-900 font-bold">{clinic.doctorPrefix} {clinic.doctorName}</span>
               </div>
               <div>
-                <span className="text-neutral-500 block text-[10px]">Usuario Registrado:</span>
-                <span className="font-mono text-cyan-400 font-bold">{clinic.username}</span>
+                <span className="text-slate-500 block text-[10px] font-semibold">Usuario Registrado:</span>
+                <span className="font-mono text-cyan-800 font-bold">{clinic.username}</span>
               </div>
               <div>
-                <span className="text-neutral-500 block text-[10px]">Fecha de Vencimiento:</span>
-                <span className="font-mono text-rose-400 font-bold">{clinic.licenseValidUntil}</span>
+                <span className="text-slate-500 block text-[10px] font-semibold">Fecha de Vencimiento:</span>
+                <span className="font-mono text-rose-700 font-bold">{clinic.licenseValidUntil}</span>
               </div>
               <div>
-                <span className="text-neutral-500 block text-[10px]">Estado de Suscripción:</span>
-                <span className="font-bold text-amber-400">
+                <span className="text-slate-500 block text-[10px] font-semibold">Estado de Suscripción:</span>
+                <span className="font-bold text-amber-800">
                   {isSuspended ? 'SUSPENDIDA' : 'VENCIDA (1 MES)'}
                 </span>
               </div>
@@ -104,12 +104,12 @@ export const LicenseExpiredModal: React.FC<LicenseExpiredModalProps> = ({
           </div>
 
           {/* Explanation Alert */}
-          <div className="p-4 rounded-2xl bg-amber-950/30 border border-amber-800/60 text-amber-200 text-xs space-y-2">
-            <div className="flex items-center gap-2 font-bold text-amber-300">
-              <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
+          <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-950 text-xs space-y-2">
+            <div className="flex items-center gap-2 font-bold text-amber-900">
+              <AlertTriangle className="w-4 h-4 text-amber-700 shrink-0" />
               <span>¿Por qué no puedo ingresar a mi consultorio?</span>
             </div>
-            <p className="leading-relaxed text-[11px] text-amber-200/90">
+            <p className="leading-relaxed text-[11px] text-amber-900/90">
               {isSuspended
                 ? 'Su cuenta ha sido suspendida temporalmente por el Super Administrador. Para reactivar el servicio, póngase en contacto inmediato.'
                 : 'La suscripción mensual de 30 días de su consultorio ha concluido. Para continuar atendiendo a sus pacientes y emitiendo informes radiológicos, solicite la renovación mensual (+1 Mes).'}
@@ -117,16 +117,16 @@ export const LicenseExpiredModal: React.FC<LicenseExpiredModalProps> = ({
           </div>
 
           {/* Super Admin Contact Card */}
-          <div className="p-4 rounded-2xl bg-gradient-to-br from-neutral-950 via-neutral-900 to-cyan-950/30 border border-cyan-500/30 space-y-3">
+          <div className="p-4 rounded-2xl bg-slate-50 border border-cyan-200 space-y-3 shadow-xs">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-cyan-400 flex items-center gap-1.5">
+              <span className="text-[10px] uppercase font-bold tracking-wider text-cyan-800 flex items-center gap-1.5">
                 <HelpCircle className="w-3.5 h-3.5" />
                 Contacto Directo con el Administrador
               </span>
-              <span className="text-[10px] text-neutral-400">{superAdminContact.name}</span>
+              <span className="text-[10px] text-slate-500 font-bold">{superAdminContact.name}</span>
             </div>
 
-            <p className="text-[11px] text-neutral-300 italic">
+            <p className="text-[11px] text-slate-700 italic">
               "{superAdminContact.helpMessage}"
             </p>
 
@@ -135,7 +135,7 @@ export const LicenseExpiredModal: React.FC<LicenseExpiredModalProps> = ({
                 href={whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md shadow-emerald-950/40 transition-all cursor-pointer group text-center"
+                className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-xs transition-all cursor-pointer group text-center"
               >
                 <MessageSquare className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span>Contactar por WhatsApp</span>
@@ -143,7 +143,7 @@ export const LicenseExpiredModal: React.FC<LicenseExpiredModalProps> = ({
 
               <a
                 href={mailtoUrl}
-                className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-cyan-700 hover:bg-cyan-600 text-white font-bold text-xs shadow-md shadow-cyan-950/40 transition-all cursor-pointer group text-center"
+                className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs shadow-xs transition-all cursor-pointer group text-center"
               >
                 <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
                 <span>Enviar Correo</span>
@@ -153,16 +153,16 @@ export const LicenseExpiredModal: React.FC<LicenseExpiredModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="p-4 bg-neutral-950 border-t border-neutral-800 flex items-center justify-between">
-          <span className="text-[10px] text-neutral-500 font-mono">
+        <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
+          <span className="text-[10px] text-slate-500 font-mono">
             Tel: {superAdminContact.phone} • {superAdminContact.email}
           </span>
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+            className="px-4 py-1.5 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-bold transition-colors cursor-pointer shadow-xs"
           >
-            Entendido / Volver al Login
+            Entendido
           </button>
         </div>
       </div>

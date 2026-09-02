@@ -61,32 +61,32 @@ export const PatientCredentialsModal: React.FC<PatientCredentialsModalProps> = (
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs select-none">
-      <div className="bg-neutral-900 border border-neutral-700 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col max-h-[95vh] animate-in fade-in zoom-in-95 duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs select-none">
+      <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden flex flex-col max-h-[95vh] animate-in fade-in zoom-in-95 duration-150">
         {/* Top Header */}
-        <div className="p-4 bg-gradient-to-r from-cyan-950 via-neutral-900 to-neutral-900 border-b border-neutral-800 flex items-center justify-between">
+        <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 bg-cyan-500/10 border border-cyan-500/30 rounded-xl text-cyan-400">
+            <div className="p-2 bg-cyan-50 border border-cyan-200 rounded-xl text-cyan-700">
               <KeyRound className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white">Credenciales del Expediente</h3>
-              <p className="text-xs text-neutral-400">Acceso digital automático para el paciente</p>
+              <h3 className="text-base font-bold text-slate-900">Credenciales del Expediente</h3>
+              <p className="text-xs text-slate-500">Acceso digital automático para el paciente</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-lg transition-colors cursor-pointer"
+            className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Content Body */}
-        <div className="p-6 overflow-y-auto space-y-5 text-xs text-neutral-200">
+        <div className="p-6 overflow-y-auto space-y-5 text-xs text-slate-700">
           {/* Success Banner */}
-          <div className="flex items-center gap-2.5 p-3 rounded-2xl bg-emerald-950/40 border border-emerald-800/80 text-emerald-300">
-            <ShieldCheck className="w-5 h-5 text-emerald-400 shrink-0" />
+          <div className="flex items-center gap-2.5 p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800">
+            <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
             <p className="text-xs">
               <strong>Expediente registrado con éxito.</strong> Se han generado las credenciales de acceso seguras para que el paciente consulte sus estudios en línea.
             </p>
@@ -95,65 +95,63 @@ export const PatientCredentialsModal: React.FC<PatientCredentialsModalProps> = (
           {/* Printable Digital Card */}
           <div
             id="printable-patient-card"
-            className="bg-gradient-to-br from-neutral-950 via-neutral-900 to-cyan-950/30 border-2 border-cyan-500/40 rounded-3xl p-5 shadow-xl space-y-4 relative overflow-hidden"
+            className="bg-white border-2 border-cyan-300 rounded-3xl p-5 shadow-md space-y-4 relative overflow-hidden"
           >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/5 rounded-full blur-2xl pointer-events-none" />
-
             {/* Card Clinic Header */}
-            <div className="flex items-center justify-between border-b border-neutral-800 pb-3">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-cyan-600 flex items-center justify-center font-bold text-white shadow-md">
+                <div className="w-9 h-9 rounded-xl bg-cyan-600 flex items-center justify-center font-bold text-white shadow-xs">
                   <Layers className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-extrabold text-white text-sm tracking-wide">{clinicName}</h4>
-                  <p className="text-[10px] text-cyan-400 font-mono">PORTAL DE EXPEDIENTE CLÍNICO DIGITAL</p>
+                  <h4 className="font-extrabold text-slate-900 text-sm tracking-wide">{clinicName}</h4>
+                  <p className="text-[10px] text-cyan-700 font-mono font-bold">PORTAL DE EXPEDIENTE CLÍNICO DIGITAL</p>
                 </div>
               </div>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 font-bold border border-cyan-800">
+              <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-cyan-50 text-cyan-800 font-bold border border-cyan-200">
                 ACTIVO
               </span>
             </div>
 
             {/* Patient Info */}
             <div className="space-y-1">
-              <span className="text-[10px] text-neutral-400 uppercase tracking-wider block">Titular del Expediente</span>
-              <div className="text-sm font-bold text-white">{patient.fullName}</div>
-              <div className="text-[11px] text-neutral-400 flex items-center gap-2">
-                <span>DNI: <strong className="text-neutral-200">{patient.dni}</strong></span>
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-semibold">Titular del Expediente</span>
+              <div className="text-sm font-bold text-slate-900">{patient.fullName}</div>
+              <div className="text-[11px] text-slate-500 flex items-center gap-2">
+                <span>DNI: <strong className="text-slate-800">{patient.dni}</strong></span>
                 <span>• Tel: {patient.phone || 'N/A'}</span>
               </div>
             </div>
 
             {/* Generated Credentials Highlight Box */}
-            <div className="grid grid-cols-2 gap-3 bg-neutral-950/90 p-3.5 rounded-2xl border border-cyan-800/60 shadow-inner">
+            <div className="grid grid-cols-2 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200 shadow-inner">
               <div className="space-y-1">
-                <span className="text-[10px] font-bold text-neutral-400 flex items-center gap-1">
-                  <User className="w-3 h-3 text-cyan-400" />
+                <span className="text-[10px] font-bold text-slate-500 flex items-center gap-1">
+                  <User className="w-3 h-3 text-cyan-700" />
                   USUARIO (DNI)
                 </span>
-                <div className="text-base font-mono font-extrabold text-cyan-300 tracking-wider">
+                <div className="text-base font-mono font-extrabold text-cyan-800 tracking-wider">
                   {username}
                 </div>
               </div>
 
               <div className="space-y-1">
-                <span className="text-[10px] font-bold text-neutral-400 flex items-center gap-1">
-                  <Lock className="w-3 h-3 text-emerald-400" />
+                <span className="text-[10px] font-bold text-slate-500 flex items-center gap-1">
+                  <Lock className="w-3 h-3 text-emerald-700" />
                   CONTRASEÑA / PIN
                 </span>
-                <div className="text-base font-mono font-extrabold text-emerald-400 tracking-wider">
+                <div className="text-base font-mono font-extrabold text-emerald-700 tracking-wider">
                   {password}
                 </div>
               </div>
             </div>
 
             {/* Access Instructions */}
-            <div className="text-[11px] text-neutral-400 space-y-1 pt-1">
+            <div className="text-[11px] text-slate-600 space-y-1 pt-1">
               <p className="leading-relaxed">
                 👉 Ingrese a la plataforma web seleccionando la opción <strong>"Portal Paciente"</strong> e introduzca su número de <strong>DNI</strong> y <strong>PIN</strong>.
               </p>
-              <p className="text-[10px] text-neutral-500 font-mono">
+              <p className="text-[10px] text-slate-400 font-mono">
                 {clinicAddress} • Tel: {clinicPhone}
               </p>
             </div>
@@ -161,22 +159,22 @@ export const PatientCredentialsModal: React.FC<PatientCredentialsModalProps> = (
         </div>
 
         {/* Footer Action Buttons */}
-        <div className="p-4 bg-neutral-950 border-t border-neutral-800 flex flex-wrap items-center justify-between gap-2">
+        <div className="p-4 bg-slate-50 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2">
           <button
             type="button"
             onClick={handleCopy}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold transition-colors cursor-pointer shadow-xs"
           >
-            {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-cyan-400" />}
+            {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-cyan-700" />}
             <span>{copied ? '¡Copiado!' : 'Copiar Credenciales'}</span>
           </button>
 
           <button
             type="button"
             onClick={handlePrint}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold transition-colors cursor-pointer shadow-xs"
           >
-            <Printer className="w-4 h-4 text-amber-400" />
+            <Printer className="w-4 h-4 text-amber-600" />
             <span>Imprimir Carnet</span>
           </button>
 
@@ -188,7 +186,7 @@ export const PatientCredentialsModal: React.FC<PatientCredentialsModalProps> = (
                   onOpenPatientLogin();
                   onClose();
                 }}
-                className="flex items-center gap-1.5 px-3.5 py-2 bg-neutral-800 hover:bg-neutral-700 text-cyan-300 border border-neutral-700 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 px-3.5 py-2 bg-white hover:bg-slate-100 text-cyan-800 border border-slate-200 rounded-xl text-xs font-semibold transition-colors cursor-pointer shadow-xs"
                 title="Abrir la pantalla de inicio de sesión donde el paciente ingresa su DNI y PIN"
               >
                 <span>Probar Inicio de Sesión</span>
@@ -201,7 +199,7 @@ export const PatientCredentialsModal: React.FC<PatientCredentialsModalProps> = (
                 onOpenPatientViewer(patient);
                 onClose();
               }}
-              className="flex items-center gap-1.5 px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-xs font-bold shadow-md shadow-cyan-600/30 transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
             >
               <Eye className="w-4 h-4" />
               <span>Ver Expediente Directo</span>

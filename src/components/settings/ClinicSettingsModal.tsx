@@ -274,22 +274,22 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
   const licenseCheck = checkLicenseStatus(formData.license);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xs select-none font-sans">
-      <div className="bg-neutral-900 border border-neutral-700 rounded-3xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-xs select-none font-sans">
+      <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] animate-fadeIn">
         {/* Modal Header */}
-        <div className="p-4 sm:p-5 bg-gradient-to-r from-neutral-950 via-neutral-900 to-neutral-900 border-b border-neutral-800 flex items-center justify-between">
+        <div className="p-4 sm:p-5 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-cyan-500/10 border border-cyan-500/30 rounded-2xl text-cyan-400">
+            <div className="p-2.5 bg-cyan-50 border border-cyan-200 rounded-2xl text-cyan-700">
               <Settings className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
                 <span>Configuración Institucional & Licenciamiento</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono">
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-800 border border-cyan-200 font-mono font-bold">
                   SOLO ADMIN
                 </span>
               </h3>
-              <p className="text-xs text-neutral-400">
+              <p className="text-xs text-slate-500">
                 Personalice los datos de la clínica, membretes oficiales, usuarios, seguridad y renta mensual/anual
               </p>
             </div>
@@ -297,22 +297,22 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-xl transition-colors cursor-pointer"
+            className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Sub Navigation Tabs */}
-        <div className="px-5 bg-neutral-950/80 border-b border-neutral-800 flex items-center justify-between gap-2 overflow-x-auto">
+        <div className="px-5 bg-slate-50/50 border-b border-slate-200 flex items-center justify-between gap-2 overflow-x-auto">
           <div className="flex items-center gap-1 py-2">
             <button
               type="button"
               onClick={() => setActiveTab('BRANDING')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'BRANDING'
                   ? 'bg-cyan-600 text-white shadow-xs'
-                  : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >
               <Building2 className="w-3.5 h-3.5" />
@@ -322,10 +322,10 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
             <button
               type="button"
               onClick={() => setActiveTab('CONTACT')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'CONTACT'
                   ? 'bg-cyan-600 text-white shadow-xs'
-                  : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >
               <MapPin className="w-3.5 h-3.5" />
@@ -335,10 +335,10 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
             <button
               type="button"
               onClick={() => setActiveTab('MEDICAL_DIRECTION')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'MEDICAL_DIRECTION'
                   ? 'bg-cyan-600 text-white shadow-xs'
-                  : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >
               <UserCheck className="w-3.5 h-3.5" />
@@ -348,15 +348,15 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
             <button
               type="button"
               onClick={() => setActiveTab('USERS')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'USERS'
                   ? 'bg-cyan-600 text-white shadow-xs'
-                  : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >
               <Users className="w-3.5 h-3.5" />
               <span>👥 Usuarios & Claves</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/40 font-mono">
+              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-200 text-slate-700 font-mono">
                 {staffList.length}
               </span>
             </button>
@@ -364,10 +364,10 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
             <button
               type="button"
               onClick={() => setActiveTab('SECURITY')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'SECURITY'
                   ? 'bg-cyan-600 text-white shadow-xs'
-                  : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >
               <Shield className="w-3.5 h-3.5" />
@@ -377,10 +377,10 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
             <button
               type="button"
               onClick={() => setActiveTab('LICENSE')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'LICENSE'
                   ? 'bg-cyan-600 text-white shadow-xs'
-                  : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >
               <Key className="w-3.5 h-3.5" />
@@ -390,10 +390,10 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
             <button
               type="button"
               onClick={() => setActiveTab('PREVIEW')}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'PREVIEW'
                   ? 'bg-cyan-600 text-white shadow-xs'
-                  : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
               }`}
             >
               <Eye className="w-3.5 h-3.5" />
@@ -404,7 +404,7 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
           <button
             type="button"
             onClick={handleResetToDefaults}
-            className="flex items-center gap-1.5 text-neutral-400 hover:text-neutral-200 text-xs px-2.5 py-1 rounded-lg hover:bg-neutral-800/80 transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 text-slate-500 hover:text-slate-800 text-xs px-2.5 py-1 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
             title="Restablecer valores originales"
           >
             <RefreshCw className="w-3 h-3" />
@@ -413,13 +413,13 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
         </div>
 
         {/* Tab Body */}
-        <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 space-y-6 text-xs text-neutral-200">
+        <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 space-y-6 text-xs text-slate-700">
           {/* TAB 1: BRANDING & LOGO */}
           {activeTab === 'BRANDING' && (
             <div className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-semibold text-neutral-300 block mb-1.5">
+                  <label className="text-xs font-bold text-slate-800 block mb-1.5">
                     Nombre Principal de la Clínica o Centro:
                   </label>
                   <input
@@ -428,15 +428,15 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                     value={formData.name}
                     onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
                     placeholder="Ej. IMAGIS, Centro Radiológico..."
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-hidden focus:bg-white focus:border-cyan-600"
                   />
-                  <span className="text-[10px] text-neutral-500 mt-1 block">
+                  <span className="text-[10px] text-slate-500 mt-1 block">
                     Se mostrará en la cabecera, portal del paciente e informes.
                   </span>
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-neutral-300 block mb-1.5">
+                  <label className="text-xs font-bold text-slate-800 block mb-1.5">
                     Nombre Corto / Sistema (Badge):
                   </label>
                   <input
@@ -445,13 +445,13 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                     value={formData.shortName}
                     onChange={e => setFormData(prev => ({ ...prev, shortName: e.target.value }))}
                     placeholder="Ej. IMAGIS Radiología & PACS"
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-hidden focus:bg-white focus:border-cyan-600"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-neutral-300 block mb-1.5">
+                <label className="text-xs font-bold text-slate-800 block mb-1.5">
                   Eslogan o Subtítulo Institucional:
                 </label>
                 <input
@@ -459,25 +459,25 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                   value={formData.tagline}
                   onChange={e => setFormData(prev => ({ ...prev, tagline: e.target.value }))}
                   placeholder="Ej. Centro de Diagnóstico por Imágenes & Radiología Médica"
-                  className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-hidden focus:bg-white focus:border-cyan-600"
                 />
               </div>
 
               {/* Logo Management */}
-              <div className="bg-neutral-950 p-4 sm:p-5 rounded-2xl border border-neutral-800 space-y-4">
+              <div className="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-4">
                 <div>
-                  <h4 className="text-xs font-bold text-white flex items-center gap-2">
-                    <ImageIcon className="w-4 h-4 text-cyan-400" />
+                  <h4 className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <ImageIcon className="w-4 h-4 text-cyan-700" />
                     <span>Logotipo Oficial del Centro</span>
                   </h4>
-                  <p className="text-[11px] text-neutral-400 mt-0.5">
+                  <p className="text-[11px] text-slate-500 mt-0.5">
                     Suba el logo gráfico de su institución o elija un icono médico representativo.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
-                  <div className="sm:col-span-4 flex flex-col items-center justify-center p-4 bg-neutral-900/90 rounded-2xl border border-neutral-800 text-center space-y-2">
-                    <div className="w-20 h-20 rounded-2xl bg-neutral-950 border border-neutral-700 flex items-center justify-center overflow-hidden shadow-inner p-2">
+                  <div className="sm:col-span-4 flex flex-col items-center justify-center p-4 bg-white rounded-2xl border border-slate-200 text-center space-y-2 shadow-xs">
+                    <div className="w-20 h-20 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center overflow-hidden shadow-inner p-2">
                       {formData.logoImage ? (
                         <img
                           src={formData.logoImage}
@@ -485,17 +485,17 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                           className="w-full h-full object-contain"
                         />
                       ) : (
-                        <CurrentLogoIcon className="w-10 h-10 text-cyan-400" />
+                        <CurrentLogoIcon className="w-10 h-10 text-cyan-600" />
                       )}
                     </div>
-                    <span className="text-[11px] font-bold text-neutral-300">
+                    <span className="text-[11px] font-bold text-slate-700">
                       {formData.logoImage ? 'Logo personalizado cargado' : 'Icono institucional activo'}
                     </span>
                     {formData.logoImage && (
                       <button
                         type="button"
                         onClick={handleRemoveCustomLogo}
-                        className="flex items-center gap-1 text-[10px] text-rose-400 hover:text-rose-300 cursor-pointer"
+                        className="flex items-center gap-1 text-[10px] text-rose-600 hover:text-rose-700 cursor-pointer font-semibold"
                       >
                         <Trash2 className="w-3 h-3" />
                         <span>Quitar imagen</span>
@@ -505,7 +505,7 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
 
                   <div className="sm:col-span-8 space-y-3">
                     <div>
-                      <label className="text-[11px] font-semibold text-neutral-400 block mb-1">
+                      <label className="text-[11px] font-semibold text-slate-600 block mb-1">
                         Subir archivo de logotipo (PNG, JPG, SVG - máx 2MB):
                       </label>
                       <input
@@ -513,12 +513,12 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                         ref={fileInputRef}
                         accept="image/png,image/jpeg,image/svg+xml"
                         onChange={handleImageUpload}
-                        className="w-full text-xs text-neutral-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-neutral-800 file:text-cyan-400 hover:file:bg-neutral-700 cursor-pointer"
+                        className="w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-slate-100 file:text-cyan-800 hover:file:bg-slate-200 cursor-pointer"
                       />
                     </div>
 
                     <div>
-                      <label className="text-[11px] font-semibold text-neutral-400 block mb-1.5">
+                      <label className="text-[11px] font-semibold text-slate-600 block mb-1.5">
                         O seleccione un icono médico vectorial:
                       </label>
                       <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
@@ -534,8 +534,8 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                               }}
                               className={`p-2.5 rounded-xl border flex flex-col items-center gap-1.5 transition-all cursor-pointer ${
                                 isSelected
-                                  ? 'bg-cyan-950/80 border-cyan-500 text-cyan-300 shadow-xs'
-                                  : 'bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-white'
+                                  ? 'bg-cyan-50 border-cyan-400 text-cyan-800 shadow-xs font-bold'
+                                  : 'bg-white border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                               }`}
                             >
                               <IconComp className="w-5 h-5" />
@@ -552,9 +552,9 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
               </div>
 
               {/* Accent Color */}
-              <div className="bg-neutral-950 p-4 rounded-2xl border border-neutral-800 space-y-2">
-                <label className="text-xs font-semibold text-neutral-300 flex items-center gap-2">
-                  <Palette className="w-4 h-4 text-cyan-400" />
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
+                <label className="text-xs font-bold text-slate-800 flex items-center gap-2">
+                  <Palette className="w-4 h-4 text-cyan-700" />
                   <span>Color de Acento del Sistema:</span>
                 </label>
                 <div className="flex flex-wrap gap-2 pt-1">
@@ -565,10 +565,10 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                         key={color.id}
                         type="button"
                         onClick={() => setFormData(prev => ({ ...prev, accentColor: color.id }))}
-                        className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-medium transition-all cursor-pointer ${
+                        className={`flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all cursor-pointer ${
                           isSelected
-                            ? 'bg-neutral-900 border-white text-white shadow-sm'
-                            : 'bg-neutral-950 border-neutral-800 text-neutral-400 hover:text-white'
+                            ? 'bg-white border-cyan-500 text-cyan-900 shadow-xs'
+                            : 'bg-white border-slate-200 text-slate-600 hover:text-slate-900'
                         }`}
                       >
                         <span className={`w-3.5 h-3.5 rounded-full ${color.bgClass}`} />
@@ -586,8 +586,8 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-semibold text-neutral-300 block mb-1.5 flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                  <label className="text-xs font-bold text-slate-800 block mb-1.5 flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-cyan-700" />
                     <span>Dirección de la Sede Principal:</span>
                   </label>
                   <input
@@ -596,13 +596,13 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                     value={formData.address}
                     onChange={e => setFormData(prev => ({ ...prev, address: e.target.value }))}
                     placeholder="Ej. Av. Javier Prado Este 2840, San Borja"
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-hidden focus:bg-white focus:border-cyan-600"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-neutral-300 block mb-1.5 flex items-center gap-1.5">
-                    <Building2 className="w-3.5 h-3.5 text-cyan-400" />
+                  <label className="text-xs font-bold text-slate-800 block mb-1.5 flex items-center gap-1.5">
+                    <Building2 className="w-3.5 h-3.5 text-cyan-700" />
                     <span>Ciudad y País:</span>
                   </label>
                   <input
@@ -611,15 +611,15 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                     value={formData.city}
                     onChange={e => setFormData(prev => ({ ...prev, city: e.target.value }))}
                     placeholder="Ej. Lima, Perú"
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-hidden focus:bg-white focus:border-cyan-600"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-semibold text-neutral-300 block mb-1.5 flex items-center gap-1.5">
-                    <Phone className="w-3.5 h-3.5 text-cyan-400" />
+                  <label className="text-xs font-bold text-slate-800 block mb-1.5 flex items-center gap-1.5">
+                    <Phone className="w-3.5 h-3.5 text-cyan-700" />
                     <span>Central Telefónica / Citas:</span>
                   </label>
                   <input
@@ -628,13 +628,13 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                     value={formData.phone}
                     onChange={e => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                     placeholder="Ej. (01) 710-2000"
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-white font-mono focus:outline-hidden focus:border-cyan-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 font-mono focus:outline-hidden focus:bg-white focus:border-cyan-600"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-neutral-300 block mb-1.5 flex items-center gap-1.5">
-                    <Phone className="w-3.5 h-3.5 text-emerald-400" />
+                  <label className="text-xs font-bold text-slate-800 block mb-1.5 flex items-center gap-1.5">
+                    <Phone className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Teléfono Móvil / WhatsApp de Urgencias:</span>
                   </label>
                   <input
@@ -642,15 +642,15 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                     value={formData.emergencyPhone}
                     onChange={e => setFormData(prev => ({ ...prev, emergencyPhone: e.target.value }))}
                     placeholder="Ej. +51 987 654 321"
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-white font-mono focus:outline-hidden focus:border-cyan-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 font-mono focus:outline-hidden focus:bg-white focus:border-cyan-600"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="text-xs font-semibold text-neutral-300 block mb-1.5 flex items-center gap-1.5">
-                    <Mail className="w-3.5 h-3.5 text-cyan-400" />
+                  <label className="text-xs font-bold text-slate-800 block mb-1.5 flex items-center gap-1.5">
+                    <Mail className="w-3.5 h-3.5 text-cyan-700" />
                     <span>Correo Electrónico de Contacto:</span>
                   </label>
                   <input
@@ -659,13 +659,13 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                     value={formData.email}
                     onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
                     placeholder="Ej. contacto@imagis-radiologia.com"
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-hidden focus:bg-white focus:border-cyan-600"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-neutral-300 block mb-1.5 flex items-center gap-1.5">
-                    <Globe className="w-3.5 h-3.5 text-cyan-400" />
+                  <label className="text-xs font-bold text-slate-800 block mb-1.5 flex items-center gap-1.5">
+                    <Globe className="w-3.5 h-3.5 text-cyan-700" />
                     <span>Sitio Web Oficial:</span>
                   </label>
                   <input
@@ -673,13 +673,13 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                     value={formData.website}
                     onChange={e => setFormData(prev => ({ ...prev, website: e.target.value }))}
                     placeholder="Ej. www.imagis-radiologia.com"
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-hidden focus:bg-white focus:border-cyan-600"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-neutral-300 block mb-1.5 flex items-center gap-1.5">
-                    <FileText className="w-3.5 h-3.5 text-cyan-400" />
+                  <label className="text-xs font-bold text-slate-800 block mb-1.5 flex items-center gap-1.5">
+                    <FileText className="w-3.5 h-3.5 text-cyan-700" />
                     <span>RUC / Identificación Fiscal:</span>
                   </label>
                   <input
@@ -687,7 +687,7 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                     value={formData.ruc}
                     onChange={e => setFormData(prev => ({ ...prev, ruc: e.target.value }))}
                     placeholder="Ej. 20608945123"
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-white font-mono focus:outline-hidden focus:border-cyan-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 font-mono focus:outline-hidden focus:bg-white focus:border-cyan-600"
                   />
                 </div>
               </div>
@@ -697,18 +697,18 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
           {/* TAB 3: MEDICAL DIRECTION */}
           {activeTab === 'MEDICAL_DIRECTION' && (
             <div className="space-y-4">
-              <div className="bg-neutral-950 p-4 rounded-2xl border border-neutral-800 space-y-3">
-                <h4 className="text-xs font-bold text-white flex items-center gap-2">
-                  <UserCheck className="w-4 h-4 text-cyan-400" />
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+                <h4 className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                  <UserCheck className="w-4 h-4 text-cyan-700" />
                   <span>Dirección Médica & Responsable de Radiología</span>
                 </h4>
-                <p className="text-[11px] text-neutral-400">
+                <p className="text-[11px] text-slate-500">
                   Estos datos se incluyen en los informes médicos oficiales generados y exportados a PDF.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                   <div>
-                    <label className="text-xs font-semibold text-neutral-300 block mb-1.5">
+                    <label className="text-xs font-bold text-slate-800 block mb-1.5">
                       Nombre del Director Médico:
                     </label>
                     <input
@@ -717,12 +717,12 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                       value={formData.directorName}
                       onChange={e => setFormData(prev => ({ ...prev, directorName: e.target.value }))}
                       placeholder="Ej. Dr. Alejandro Mendoza Valdivia"
-                      className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-semibold text-neutral-300 block mb-1.5">
+                    <label className="text-xs font-bold text-slate-800 block mb-1.5">
                       Título y Registro Médico (C.M.P. / R.N.E.):
                     </label>
                     <input
@@ -731,7 +731,7 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                       value={formData.directorTitle}
                       onChange={e => setFormData(prev => ({ ...prev, directorTitle: e.target.value }))}
                       placeholder="Ej. Especialista en Radiología - R.N.E. 18452"
-                      className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600"
                     />
                   </div>
                 </div>
@@ -742,13 +742,13 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
           {/* TAB 4: USERS & PASSWORDS MANAGEMENT */}
           {activeTab === 'USERS' && (
             <div className="space-y-5">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-neutral-950 p-4 rounded-2xl border border-neutral-800">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
                 <div>
-                  <h4 className="text-xs font-bold text-white flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-cyan-400" />
+                  <h4 className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4 text-cyan-700" />
                     <span>Control de Usuarios, Roles y Contraseñas</span>
                   </h4>
-                  <p className="text-[11px] text-neutral-400 mt-0.5">
+                  <p className="text-[11px] text-slate-500 mt-0.5">
                     Modifique las contraseñas del Administrador o cree usuarios de tipo <strong>Encargado</strong> con acceso restringido.
                   </p>
                 </div>
@@ -756,7 +756,7 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setShowAddUserForm(!showAddUserForm)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-xs font-semibold shadow-xs transition-all self-start sm:self-auto cursor-pointer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-cyan-600 hover:bg-cyan-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all self-start sm:self-auto cursor-pointer"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Crear Nuevo Usuario</span>
@@ -765,58 +765,58 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
 
               {/* Add New User Form */}
               {showAddUserForm && (
-                <div className="bg-neutral-950 p-4 rounded-2xl border border-cyan-800/80 space-y-3 animate-fadeIn">
-                  <div className="text-xs font-bold text-cyan-300 flex items-center gap-2">
+                <div className="bg-slate-50 p-4 rounded-2xl border border-cyan-300 space-y-3 animate-fadeIn">
+                  <div className="text-xs font-bold text-cyan-900 flex items-center gap-2">
                     <User className="w-4 h-4" />
                     <span>Registrar Nuevo Miembro del Personal</span>
                   </div>
 
                   {userFormError && (
-                    <div className="p-2 bg-rose-950/60 border border-rose-800 text-rose-300 text-[11px] rounded-lg">
+                    <div className="p-2 bg-rose-50 border border-rose-200 text-rose-800 text-[11px] rounded-lg">
                       {userFormError}
                     </div>
                   )}
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
-                      <label className="text-[11px] text-neutral-400 block mb-1">Nombre Completo:</label>
+                      <label className="text-[11px] text-slate-600 block mb-1 font-semibold">Nombre Completo:</label>
                       <input
                         type="text"
                         placeholder="Ej. Lic. Rosaura Flores"
                         value={newFullName}
                         onChange={e => setNewFullName(e.target.value)}
-                        className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs text-white"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900"
                       />
                     </div>
 
                     <div>
-                      <label className="text-[11px] text-neutral-400 block mb-1">Nombre de Usuario (Login):</label>
+                      <label className="text-[11px] text-slate-600 block mb-1 font-semibold">Nombre de Usuario (Login):</label>
                       <input
                         type="text"
                         placeholder="Ej. rflores"
                         value={newUsername}
                         onChange={e => setNewUsername(e.target.value)}
-                        className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs text-white font-mono"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 font-mono"
                       />
                     </div>
 
                     <div>
-                      <label className="text-[11px] text-neutral-400 block mb-1">Contraseña:</label>
+                      <label className="text-[11px] text-slate-600 block mb-1 font-semibold">Contraseña:</label>
                       <input
                         type="text"
                         placeholder="••••••••"
                         value={newPassword}
                         onChange={e => setNewPassword(e.target.value)}
-                        className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs text-white font-mono"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900 font-mono"
                       />
                     </div>
 
                     <div>
-                      <label className="text-[11px] text-neutral-400 block mb-1">Rol de Acceso:</label>
+                      <label className="text-[11px] text-slate-600 block mb-1 font-semibold">Rol de Acceso:</label>
                       <select
                         value={newRole}
                         onChange={e => setNewRole(e.target.value as 'ADMIN' | 'ENCARGADO')}
-                        className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs text-white"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900"
                       >
                         <option value="ENCARGADO">🛡️ ENCARGADO (Sin botón de Configuración)</option>
                         <option value="ADMIN">👑 ADMINISTRADOR (Acceso Total)</option>
@@ -824,40 +824,40 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                     </div>
 
                     <div>
-                      <label className="text-[11px] text-neutral-400 block mb-1">Cargo / Especialidad:</label>
+                      <label className="text-[11px] text-slate-600 block mb-1 font-semibold">Cargo / Especialidad:</label>
                       <input
                         type="text"
                         placeholder="Ej. Tecnólogo de Ultrasonido"
                         value={newPosition}
                         onChange={e => setNewPosition(e.target.value)}
-                        className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs text-white"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900"
                       />
                     </div>
 
                     <div>
-                      <label className="text-[11px] text-neutral-400 block mb-1">Correo Electrónico:</label>
+                      <label className="text-[11px] text-slate-600 block mb-1 font-semibold">Correo Electrónico:</label>
                       <input
                         type="email"
                         placeholder="usuario@clinica.com"
                         value={newEmail}
                         onChange={e => setNewEmail(e.target.value)}
-                        className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-3 py-1.5 text-xs text-white"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-900"
                       />
                     </div>
                   </div>
 
-                  <div className="flex justify-end gap-2 pt-2 border-t border-neutral-800">
+                  <div className="flex justify-end gap-2 pt-2 border-t border-slate-200">
                     <button
                       type="button"
                       onClick={() => setShowAddUserForm(false)}
-                      className="px-3 py-1 text-xs text-neutral-400 hover:text-white cursor-pointer"
+                      className="px-3 py-1 text-xs text-slate-500 hover:text-slate-800 cursor-pointer font-semibold"
                     >
                       Cancelar
                     </button>
                     <button
                       type="button"
                       onClick={handleAddNewUser}
-                      className="px-3.5 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg text-xs font-semibold shadow-xs cursor-pointer"
+                      className="px-3.5 py-1.5 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg text-xs font-bold shadow-xs cursor-pointer"
                     >
                       Guardar Nuevo Usuario
                     </button>
@@ -874,15 +874,15 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                   return (
                     <div
                       key={user.id}
-                      className="p-4 bg-neutral-950 rounded-2xl border border-neutral-800 hover:border-neutral-700 transition-all space-y-3"
+                      className="p-4 bg-slate-50 rounded-2xl border border-slate-200 hover:border-slate-300 transition-all space-y-3"
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                         <div className="flex items-center gap-3">
                           <div
                             className={`w-9 h-9 rounded-xl flex items-center justify-center border ${
                               isAdmin
-                                ? 'bg-cyan-950 text-cyan-300 border-cyan-800'
-                                : 'bg-emerald-950 text-emerald-300 border-emerald-800'
+                                ? 'bg-cyan-50 text-cyan-800 border-cyan-200'
+                                : 'bg-emerald-50 text-emerald-800 border-emerald-200'
                             }`}
                           >
                             {isAdmin ? <ShieldCheck className="w-5 h-5" /> : <UserCheck className="w-5 h-5" />}
@@ -890,18 +890,18 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
 
                           <div>
                             <div className="flex items-center gap-2">
-                              <span className="font-bold text-sm text-white">{user.fullName}</span>
+                              <span className="font-bold text-sm text-slate-900">{user.fullName}</span>
                               <span
                                 className={`text-[10px] px-2 py-0.5 rounded-full font-bold border ${
                                   isAdmin
-                                    ? 'bg-cyan-950 text-cyan-300 border-cyan-800'
-                                    : 'bg-emerald-950 text-emerald-300 border-emerald-800'
+                                    ? 'bg-cyan-50 text-cyan-800 border-cyan-200'
+                                    : 'bg-emerald-50 text-emerald-800 border-emerald-200'
                                 }`}
                               >
                                 {user.role}
                               </span>
                             </div>
-                            <p className="text-[11px] text-neutral-400">{user.position}</p>
+                            <p className="text-[11px] text-slate-500">{user.position}</p>
                           </div>
                         </div>
 
@@ -910,7 +910,7 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                           <button
                             type="button"
                             onClick={() => handleDeleteUser(user.id)}
-                            className="p-2 rounded-lg bg-neutral-900 hover:bg-rose-950/80 text-neutral-400 hover:text-rose-300 border border-neutral-800 transition-colors cursor-pointer"
+                            className="p-2 rounded-lg bg-white hover:bg-rose-50 text-slate-400 hover:text-rose-700 border border-slate-200 transition-colors cursor-pointer"
                             title="Eliminar usuario"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -919,21 +919,21 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                       </div>
 
                       {/* Editable Credentials Inline */}
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-neutral-900 text-xs">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-slate-200 text-xs">
                         <div>
-                          <label className="text-[10px] text-neutral-500 uppercase font-semibold block mb-1">
+                          <label className="text-[10px] text-slate-500 uppercase font-bold block mb-1">
                             Nombre de Usuario:
                           </label>
                           <input
                             type="text"
                             value={user.username}
                             onChange={e => handleUpdateUserField(user.id, 'username', e.target.value)}
-                            className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-2.5 py-1 text-xs text-white font-mono"
+                            className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1 text-xs text-slate-900 font-mono"
                           />
                         </div>
 
                         <div>
-                          <label className="text-[10px] text-neutral-500 uppercase font-semibold block mb-1">
+                          <label className="text-[10px] text-slate-500 uppercase font-bold block mb-1">
                             Contraseña de Acceso:
                           </label>
                           <div className="relative">
@@ -941,12 +941,12 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                               type={isPasswordVisible ? 'text' : 'password'}
                               value={user.password || ''}
                               onChange={e => handleUpdateUserField(user.id, 'password', e.target.value)}
-                              className="w-full bg-neutral-900 border border-neutral-800 rounded-lg pl-2.5 pr-8 py-1 text-xs text-white font-mono"
+                              className="w-full bg-white border border-slate-200 rounded-lg pl-2.5 pr-8 py-1 text-xs text-slate-900 font-mono"
                             />
                             <button
                               type="button"
                               onClick={() => handleToggleShowPassword(user.id)}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white text-xs cursor-pointer"
+                              className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 text-xs cursor-pointer"
                               title={isPasswordVisible ? 'Ocultar contraseña' : 'Ver contraseña'}
                             >
                               {isPasswordVisible ? '🙈' : '👁️'}
@@ -955,7 +955,7 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                         </div>
 
                         <div>
-                          <label className="text-[10px] text-neutral-500 uppercase font-semibold block mb-1">
+                          <label className="text-[10px] text-slate-500 uppercase font-bold block mb-1">
                             Permisos & Rol:
                           </label>
                           <select
@@ -963,7 +963,7 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                             onChange={e =>
                               handleUpdateUserField(user.id, 'role', e.target.value as 'ADMIN' | 'ENCARGADO')
                             }
-                            className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-2.5 py-1 text-xs text-white"
+                            className="w-full bg-white border border-slate-200 rounded-lg px-2.5 py-1 text-xs text-slate-900 font-semibold"
                           >
                             <option value="ADMIN">👑 ADMINISTRADOR (Acceso Total)</option>
                             <option value="ENCARGADO">🛡️ ENCARGADO (Sin Configuración)</option>
@@ -980,22 +980,22 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
           {/* TAB 5: SECURITY & INTERNET CLOUD OPTIONS */}
           {activeTab === 'SECURITY' && (
             <div className="space-y-5">
-              <div className="bg-neutral-950 p-5 rounded-2xl border border-neutral-800 space-y-4">
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
                 <div className="flex items-center gap-2.5">
-                  <ShieldCheck className="w-5 h-5 text-cyan-400" />
+                  <ShieldCheck className="w-5 h-5 text-cyan-700" />
                   <div>
-                    <h4 className="text-sm font-bold text-white">Parámetros de Seguridad para Publicación en Internet</h4>
-                    <p className="text-[11px] text-neutral-400">
+                    <h4 className="text-sm font-bold text-slate-900">Parámetros de Seguridad para Publicación en Internet</h4>
+                    <p className="text-[11px] text-slate-500">
                       Configure cómo interactúan los pacientes y la red externa con el servidor clínico.
                     </p>
                   </div>
                 </div>
 
                 <div className="space-y-3 pt-2">
-                  <div className="flex items-center justify-between p-3.5 bg-neutral-900 rounded-xl border border-neutral-800">
+                  <div className="flex items-center justify-between p-3.5 bg-white rounded-2xl border border-slate-200">
                     <div>
-                      <span className="font-semibold text-white block">Ocultar Botones de Demostración en Portal de Pacientes</span>
-                      <span className="text-[11px] text-neutral-400">
+                      <span className="font-bold text-slate-900 block">Ocultar Botones de Demostración en Portal de Pacientes</span>
+                      <span className="text-[11px] text-slate-500">
                         Exige obligatoriamente DNI y PIN real a los pacientes. Oculta accesos rápidos de prueba.
                       </span>
                     </div>
@@ -1006,14 +1006,14 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                         onChange={e => setFormData(prev => ({ ...prev, enableDemoMode: !e.target.checked }))}
                         className="sr-only peer"
                       />
-                      <div className="w-11 h-6 bg-neutral-700 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                      <div className="w-11 h-6 bg-slate-300 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
                     </label>
                   </div>
 
-                  <div className="flex items-center justify-between p-3.5 bg-neutral-900 rounded-xl border border-neutral-800">
+                  <div className="flex items-center justify-between p-3.5 bg-white rounded-2xl border border-slate-200">
                     <div>
-                      <span className="font-semibold text-white block">Protección contra Ataques de Fuerza Bruta</span>
-                      <span className="text-[11px] text-neutral-400">
+                      <span className="font-bold text-slate-900 block">Protección contra Ataques de Fuerza Bruta</span>
+                      <span className="text-[11px] text-slate-500">
                         Bloquea temporalmente el inicio de sesión por 30 segundos tras 5 intentos erróneos consecutivos.
                       </span>
                     </div>
@@ -1024,21 +1024,21 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                         onChange={e => setFormData(prev => ({ ...prev, enableBruteForceProtection: e.target.checked }))}
                         className="sr-only peer"
                       />
-                      <div className="w-11 h-6 bg-neutral-700 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-600"></div>
+                      <div className="w-11 h-6 bg-slate-300 peer-focus:outline-hidden rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-600"></div>
                     </label>
                   </div>
 
-                  <div className="flex items-center justify-between p-3.5 bg-neutral-900 rounded-xl border border-neutral-800">
+                  <div className="flex items-center justify-between p-3.5 bg-white rounded-2xl border border-slate-200">
                     <div>
-                      <span className="font-semibold text-white block">Cierre Automático de Sesión por Inactividad</span>
-                      <span className="text-[11px] text-neutral-400">
+                      <span className="font-bold text-slate-900 block">Cierre Automático de Sesión por Inactividad</span>
+                      <span className="text-[11px] text-slate-500">
                         Protección en consultorio si la pantalla queda desatendida.
                       </span>
                     </div>
                     <select
                       value={formData.sessionTimeoutMinutes || 30}
                       onChange={e => setFormData(prev => ({ ...prev, sessionTimeoutMinutes: Number(e.target.value) }))}
-                      className="bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-1.5 text-xs text-white"
+                      className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs text-slate-900 font-semibold"
                     >
                       <option value={15}>15 minutos</option>
                       <option value={30}>30 minutos (Recomendado)</option>
@@ -1050,29 +1050,29 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
               </div>
 
               {/* Server Active Defenses Status */}
-              <div className="bg-neutral-950 p-5 rounded-2xl border border-neutral-800 space-y-3">
-                <h4 className="text-xs font-bold text-white flex items-center gap-2">
-                  <Server className="w-4 h-4 text-emerald-400" />
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                <h4 className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                  <Server className="w-4 h-4 text-emerald-600" />
                   <span>Estado de Blindaje del Servidor en Producción</span>
                 </h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                  <div className="p-3 bg-neutral-900 rounded-xl border border-neutral-800 space-y-1">
-                    <div className="flex items-center gap-2 text-emerald-400 font-bold text-[11px]">
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                    <div className="flex items-center gap-2 text-emerald-700 font-bold text-[11px]">
                       <CheckCircle2 className="w-3.5 h-3.5" />
                       <span>Cabeceras HTTP de Seguridad (Helmet)</span>
                     </div>
-                    <p className="text-[10px] text-neutral-400">
+                    <p className="text-[10px] text-slate-500">
                       Protección contra sniffing MIME, clickjacking (X-Frame-Options SAMEORIGIN) y Cross-Site Scripting.
                     </p>
                   </div>
 
-                  <div className="p-3 bg-neutral-900 rounded-xl border border-neutral-800 space-y-1">
-                    <div className="flex items-center gap-2 text-emerald-400 font-bold text-[11px]">
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200 space-y-1">
+                    <div className="flex items-center gap-2 text-emerald-700 font-bold text-[11px]">
                       <Zap className="w-3.5 h-3.5" />
                       <span>Limitador de Tasa (Rate Limiting)</span>
                     </div>
-                    <p className="text-[10px] text-neutral-400">
+                    <p className="text-[10px] text-slate-500">
                       Máx. 120 peticiones/min para APIs y máx. 30 peticiones/min para generación de informes IA (Gemini).
                     </p>
                   </div>
@@ -1085,30 +1085,30 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
           {activeTab === 'LICENSE' && (
             <div className="space-y-5">
               {/* Current License Card */}
-              <div className="bg-neutral-950 p-5 rounded-2xl border border-neutral-800 space-y-4">
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <div
                       className={`w-10 h-10 rounded-xl flex items-center justify-center border ${
                         licenseCheck.isLocked
-                          ? 'bg-rose-950 text-rose-300 border-rose-800'
+                          ? 'bg-rose-50 text-rose-700 border-rose-200'
                           : licenseCheck.isWarning
-                          ? 'bg-amber-950 text-amber-300 border-amber-800'
-                          : 'bg-emerald-950 text-emerald-300 border-emerald-800'
+                          ? 'bg-amber-50 text-amber-700 border-amber-200'
+                          : 'bg-emerald-50 text-emerald-700 border-emerald-200'
                       }`}
                     >
                       <Key className="w-5 h-5" />
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <h4 className="text-sm font-bold text-white">Licencia de Uso & Renta del Sistema</h4>
+                        <h4 className="text-sm font-bold text-slate-900">Licencia de Uso & Renta del Sistema</h4>
                         <span
-                          className={`text-[10px] font-bold font-mono px-2 py-0.5 rounded-full border ${
+                          className={`text-[10px] font-bold font-mono px-2.5 py-0.5 rounded-full border ${
                             licenseCheck.isLocked
-                              ? 'bg-rose-950 text-rose-300 border-rose-800'
+                              ? 'bg-rose-50 text-rose-800 border-rose-200'
                               : licenseCheck.isWarning
-                              ? 'bg-amber-950 text-amber-300 border-amber-800'
-                              : 'bg-emerald-950 text-emerald-300 border-emerald-800'
+                              ? 'bg-amber-50 text-amber-800 border-amber-200'
+                              : 'bg-emerald-50 text-emerald-800 border-emerald-200'
                           }`}
                         >
                           {licenseCheck.isLocked
@@ -1118,9 +1118,9 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                             : 'VIGENTE & ACTIVA'}
                         </span>
                       </div>
-                      <p className="text-[11px] text-neutral-400">
+                      <p className="text-[11px] text-slate-500">
                         Modalidad:{' '}
-                        <strong>
+                        <strong className="text-slate-800">
                           {formData.license?.billingType === 'ANNUAL'
                             ? 'Renta Anual ($590 USD/año)'
                             : formData.license?.billingType === 'PERPETUAL'
@@ -1134,18 +1134,18 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
 
                 {/* License Metrics Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-2 text-xs">
-                  <div className="p-3 bg-neutral-900 rounded-xl border border-neutral-800">
-                    <span className="text-[10px] text-neutral-500 block uppercase font-bold">Fecha de Vencimiento</span>
-                    <span className="text-xs font-bold text-white font-mono">
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200">
+                    <span className="text-[10px] text-slate-400 block uppercase font-bold">Fecha de Vencimiento</span>
+                    <span className="text-xs font-bold text-slate-900 font-mono">
                       {formData.license?.expirationDate || 'No establecida'}
                     </span>
                   </div>
 
-                  <div className="p-3 bg-neutral-900 rounded-xl border border-neutral-800">
-                    <span className="text-[10px] text-neutral-500 block uppercase font-bold">Días Restantes</span>
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200">
+                    <span className="text-[10px] text-slate-400 block uppercase font-bold">Días Restantes</span>
                     <span
                       className={`text-xs font-bold font-mono ${
-                        licenseCheck.daysRemaining <= 7 ? 'text-amber-400' : 'text-emerald-400'
+                        licenseCheck.daysRemaining <= 7 ? 'text-amber-700' : 'text-emerald-700'
                       }`}
                     >
                       {licenseCheck.daysRemaining > 0
@@ -1154,16 +1154,16 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                     </span>
                   </div>
 
-                  <div className="p-3 bg-neutral-900 rounded-xl border border-neutral-800">
-                    <span className="text-[10px] text-neutral-500 block uppercase font-bold">Periodo de Gracia</span>
-                    <span className="text-xs font-bold text-neutral-300 font-mono">
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200">
+                    <span className="text-[10px] text-slate-400 block uppercase font-bold">Periodo de Gracia</span>
+                    <span className="text-xs font-bold text-slate-700 font-mono">
                       {formData.license?.gracePeriodDays || 5} días
                     </span>
                   </div>
 
-                  <div className="p-3 bg-neutral-900 rounded-xl border border-neutral-800 truncate">
-                    <span className="text-[10px] text-neutral-500 block uppercase font-bold">Clave Actual</span>
-                    <span className="text-[11px] font-bold text-cyan-300 font-mono truncate block">
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200 truncate">
+                    <span className="text-[10px] text-slate-400 block uppercase font-bold">Clave Actual</span>
+                    <span className="text-[11px] font-bold text-cyan-800 font-mono truncate block">
                       {formData.license?.key || 'IMAGIS-MENS-2026'}
                     </span>
                   </div>
@@ -1171,12 +1171,12 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
               </div>
 
               {/* Renewal Buttons */}
-              <div className="bg-neutral-950 p-5 rounded-2xl border border-neutral-800 space-y-3">
-                <h4 className="text-xs font-bold text-white flex items-center gap-2">
-                  <CreditCard className="w-4 h-4 text-cyan-400" />
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                <h4 className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                  <CreditCard className="w-4 h-4 text-cyan-700" />
                   <span>Renovación Rápida de Periodo</span>
                 </h4>
-                <p className="text-[11px] text-neutral-400">
+                <p className="text-[11px] text-slate-500">
                   Extienda la vigencia del servicio para esta sede.
                 </p>
 
@@ -1184,13 +1184,13 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                   <button
                     type="button"
                     onClick={() => handleExtendDuration(30, 'MONTHLY')}
-                    className="p-3.5 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 rounded-xl text-left transition-all cursor-pointer space-y-1"
+                    className="p-4 bg-white hover:bg-slate-100 border border-slate-200 rounded-2xl text-left transition-all cursor-pointer space-y-1 shadow-xs"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-white text-xs">Renovar Renta Mensual</span>
-                      <span className="text-[10px] font-mono text-cyan-400 font-bold">$59 USD</span>
+                      <span className="font-bold text-slate-900 text-xs">Renovar Renta Mensual</span>
+                      <span className="text-[10px] font-mono text-cyan-800 font-bold">$59 USD</span>
                     </div>
-                    <p className="text-[10px] text-neutral-400">
+                    <p className="text-[10px] text-slate-500">
                       Suma 30 días de vigencia a partir de hoy.
                     </p>
                   </button>
@@ -1198,16 +1198,16 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                   <button
                     type="button"
                     onClick={() => handleExtendDuration(365, 'ANNUAL')}
-                    className="p-3.5 bg-cyan-950/60 hover:bg-cyan-900/60 border border-cyan-700/80 rounded-xl text-left transition-all cursor-pointer space-y-1"
+                    className="p-4 bg-cyan-50 hover:bg-cyan-100/80 border border-cyan-200 rounded-2xl text-left transition-all cursor-pointer space-y-1 shadow-xs"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-cyan-300 text-xs flex items-center gap-1">
+                      <span className="font-bold text-cyan-900 text-xs flex items-center gap-1">
                         <Sparkles className="w-3 h-3" />
                         <span>Renovar Renta Anual (1 Año)</span>
                       </span>
-                      <span className="text-[10px] font-mono text-emerald-400 font-bold">$590 USD</span>
+                      <span className="text-[10px] font-mono text-emerald-800 font-bold">$590 USD</span>
                     </div>
-                    <p className="text-[10px] text-neutral-400">
+                    <p className="text-[10px] text-cyan-800">
                       Suma 365 días de vigencia (2 meses de ahorro).
                     </p>
                   </button>
@@ -1215,24 +1215,24 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
               </div>
 
               {/* Enter Activation Token */}
-              <div className="bg-neutral-950 p-5 rounded-2xl border border-neutral-800 space-y-3">
-                <h4 className="text-xs font-bold text-white flex items-center gap-2">
-                  <Key className="w-4 h-4 text-emerald-400" />
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                <h4 className="text-xs font-bold text-slate-900 flex items-center gap-2">
+                  <Key className="w-4 h-4 text-emerald-700" />
                   <span>Activar con Nueva Clave de Licencia</span>
                 </h4>
 
                 {licenseMsg && (
                   <div
-                    className={`p-2.5 rounded-xl text-xs flex items-center gap-2 ${
+                    className={`p-3 rounded-xl text-xs flex items-center gap-2 ${
                       licenseMsg.isError
-                        ? 'bg-rose-950/70 border border-rose-800 text-rose-300'
-                        : 'bg-emerald-950/70 border border-emerald-800 text-emerald-300'
+                        ? 'bg-rose-50 border border-rose-200 text-rose-800'
+                        : 'bg-emerald-50 border border-emerald-200 text-emerald-800'
                     }`}
                   >
                     {licenseMsg.isError ? (
-                      <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />
+                      <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0" />
                     ) : (
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                     )}
                     <span>{licenseMsg.text}</span>
                   </div>
@@ -1244,12 +1244,12 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                     value={licenseKeyInput}
                     onChange={e => setLicenseKeyInput(e.target.value)}
                     placeholder="Ej. IMAGIS-ANUAL-2027-OK o DEMO-30-DAYS"
-                    className="flex-1 bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white font-mono focus:border-cyan-500"
+                    className="flex-1 bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-900 font-mono focus:border-cyan-600"
                   />
                   <button
                     type="button"
                     onClick={handleApplyLicenseKey}
-                    className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0"
+                    className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 shadow-xs"
                   >
                     Activar Clave
                   </button>
@@ -1257,19 +1257,19 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
               </div>
 
               {/* Simulation Sandbox for User Testing */}
-              <div className="p-4 bg-rose-950/30 rounded-2xl border border-rose-900/60 space-y-2">
-                <div className="flex items-center gap-2 text-rose-300 font-bold text-xs">
-                  <AlertTriangle className="w-4 h-4 text-rose-400" />
+              <div className="p-4 bg-rose-50 rounded-2xl border border-rose-200 space-y-2">
+                <div className="flex items-center gap-2 text-rose-800 font-bold text-xs">
+                  <AlertTriangle className="w-4 h-4 text-rose-600" />
                   <span>Herramienta de Prueba: Simulación de Bloqueo por Falta de Pago</span>
                 </div>
-                <p className="text-[11px] text-neutral-400">
+                <p className="text-[11px] text-slate-600">
                   Permite simular qué ve el médico cuando la renta mensual vence sin haber realizado el pago.
                 </p>
                 <div className="pt-1 flex gap-2">
                   <button
                     type="button"
                     onClick={handleSimulateLock}
-                    className="px-3.5 py-1.5 bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800 rounded-xl text-xs font-bold transition-all cursor-pointer"
+                    className="px-3.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs"
                   >
                     🔴 Simular Vencimiento Inmediato (Ver Pantalla de Bloqueo)
                   </button>
@@ -1281,57 +1281,57 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
           {/* TAB 7: PREVIEW */}
           {activeTab === 'PREVIEW' && (
             <div className="space-y-5">
-              <div className="bg-neutral-950 p-4 rounded-2xl border border-neutral-800 space-y-2">
-                <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-wider block">
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
+                <span className="text-[10px] font-bold text-cyan-800 uppercase tracking-wider block">
                   Vista Previa en Barra Superior (Navbar):
                 </span>
-                <div className="p-3 bg-neutral-900 rounded-xl border border-neutral-800 flex items-center justify-between">
+                <div className="p-3.5 bg-white rounded-2xl border border-slate-200 flex items-center justify-between shadow-xs">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-neutral-950 border border-neutral-700 flex items-center justify-center p-1.5 overflow-hidden">
+                    <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center p-1.5 overflow-hidden">
                       {formData.logoImage ? (
                         <img src={formData.logoImage} alt="Logo" className="w-full h-full object-contain" />
                       ) : (
-                        <CurrentLogoIcon className="w-6 h-6 text-cyan-400" />
+                        <CurrentLogoIcon className="w-6 h-6 text-cyan-600" />
                       )}
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-white">{formData.name}</span>
-                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono">
+                        <span className="text-sm font-bold text-slate-900">{formData.name}</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-800 border border-cyan-200 font-mono font-bold">
                           v2.6
                         </span>
                       </div>
-                      <p className="text-[11px] text-neutral-400">{formData.tagline}</p>
+                      <p className="text-[11px] text-slate-500">{formData.tagline}</p>
                     </div>
                   </div>
-                  <div className="text-right text-[11px] text-neutral-400">
+                  <div className="text-right text-[11px] text-slate-500">
                     <div>{formData.phone}</div>
-                    <div className="text-[10px] text-neutral-500">{formData.address}</div>
+                    <div className="text-[10px] text-slate-400">{formData.address}</div>
                   </div>
                 </div>
               </div>
 
               {/* PDF Report Header Preview */}
-              <div className="bg-neutral-950 p-4 rounded-2xl border border-neutral-800 space-y-2">
-                <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block">
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
+                <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider block">
                   Vista Previa en Membrete de Informe Médico Radiológico:
                 </span>
-                <div className="p-4 bg-white text-neutral-900 rounded-xl shadow-lg border border-neutral-300 space-y-3 font-sans">
-                  <div className="flex items-center justify-between border-b border-neutral-300 pb-3">
+                <div className="p-4 bg-white text-slate-900 rounded-2xl shadow-sm border border-slate-200 space-y-3 font-sans">
+                  <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-neutral-100 border border-neutral-300 flex items-center justify-center p-1 overflow-hidden">
+                      <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center p-1 overflow-hidden">
                         {formData.logoImage ? (
                           <img src={formData.logoImage} alt="Logo" className="w-full h-full object-contain" />
                         ) : (
-                          <CurrentLogoIcon className="w-6 h-6 text-cyan-600" />
+                          <CurrentLogoIcon className="w-6 h-6 text-cyan-700" />
                         )}
                       </div>
                       <div>
-                        <h4 className="text-sm font-extrabold text-neutral-900">{formData.name}</h4>
-                        <p className="text-[10px] text-neutral-600 font-medium">{formData.tagline}</p>
+                        <h4 className="text-sm font-extrabold text-slate-900">{formData.name}</h4>
+                        <p className="text-[10px] text-slate-500 font-medium">{formData.tagline}</p>
                       </div>
                     </div>
-                    <div className="text-right text-[10px] text-neutral-600">
+                    <div className="text-right text-[10px] text-slate-600">
                       <div><strong>RUC:</strong> {formData.ruc}</div>
                       <div>{formData.address} - {formData.city}</div>
                       <div>Central: {formData.phone} | {formData.email}</div>
@@ -1339,12 +1339,12 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                   </div>
 
                   <div className="text-center py-1">
-                    <span className="text-xs font-bold text-neutral-800 uppercase tracking-wide">
+                    <span className="text-xs font-bold text-slate-800 uppercase tracking-wide">
                       INFORME RADIOLÓGICO DEPARTAMENTAL
                     </span>
                   </div>
 
-                  <div className="border-t border-neutral-200 pt-2 flex justify-between text-[9px] text-neutral-500">
+                  <div className="border-t border-slate-200 pt-2 flex justify-between text-[9px] text-slate-400">
                     <span>{formData.directorName} - {formData.directorTitle}</span>
                     <span>{formData.website}</span>
                   </div>
@@ -1354,11 +1354,11 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
           )}
 
           {/* Footer Actions */}
-          <div className="pt-4 border-t border-neutral-800 flex items-center justify-between">
+          <div className="pt-4 border-t border-slate-200 flex items-center justify-between">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs text-neutral-400 hover:text-white transition-colors cursor-pointer"
+              className="px-4 py-2 text-xs text-slate-500 hover:text-slate-800 transition-colors cursor-pointer font-semibold"
             >
               Cancelar
             </button>
@@ -1366,10 +1366,10 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
             <button
               type="submit"
               disabled={savedSuccess}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold transition-all shadow-md active:scale-[0.99] cursor-pointer ${
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold transition-all shadow-xs active:scale-[0.99] cursor-pointer ${
                 savedSuccess
                   ? 'bg-emerald-600 text-white'
-                  : 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white'
+                  : 'bg-cyan-600 hover:bg-cyan-700 text-white'
               }`}
             >
               {savedSuccess ? (

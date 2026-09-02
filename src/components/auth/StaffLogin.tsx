@@ -334,32 +334,32 @@ export const StaffLogin: React.FC<StaffLoginProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100 flex flex-col justify-between relative overflow-hidden font-sans select-none">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-sky-50/50 to-teal-50/40 text-slate-800 flex flex-col justify-between relative overflow-hidden font-sans select-none">
       {/* Background Decorative Glows */}
-      <div className="absolute top-[-150px] left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-cyan-600/15 via-blue-700/10 to-transparent blur-3xl pointer-events-none rounded-full" />
-      <div className="absolute bottom-[-100px] right-[-100px] w-[500px] h-[500px] bg-emerald-600/10 blur-3xl pointer-events-none rounded-full" />
+      <div className="absolute top-[-150px] left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-cyan-400/10 via-sky-400/10 to-transparent blur-3xl pointer-events-none rounded-full" />
+      <div className="absolute bottom-[-100px] right-[-100px] w-[500px] h-[500px] bg-emerald-400/10 blur-3xl pointer-events-none rounded-full" />
 
       {/* Top Header */}
       <header className="relative z-10 w-full max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-neutral-900 border border-neutral-800 shadow-sm flex items-center justify-center">
+          <div className="p-2 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-center">
             {renderClinicIcon()}
           </div>
           <div>
-            <h1 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
+            <h1 className="text-base font-bold text-slate-900 tracking-tight flex items-center gap-2">
               <span>{clinicSettings.name}</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-800/80 font-medium">
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-800 border border-cyan-200 font-semibold">
                 PACS MULTI-TENANT
               </span>
             </h1>
-            <p className="text-xs text-neutral-400">{clinicSettings.tagline}</p>
+            <p className="text-xs text-slate-500">{clinicSettings.tagline}</p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowRegisterModal(true)}
-            className="flex items-center gap-1.5 px-3.5 py-2 bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white rounded-xl text-xs font-bold shadow-md shadow-emerald-950/40 transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-xl text-xs font-bold shadow-sm transition-all cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5" />
             <span>Registrar Consultorio (1 Mes Gratis)</span>
@@ -367,46 +367,46 @@ export const StaffLogin: React.FC<StaffLoginProps> = ({
 
           <button
             onClick={onSwitchToPatientPortal}
-            className="flex items-center gap-2 px-3.5 py-2 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700/80 text-neutral-200 hover:text-white rounded-xl text-xs font-semibold transition-all shadow-xs group cursor-pointer"
+            className="flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 rounded-xl text-xs font-semibold transition-all shadow-xs group cursor-pointer"
           >
             <span>Portal Paciente</span>
-            <ArrowRight className="w-3.5 h-3.5 text-cyan-400 group-hover:translate-x-0.5 transition-transform" />
+            <ArrowRight className="w-3.5 h-3.5 text-cyan-600 group-hover:translate-x-0.5 transition-transform" />
           </button>
         </div>
       </header>
 
       {/* Main Login Card */}
       <main className="relative z-10 flex-1 flex items-center justify-center px-4 py-8">
-        <div className="w-full max-w-md bg-neutral-900/90 border border-neutral-800 rounded-3xl p-7 shadow-2xl backdrop-blur-xl space-y-5">
+        <div className="w-full max-w-md bg-white border border-slate-200 rounded-3xl p-7 shadow-xl space-y-5">
           {/* Card Title */}
           <div className="text-center space-y-1">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-cyan-950/60 border border-cyan-800/60 text-cyan-400 mb-2 shadow-inner">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-cyan-50 border border-cyan-200 text-cyan-700 mb-2 shadow-xs">
               <Lock className="w-6 h-6" />
             </div>
-            <h2 className="text-lg font-bold text-white tracking-tight">Acceso a Consola Médica</h2>
-            <p className="text-xs text-neutral-400">
+            <h2 className="text-lg font-bold text-slate-900 tracking-tight">Acceso a Consola Médica</h2>
+            <p className="text-xs text-slate-500">
               Ingrese con sus credenciales de consultorio o de Super Administrador
             </p>
           </div>
 
           {/* Real-Time Internet & Synchronized Server Date/Time Indicator */}
-          <div className="p-2.5 bg-neutral-950 rounded-2xl border border-neutral-800 flex items-center justify-between text-[11px]">
+          <div className="p-2.5 bg-slate-50 rounded-2xl border border-slate-200 flex items-center justify-between text-[11px]">
             <div className="flex items-center gap-2">
               {networkTime?.isOnline ? (
-                <div className="flex items-center gap-1 text-emerald-400 font-bold">
+                <div className="flex items-center gap-1 text-emerald-700 font-bold">
                   <Wifi className="w-3.5 h-3.5" />
                   <span>Internet Conectado</span>
                 </div>
               ) : (
-                <div className="flex items-center gap-1 text-rose-400 font-bold animate-pulse">
+                <div className="flex items-center gap-1 text-rose-600 font-bold animate-pulse">
                   <WifiOff className="w-3.5 h-3.5" />
                   <span>Sin Internet</span>
                 </div>
               )}
             </div>
 
-            <div className="flex items-center gap-1.5 font-mono text-[10px] text-neutral-400">
-              <Clock className="w-3 h-3 text-cyan-400" />
+            <div className="flex items-center gap-1.5 font-mono text-[10px] text-slate-500">
+              <Clock className="w-3 h-3 text-cyan-700" />
               <span>{networkTime?.formattedDate || 'Verificando...'}</span>
               <span>{networkTime?.formattedTime || ''}</span>
             </div>
@@ -414,8 +414,8 @@ export const StaffLogin: React.FC<StaffLoginProps> = ({
 
           {/* Error Message */}
           {errorMessage && (
-            <div className="p-3 rounded-2xl bg-rose-950/60 border border-rose-800/80 text-rose-200 text-xs flex items-start gap-2.5">
-              <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+            <div className="p-3 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-2.5">
+              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
               <div className="leading-relaxed">{errorMessage}</div>
             </div>
           )}
@@ -423,11 +423,11 @@ export const StaffLogin: React.FC<StaffLoginProps> = ({
           {/* Manual Login Form */}
           <form onSubmit={handleManualLogin} className="space-y-4">
             <div>
-              <label className="text-xs font-semibold text-neutral-300 block mb-1.5">
+              <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                 Nombre de Usuario o Correo:
               </label>
               <div className="relative">
-                <User className="w-4 h-4 text-neutral-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   required
@@ -435,17 +435,17 @@ export const StaffLogin: React.FC<StaffLoginProps> = ({
                   value={username}
                   onChange={e => setUsername(e.target.value)}
                   placeholder="Ej. Fernando01 o dr_mendoza"
-                  className="w-full bg-neutral-950 border border-neutral-700 rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-white placeholder:text-neutral-600 focus:outline-hidden focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all font-mono disabled:opacity-50"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-3.5 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:bg-white focus:border-cyan-600 focus:ring-1 focus:ring-cyan-600 transition-all font-mono disabled:opacity-50"
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-xs font-semibold text-neutral-300 block mb-1.5">
+              <label className="text-xs font-semibold text-slate-700 block mb-1.5">
                 Contraseña:
               </label>
               <div className="relative">
-                <Lock className="w-4 h-4 text-neutral-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   required
@@ -453,12 +453,12 @@ export const StaffLogin: React.FC<StaffLoginProps> = ({
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full bg-neutral-950 border border-neutral-700 rounded-xl pl-10 pr-10 py-2.5 text-xs text-white placeholder:text-neutral-600 focus:outline-hidden focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all font-mono disabled:opacity-50"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-10 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:bg-white focus:border-cyan-600 focus:ring-1 focus:ring-cyan-600 transition-all font-mono disabled:opacity-50"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white text-xs cursor-pointer"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 text-xs cursor-pointer"
                   title={showPassword ? 'Ocultar contraseña' : 'Ver contraseña'}
                 >
                   {showPassword ? '🙈' : '👁️'}
@@ -469,7 +469,7 @@ export const StaffLogin: React.FC<StaffLoginProps> = ({
             <button
               type="submit"
               disabled={lockoutSeconds > 0 || isValidatingNetwork}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs font-bold shadow-md shadow-cyan-600/20 active:scale-[0.99] transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white text-xs font-bold shadow-md shadow-cyan-600/20 active:scale-[0.99] transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {isValidatingNetwork ? (
                 <>
@@ -485,11 +485,11 @@ export const StaffLogin: React.FC<StaffLoginProps> = ({
           </form>
 
           {/* Quick Register Callout */}
-          <div className="pt-2 text-center border-t border-neutral-800">
+          <div className="pt-2 text-center border-t border-slate-100">
             <button
               type="button"
               onClick={() => setShowRegisterModal(true)}
-              className="text-xs text-cyan-400 hover:text-cyan-300 font-semibold transition-colors cursor-pointer inline-flex items-center gap-1.5"
+              className="text-xs text-cyan-700 hover:text-cyan-800 font-semibold transition-colors cursor-pointer inline-flex items-center gap-1.5"
             >
               <PlusCircle className="w-3.5 h-3.5" />
               <span>¿No tienes cuenta? Registra tu consultorio aquí</span>
@@ -497,29 +497,29 @@ export const StaffLogin: React.FC<StaffLoginProps> = ({
           </div>
 
           {/* Security Notice */}
-          <div className="p-3 bg-neutral-950/60 rounded-2xl border border-neutral-800/80 text-[11px] text-neutral-400 flex items-center justify-between">
+          <div className="p-3 bg-slate-50 rounded-2xl border border-slate-200 text-[11px] text-slate-600 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-cyan-400" />
+              <ShieldCheck className="w-4 h-4 text-cyan-700" />
               <span>Autenticación cifrada & aislamiento multi-tenant</span>
             </div>
-            <span className="text-[10px] font-mono text-neutral-500">v3.0 Cloud</span>
+            <span className="text-[10px] font-mono text-slate-400">v3.0 Cloud</span>
           </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-neutral-800/80 bg-neutral-900/40 px-6 py-4 text-center text-xs text-neutral-500 flex flex-col sm:flex-row items-center justify-between gap-2 max-w-6xl mx-auto w-full">
+      <footer className="relative z-10 border-t border-slate-200 bg-white/70 px-6 py-4 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-2 max-w-6xl mx-auto w-full">
         <div>
           <span>© 2026 {clinicSettings.name} — Sistema Multi-Tenant de Imagenología Médica</span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="flex items-center gap-1 text-emerald-400 font-mono text-[11px]">
+          <span className="flex items-center gap-1 text-emerald-700 font-mono text-[11px] font-semibold">
             <Wifi className="w-3 h-3" />
             <span>Sincronización en la Nube Activa</span>
           </span>
           <span>•</span>
           <span className="flex items-center gap-1">
-            <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+            <ShieldCheck className="w-3.5 h-3.5 text-cyan-700" />
             <span>Aislamiento 100% en Blanco</span>
           </span>
         </div>

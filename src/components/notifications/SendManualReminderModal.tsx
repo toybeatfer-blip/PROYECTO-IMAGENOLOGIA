@@ -108,43 +108,43 @@ export const SendManualReminderModal: React.FC<SendManualReminderModalProps> = (
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs">
-      <div className="bg-neutral-900 border border-neutral-700 rounded-2xl w-full max-w-xl shadow-2xl overflow-hidden animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs select-none">
+      <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-xl shadow-2xl overflow-hidden animate-fadeIn">
         {/* Header */}
-        <div className="p-4 bg-gradient-to-r from-cyan-950/70 to-neutral-900 border-b border-neutral-800 flex items-center justify-between">
+        <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 bg-cyan-500/10 border border-cyan-500/30 rounded-xl text-cyan-400">
+            <div className="p-2 bg-cyan-50 border border-cyan-200 rounded-xl text-cyan-700">
               <Send className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-white">Enviar Recordatorio Inmediato</h3>
-              <p className="text-xs text-neutral-400">
+              <h3 className="text-sm font-bold text-slate-900">Enviar Recordatorio Inmediato</h3>
+              <p className="text-xs text-slate-500">
                 Notificación para {appointment.patientName} ({appointment.studyName})
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-lg"
+            className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="p-5 space-y-4 text-xs text-neutral-300">
+        <div className="p-5 space-y-4 text-xs text-slate-700">
           {/* Channel selector */}
           <div>
-            <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider block mb-1.5">
+            <label className="text-[11px] font-bold text-slate-600 uppercase tracking-wider block mb-1.5">
               Canal de Comunicación:
             </label>
             <div className="grid grid-cols-3 gap-2">
               <button
                 type="button"
                 onClick={() => setChannel('EMAIL')}
-                className={`flex items-center justify-center gap-2 p-2.5 rounded-xl border text-xs font-semibold transition-all ${
+                className={`flex items-center justify-center gap-2 p-2.5 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
                   channel === 'EMAIL'
-                    ? 'bg-blue-950/80 border-blue-600 text-blue-300 shadow-xs'
-                    : 'bg-neutral-950 border-neutral-800 text-neutral-400 hover:text-neutral-200'
+                    ? 'bg-blue-50 border-blue-400 text-blue-800 shadow-xs'
+                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-white'
                 }`}
               >
                 <Mail className="w-3.5 h-3.5" />
@@ -154,10 +154,10 @@ export const SendManualReminderModal: React.FC<SendManualReminderModalProps> = (
               <button
                 type="button"
                 onClick={() => setChannel('SMS')}
-                className={`flex items-center justify-center gap-2 p-2.5 rounded-xl border text-xs font-semibold transition-all ${
+                className={`flex items-center justify-center gap-2 p-2.5 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
                   channel === 'SMS'
-                    ? 'bg-purple-950/80 border-purple-600 text-purple-300 shadow-xs'
-                    : 'bg-neutral-950 border-neutral-800 text-neutral-400 hover:text-neutral-200'
+                    ? 'bg-purple-50 border-purple-400 text-purple-800 shadow-xs'
+                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-white'
                 }`}
               >
                 <Smartphone className="w-3.5 h-3.5" />
@@ -167,10 +167,10 @@ export const SendManualReminderModal: React.FC<SendManualReminderModalProps> = (
               <button
                 type="button"
                 onClick={() => setChannel('WHATSAPP')}
-                className={`flex items-center justify-center gap-2 p-2.5 rounded-xl border text-xs font-semibold transition-all ${
+                className={`flex items-center justify-center gap-2 p-2.5 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
                   channel === 'WHATSAPP'
-                    ? 'bg-emerald-950/80 border-emerald-600 text-emerald-300 shadow-xs'
-                    : 'bg-neutral-950 border-neutral-800 text-neutral-400 hover:text-neutral-200'
+                    ? 'bg-emerald-50 border-emerald-400 text-emerald-800 shadow-xs'
+                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-white'
                 }`}
               >
                 <MessageSquare className="w-3.5 h-3.5" />
@@ -180,18 +180,18 @@ export const SendManualReminderModal: React.FC<SendManualReminderModalProps> = (
           </div>
 
           {/* Recipient summary */}
-          <div className="bg-neutral-950 p-3 rounded-xl border border-neutral-800 flex items-center justify-between">
+          <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between">
             <div>
-              <span className="text-[11px] text-neutral-400 block">Destinatario confirmado:</span>
-              <span className="font-bold text-white">
+              <span className="text-[11px] text-slate-500 block font-semibold">Destinatario confirmado:</span>
+              <span className="font-bold text-slate-900">
                 {channel === 'EMAIL'
                   ? patient?.email || 'roberto.silva@email.com'
                   : appointment.patientPhone}
               </span>
             </div>
             <div className="text-right">
-              <span className="text-[11px] text-neutral-400 block">Cita:</span>
-              <span className="text-cyan-300 font-semibold">
+              <span className="text-[11px] text-slate-500 block font-semibold">Cita:</span>
+              <span className="text-cyan-800 font-bold">
                 {appointment.scheduledDate} a las {appointment.scheduledTime} hrs
               </span>
             </div>
@@ -199,28 +199,28 @@ export const SendManualReminderModal: React.FC<SendManualReminderModalProps> = (
 
           {channel === 'EMAIL' && (
             <div>
-              <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider block mb-1">
+              <label className="text-[11px] font-bold text-slate-600 uppercase tracking-wider block mb-1">
                 Asunto del Correo:
               </label>
               <input
                 type="text"
                 value={emailSubject}
                 onChange={e => setEmailSubject(e.target.value)}
-                className="w-full bg-neutral-950 border border-neutral-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-hidden focus:bg-white focus:border-cyan-600"
               />
             </div>
           )}
 
           <div>
             <div className="flex items-center justify-between mb-1">
-              <label className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider">
+              <label className="text-[11px] font-bold text-slate-600 uppercase tracking-wider">
                 Cuerpo del Mensaje:
               </label>
               <button
                 type="button"
                 onClick={handleGenerateAI}
                 disabled={isGeneratingAI}
-                className="flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 font-semibold transition-colors"
+                className="flex items-center gap-1.5 text-xs text-cyan-700 hover:text-cyan-800 font-bold transition-colors cursor-pointer"
               >
                 <Sparkles className={`w-3.5 h-3.5 ${isGeneratingAI ? 'animate-spin' : ''}`} />
                 <span>{isGeneratingAI ? 'Generando...' : 'Optimizar con IA'}</span>
@@ -230,16 +230,16 @@ export const SendManualReminderModal: React.FC<SendManualReminderModalProps> = (
               rows={6}
               value={messageBody}
               onChange={e => setMessageBody(e.target.value)}
-              className="w-full bg-neutral-950 border border-neutral-700 rounded-xl p-3 text-xs text-neutral-200 leading-relaxed font-sans focus:outline-hidden focus:border-cyan-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs text-slate-900 leading-relaxed font-sans focus:outline-hidden focus:bg-white focus:border-cyan-600"
             />
           </div>
         </div>
 
         {/* Footer */}
-        <div className="p-4 bg-neutral-950 border-t border-neutral-800 flex items-center justify-between">
+        <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-xs text-neutral-400 hover:text-white transition-colors"
+            className="px-4 py-2 text-xs text-slate-500 hover:text-slate-800 transition-colors cursor-pointer font-semibold"
           >
             Cancelar
           </button>
@@ -247,10 +247,10 @@ export const SendManualReminderModal: React.FC<SendManualReminderModalProps> = (
           <button
             onClick={handleSendNow}
             disabled={isSending || sentSuccess}
-            className={`flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all shadow-md ${
+            className={`flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer ${
               sentSuccess
                 ? 'bg-emerald-600 text-white'
-                : 'bg-cyan-600 hover:bg-cyan-500 text-white'
+                : 'bg-cyan-600 hover:bg-cyan-700 text-white'
             }`}
           >
             {sentSuccess ? (

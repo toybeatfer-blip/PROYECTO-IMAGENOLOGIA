@@ -330,22 +330,22 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100 flex flex-col font-sans select-none antialiased">
+    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans select-none antialiased">
       {/* Top Header */}
-      <header className="sticky top-0 z-40 bg-neutral-900/95 border-b border-amber-500/30 backdrop-blur-md px-6 py-3.5 shadow-xl">
+      <header className="sticky top-0 z-40 bg-white/95 border-b border-slate-200 backdrop-blur-md px-6 py-3.5 shadow-xs">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center text-neutral-950 font-extrabold shadow-lg shadow-amber-950/40">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center text-slate-950 font-extrabold shadow-sm">
               <Crown className="w-6 h-6" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-base font-extrabold text-white tracking-tight">Panel de Super Administrador</h1>
-                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-700/80">
+                <h1 className="text-base font-extrabold text-slate-900 tracking-tight">Panel de Super Administrador</h1>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-300">
                   Fernando01 (Maestro)
                 </span>
               </div>
-              <p className="text-xs text-neutral-400">
+              <p className="text-xs text-slate-500">
                 Gestión Central de Consultorios, Licencias Mensuales de 1 Mes y Sincronización en la Nube
               </p>
             </div>
@@ -356,24 +356,24 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
             <div
               className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-mono font-bold min-w-[145px] transition-all ${
                 cloudStatus.isConnected
-                  ? 'bg-emerald-950/80 border-emerald-700/80 text-emerald-300'
-                  : 'bg-rose-950/80 border-rose-800 text-rose-300'
+                  ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
+                  : 'bg-rose-50 border-rose-200 text-rose-800'
               }`}
               title={cloudStatus.error || 'Bóveda central en la nube activa'}
             >
               {cloudStatus.isSyncing ? (
                 <>
-                  <RefreshCw className="w-3.5 h-3.5 animate-spin text-cyan-400" />
+                  <RefreshCw className="w-3.5 h-3.5 animate-spin text-cyan-600" />
                   <span>Sincronizando...</span>
                 </>
               ) : cloudStatus.isConnected ? (
                 <>
-                  <Cloud className="w-3.5 h-3.5 text-emerald-400" />
+                  <Cloud className="w-3.5 h-3.5 text-emerald-600" />
                   <span>Nube Conectada</span>
                 </>
               ) : (
                 <>
-                  <CloudOff className="w-3.5 h-3.5 text-rose-400" />
+                  <CloudOff className="w-3.5 h-3.5 text-rose-600" />
                   <span>Sin Nube</span>
                 </>
               )}
@@ -382,7 +382,7 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
             {/* Sync Now Button */}
             <button
               onClick={() => syncWithCloud().then(() => showNotification('Sincronización con la nube completada.'))}
-              className="p-2 bg-neutral-800 hover:bg-neutral-700 text-cyan-300 rounded-xl border border-neutral-700 transition-colors cursor-pointer"
+              className="p-2 bg-slate-100 hover:bg-slate-200 text-cyan-700 rounded-xl border border-slate-200 transition-colors cursor-pointer shadow-xs"
               title="Forzar Sincronización Inmediata con la Nube"
             >
               <RefreshCw className={`w-4 h-4 ${cloudStatus.isSyncing ? 'animate-spin' : ''}`} />
@@ -391,7 +391,7 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
             {/* Visible Red Logout Button */}
             <button
               onClick={onLogout}
-              className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-rose-600 to-red-700 hover:from-rose-500 hover:to-red-600 text-white rounded-xl text-xs font-bold shadow-md shadow-rose-950/50 transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
               title="Cerrar Sesión Maestra y Salir"
             >
               <LogOut className="w-4 h-4" />
@@ -406,17 +406,17 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
         {/* Toast Notification */}
         {notificationMsg && (
           <div
-            className={`p-3.5 rounded-2xl border text-xs flex items-center justify-between shadow-xl animate-in fade-in slide-in-from-top-4 duration-150 ${
+            className={`p-3.5 rounded-2xl border text-xs flex items-center justify-between shadow-md animate-in fade-in slide-in-from-top-4 duration-150 ${
               notificationMsg.isError
-                ? 'bg-rose-950 border-rose-800 text-rose-200'
-                : 'bg-emerald-950 border-emerald-700 text-emerald-200'
+                ? 'bg-rose-50 border-rose-200 text-rose-800'
+                : 'bg-emerald-50 border-emerald-200 text-emerald-800'
             }`}
           >
             <div className="flex items-center gap-2">
-              {notificationMsg.isError ? <AlertTriangle className="w-4 h-4 text-rose-400" /> : <CheckCircle2 className="w-4 h-4 text-emerald-400" />}
+              {notificationMsg.isError ? <AlertTriangle className="w-4 h-4 text-rose-600" /> : <CheckCircle2 className="w-4 h-4 text-emerald-600" />}
               <span>{notificationMsg.text}</span>
             </div>
-            <button onClick={() => setNotificationMsg(null)} className="text-neutral-400 hover:text-white">
+            <button onClick={() => setNotificationMsg(null)} className="text-slate-400 hover:text-slate-700 cursor-pointer">
               <X className="w-4 h-4" />
             </button>
           </div>
@@ -424,49 +424,49 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
 
         {/* 1. KPIs Metric Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl shadow-md space-y-1">
-            <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider flex items-center gap-1.5">
-              <Building2 className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="bg-white border border-slate-200 p-5 rounded-3xl shadow-xs space-y-1">
+            <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+              <Building2 className="w-3.5 h-3.5 text-cyan-600" />
               Consultorios Totales
             </span>
-            <div className="text-2xl font-extrabold text-white font-mono">{metrics.totalClinics}</div>
-            <p className="text-[10px] text-neutral-500">Espacios multi-tenant registrados</p>
+            <div className="text-2xl font-extrabold text-slate-900 font-mono">{metrics.totalClinics}</div>
+            <p className="text-[10px] text-slate-400">Espacios multi-tenant registrados</p>
           </div>
 
-          <div className="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl shadow-md space-y-1">
-            <span className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5" />
+          <div className="bg-white border border-slate-200 p-5 rounded-3xl shadow-xs space-y-1">
+            <span className="text-[11px] font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
               Licencias Activas
             </span>
-            <div className="text-2xl font-extrabold text-emerald-400 font-mono">{metrics.activeClinics}</div>
-            <p className="text-[10px] text-neutral-500">Con vigencia de 30 días vigente</p>
+            <div className="text-2xl font-extrabold text-emerald-600 font-mono">{metrics.activeClinics}</div>
+            <p className="text-[10px] text-slate-400">Con vigencia de 30 días vigente</p>
           </div>
 
-          <div className="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl shadow-md space-y-1">
-            <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5" />
+          <div className="bg-white border border-slate-200 p-5 rounded-3xl shadow-xs space-y-1">
+            <span className="text-[11px] font-bold text-amber-700 uppercase tracking-wider flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-amber-600" />
               Suspendidas / Vencidas
             </span>
-            <div className="text-2xl font-extrabold text-amber-400 font-mono">{metrics.inactiveClinics}</div>
-            <p className="text-[10px] text-neutral-500">Requieren renovación mensual</p>
+            <div className="text-2xl font-extrabold text-amber-600 font-mono">{metrics.inactiveClinics}</div>
+            <p className="text-[10px] text-slate-400">Requieren renovación mensual</p>
           </div>
 
-          <div className="bg-neutral-900 border border-neutral-800 p-4 rounded-2xl shadow-md space-y-1">
-            <span className="text-[11px] font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
-              <Users className="w-3.5 h-3.5" />
+          <div className="bg-white border border-slate-200 p-5 rounded-3xl shadow-xs space-y-1">
+            <span className="text-[11px] font-bold text-cyan-700 uppercase tracking-wider flex items-center gap-1.5">
+              <Users className="w-3.5 h-3.5 text-cyan-600" />
               Expedientes Totales
             </span>
-            <div className="text-2xl font-extrabold text-cyan-400 font-mono">{metrics.totalPatients}</div>
-            <p className="text-[10px] text-neutral-500">Pacientes acumulados en el sistema</p>
+            <div className="text-2xl font-extrabold text-cyan-700 font-mono">{metrics.totalPatients}</div>
+            <p className="text-[10px] text-slate-400">Pacientes acumulados en el sistema</p>
           </div>
         </div>
 
         {/* 2. Global Actions Toolbar */}
-        <div className="bg-neutral-900/90 border border-neutral-800 p-4 rounded-2xl flex flex-wrap items-center justify-between gap-3 shadow-md">
+        <div className="bg-white border border-slate-200 p-4 rounded-3xl flex flex-wrap items-center justify-between gap-3 shadow-xs">
           <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={() => setShowCreateModal(true)}
-              className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white rounded-xl text-xs font-bold shadow-md shadow-emerald-950/40 transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-700 hover:to-cyan-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               <span>+ Nuevo Consultorio</span>
@@ -474,19 +474,19 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
 
             <button
               onClick={handleRunDeepRecovery}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-neutral-800 hover:bg-neutral-700 text-cyan-300 border border-neutral-700 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
               title="Escanea el almacenamiento local en busca de datos o consultorios huérfanos"
             >
-              <Database className="w-4 h-4 text-cyan-400" />
+              <Database className="w-4 h-4 text-cyan-700" />
               <span>🗄️ Recuperar Previos</span>
             </button>
 
             <button
               onClick={() => setShowContactModal(true)}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-neutral-800 hover:bg-neutral-700 text-amber-300 border border-neutral-700 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
               title="Editar nombre, WhatsApp, correo y mensaje de Fernando para los modales de renovación"
             >
-              <MessageSquare className="w-4 h-4 text-amber-400" />
+              <MessageSquare className="w-4 h-4 text-amber-600" />
               <span>Mis Datos de Contacto</span>
             </button>
           </div>
@@ -494,15 +494,15 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
           <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={handleExportBackup}
-              className="flex items-center gap-1.5 px-3 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 border border-neutral-700 rounded-xl text-xs font-medium transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-xl text-xs font-medium transition-colors cursor-pointer"
               title="Descargar respaldo maestro en JSON"
             >
-              <Download className="w-3.5 h-3.5 text-neutral-400" />
+              <Download className="w-3.5 h-3.5 text-slate-500" />
               <span>Exportar JSON</span>
             </button>
 
-            <label className="flex items-center gap-1.5 px-3 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 border border-neutral-700 rounded-xl text-xs font-medium transition-colors cursor-pointer">
-              <Upload className="w-3.5 h-3.5 text-neutral-400" />
+            <label className="flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-xl text-xs font-medium transition-colors cursor-pointer">
+              <Upload className="w-3.5 h-3.5 text-slate-500" />
               <span>Importar JSON</span>
               <input type="file" accept=".json" onChange={handleImportBackup} className="hidden" />
             </label>
@@ -512,45 +512,45 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
         {/* 3. Search & Filters Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="relative w-full sm:w-80">
-            <Search className="w-4 h-4 text-neutral-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Buscar por clínica, médico, usuario, cédula..."
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl pl-10 pr-4 py-2 text-xs text-white placeholder:text-neutral-500 focus:outline-hidden focus:border-cyan-500"
+              className="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:border-cyan-600 shadow-xs"
             />
           </div>
 
-          <div className="flex items-center gap-1 bg-neutral-900 p-1 rounded-xl border border-neutral-800 text-xs w-full sm:w-auto overflow-x-auto">
+          <div className="flex items-center gap-1 bg-white p-1 rounded-2xl border border-slate-200 text-xs w-full sm:w-auto overflow-x-auto shadow-xs">
             <button
               onClick={() => setFilterStatus('ALL')}
-              className={`px-3 py-1 rounded-lg font-semibold transition-colors cursor-pointer ${
-                filterStatus === 'ALL' ? 'bg-cyan-600 text-white' : 'text-neutral-400 hover:text-white'
+              className={`px-3 py-1.5 rounded-xl font-semibold transition-colors cursor-pointer ${
+                filterStatus === 'ALL' ? 'bg-slate-900 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Todos ({clinics.length})
             </button>
             <button
               onClick={() => setFilterStatus('ACTIVE')}
-              className={`px-3 py-1 rounded-lg font-semibold transition-colors cursor-pointer ${
-                filterStatus === 'ACTIVE' ? 'bg-emerald-600 text-white' : 'text-neutral-400 hover:text-white'
+              className={`px-3 py-1.5 rounded-xl font-semibold transition-colors cursor-pointer ${
+                filterStatus === 'ACTIVE' ? 'bg-emerald-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Activos ({metrics.activeClinics})
             </button>
             <button
               onClick={() => setFilterStatus('SUSPENDED')}
-              className={`px-3 py-1 rounded-lg font-semibold transition-colors cursor-pointer ${
-                filterStatus === 'SUSPENDED' ? 'bg-rose-600 text-white' : 'text-neutral-400 hover:text-white'
+              className={`px-3 py-1.5 rounded-xl font-semibold transition-colors cursor-pointer ${
+                filterStatus === 'SUSPENDED' ? 'bg-rose-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Suspendidos
             </button>
             <button
               onClick={() => setFilterStatus('EXPIRED')}
-              className={`px-3 py-1 rounded-lg font-semibold transition-colors cursor-pointer ${
-                filterStatus === 'EXPIRED' ? 'bg-amber-600 text-white' : 'text-neutral-400 hover:text-white'
+              className={`px-3 py-1.5 rounded-xl font-semibold transition-colors cursor-pointer ${
+                filterStatus === 'EXPIRED' ? 'bg-amber-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Vencidos
@@ -559,24 +559,24 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
         </div>
 
         {/* 4. Master Table of Clinics */}
-        <div className="bg-neutral-900 border border-neutral-800 rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-white border border-slate-200 rounded-3xl shadow-xs overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-neutral-300">
-              <thead className="bg-neutral-950 text-neutral-400 uppercase text-[10px] tracking-wider border-b border-neutral-800">
+            <table className="w-full text-left text-xs text-slate-700">
+              <thead className="bg-slate-50 text-slate-500 uppercase text-[10px] tracking-wider border-b border-slate-200">
                 <tr>
-                  <th className="py-3 px-4">Consultorio / Sede</th>
-                  <th className="py-3 px-4">Médico Titular & Cédula</th>
-                  <th className="py-3 px-4">Usuario & Contraseña</th>
-                  <th className="py-3 px-4">Estado de Licencia</th>
-                  <th className="py-3 px-4">Vigencia (1 Mes)</th>
-                  <th className="py-3 px-4 text-center">Pacientes</th>
-                  <th className="py-3 px-4 text-right">Acciones Rápidas</th>
+                  <th className="py-3.5 px-4 font-bold">Consultorio / Sede</th>
+                  <th className="py-3.5 px-4 font-bold">Médico Titular & Cédula</th>
+                  <th className="py-3.5 px-4 font-bold">Usuario & Contraseña</th>
+                  <th className="py-3.5 px-4 font-bold">Estado de Licencia</th>
+                  <th className="py-3.5 px-4 font-bold">Vigencia (1 Mes)</th>
+                  <th className="py-3.5 px-4 text-center font-bold">Pacientes</th>
+                  <th className="py-3.5 px-4 text-right font-bold">Acciones Rápidas</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-neutral-800/60 font-sans">
+              <tbody className="divide-y divide-slate-100 font-sans">
                 {filteredClinics.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="py-8 text-center text-neutral-500">
+                    <td colSpan={7} className="py-8 text-center text-slate-400">
                       No se encontraron consultorios con los filtros seleccionados.
                     </td>
                   </tr>
@@ -587,44 +587,44 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
                     const isPassVisible = !!showPasswords[clinic.id];
 
                     return (
-                      <tr key={clinic.id} className="hover:bg-neutral-800/40 transition-colors">
+                      <tr key={clinic.id} className="hover:bg-slate-50/80 transition-colors">
                         {/* 1. Clinic Name & Branch */}
                         <td className="py-3.5 px-4">
-                          <div className="font-bold text-white text-sm">{clinic.clinicName}</div>
-                          <div className="text-[11px] text-neutral-400 flex items-center gap-1.5 mt-0.5">
-                            <span className="text-cyan-400 font-medium">{clinic.branch}</span>
+                          <div className="font-bold text-slate-900 text-sm">{clinic.clinicName}</div>
+                          <div className="text-[11px] text-slate-500 flex items-center gap-1.5 mt-0.5">
+                            <span className="text-cyan-700 font-semibold">{clinic.branch}</span>
                             <span>• {clinic.phone || 'Sin tel'}</span>
                           </div>
                         </td>
 
                         {/* 2. Doctor & License */}
                         <td className="py-3.5 px-4">
-                          <div className="font-semibold text-neutral-200">
+                          <div className="font-bold text-slate-800">
                             {clinic.doctorPrefix} {clinic.doctorName}
                           </div>
-                          <div className="text-[10px] text-neutral-400 font-mono mt-0.5">
-                            Céd. Gral: <strong className="text-neutral-300">{clinic.generalLicense || 'N/A'}</strong>
+                          <div className="text-[10px] text-slate-500 font-mono mt-0.5">
+                            Céd. Gral: <strong className="text-slate-700">{clinic.generalLicense || 'N/A'}</strong>
                             {clinic.specialtyLicense && ` • Esp: ${clinic.specialtyLicense}`}
                           </div>
                         </td>
 
                         {/* 3. Username & Password */}
                         <td className="py-3.5 px-4 font-mono">
-                          <div className="text-cyan-300 font-bold flex items-center gap-1.5">
+                          <div className="text-cyan-800 font-bold flex items-center gap-1.5">
                             <span>{clinic.username}</span>
                             <button
                               onClick={() => handleCopy(clinic.username, `u-${clinic.id}`)}
-                              className="text-neutral-500 hover:text-white"
+                              className="text-slate-400 hover:text-slate-700 cursor-pointer"
                               title="Copiar usuario"
                             >
-                              {copiedKey === `u-${clinic.id}` ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                              {copiedKey === `u-${clinic.id}` ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
                             </button>
                           </div>
-                          <div className="flex items-center gap-2 text-neutral-400 text-[11px] mt-0.5">
+                          <div className="flex items-center gap-2 text-slate-500 text-[11px] mt-0.5">
                             <span>Pass: <strong>{isPassVisible ? clinic.password : '••••••••'}</strong></span>
                             <button
                               onClick={() => togglePasswordVisibility(clinic.id)}
-                              className="text-neutral-500 hover:text-white cursor-pointer"
+                              className="text-slate-400 hover:text-slate-700 cursor-pointer"
                               title={isPassVisible ? 'Ocultar contraseña' : 'Ver contraseña'}
                             >
                               <Eye className="w-3.5 h-3.5" />
@@ -635,18 +635,18 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
                         {/* 4. License Status Badge */}
                         <td className="py-3.5 px-4">
                           {evalInfo.isSuspended ? (
-                            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-rose-950 text-rose-300 border border-rose-800">
-                              <ShieldAlert className="w-3 h-3" />
+                            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-rose-50 text-rose-800 border border-rose-200">
+                              <ShieldAlert className="w-3 h-3 text-rose-600" />
                               <span>SUSPENDIDA</span>
                             </span>
                           ) : evalInfo.isExpired ? (
-                            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-950 text-amber-300 border border-amber-800">
-                              <Clock className="w-3 h-3" />
+                            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200">
+                              <Clock className="w-3 h-3 text-amber-600" />
                               <span>VENCIDA</span>
                             </span>
                           ) : (
-                            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-950 text-emerald-300 border border-emerald-800">
-                              <ShieldCheck className="w-3 h-3" />
+                            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                              <ShieldCheck className="w-3 h-3 text-emerald-600" />
                               <span>ACTIVA</span>
                             </span>
                           )}
@@ -654,13 +654,13 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
 
                         {/* 5. Remaining Days / Expiry Date */}
                         <td className="py-3.5 px-4 font-mono text-[11px]">
-                          <div className="text-white font-bold">{evalInfo.label}</div>
-                          <div className="text-[10px] text-neutral-500">Hasta: {clinic.licenseValidUntil}</div>
+                          <div className="text-slate-900 font-bold">{evalInfo.label}</div>
+                          <div className="text-[10px] text-slate-400">Hasta: {clinic.licenseValidUntil}</div>
                         </td>
 
                         {/* 6. Patients Count */}
                         <td className="py-3.5 px-4 text-center font-mono">
-                          <span className="px-2 py-0.5 rounded-lg bg-neutral-950 border border-neutral-800 text-cyan-300 font-bold">
+                          <span className="px-2.5 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-cyan-800 font-bold">
                             {patientsCount}
                           </span>
                         </td>
@@ -673,8 +673,8 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
                               onClick={() => handleToggleSuspension(clinic.id)}
                               className={`p-1.5 rounded-lg border transition-colors cursor-pointer ${
                                 evalInfo.isSuspended
-                                  ? 'bg-emerald-950 hover:bg-emerald-900 border-emerald-700 text-emerald-300'
-                                  : 'bg-rose-950 hover:bg-rose-900 border-rose-800 text-rose-300'
+                                  ? 'bg-emerald-50 hover:bg-emerald-100 border-emerald-200 text-emerald-800'
+                                  : 'bg-rose-50 hover:bg-rose-100 border-rose-200 text-rose-800'
                               }`}
                               title={evalInfo.isSuspended ? 'Reactivar acceso' : 'Suspender acceso inmediatamente'}
                             >
@@ -684,7 +684,7 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
                             {/* Renovar +1 Mes */}
                             <button
                               onClick={() => handleRenewLicense(clinic.id)}
-                              className="p-1.5 bg-neutral-800 hover:bg-cyan-950 border border-neutral-700 hover:border-cyan-600 text-cyan-300 rounded-lg transition-colors cursor-pointer"
+                              className="p-1.5 bg-slate-100 hover:bg-cyan-50 border border-slate-200 hover:border-cyan-300 text-cyan-800 rounded-lg transition-colors cursor-pointer"
                               title="Renovar Licencia (+1 Mes / +30 días)"
                             >
                               <Clock className="w-3.5 h-3.5" />
@@ -693,7 +693,7 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
                             {/* Editar */}
                             <button
                               onClick={() => setEditingClinic({ ...clinic })}
-                              className="p-1.5 bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-amber-300 rounded-lg transition-colors cursor-pointer"
+                              className="p-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-amber-700 rounded-lg transition-colors cursor-pointer"
                               title="Editar datos del consultorio y médico"
                             >
                               <Edit2 className="w-3.5 h-3.5" />
@@ -702,7 +702,7 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
                             {/* Entrar / Impersonar */}
                             <button
                               onClick={() => onSelectClinicToImpersonate(clinic.id)}
-                              className="p-1.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg transition-colors cursor-pointer shadow-xs"
+                              className="p-1.5 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition-colors cursor-pointer shadow-xs"
                               title="Entrar a la consola de este consultorio"
                             >
                               <ArrowRight className="w-3.5 h-3.5" />
@@ -711,7 +711,7 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
                             {/* Eliminar Definitivo */}
                             <button
                               onClick={() => setShowDeleteConfirmId(clinic.id)}
-                              className="p-1.5 bg-neutral-800 hover:bg-rose-900 border border-neutral-700 hover:border-rose-700 text-rose-400 rounded-lg transition-colors cursor-pointer"
+                              className="p-1.5 bg-slate-100 hover:bg-rose-50 border border-slate-200 hover:border-rose-300 text-rose-600 rounded-lg transition-colors cursor-pointer"
                               title="Eliminar consultorio permanentemente"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
@@ -745,14 +745,14 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
 
       {/* 2. Edit Clinic Modal */}
       {editingClinic && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md select-none">
-          <div className="bg-neutral-900 border border-neutral-700 rounded-3xl w-full max-w-xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
-            <div className="p-4 bg-gradient-to-r from-neutral-900 via-amber-950/40 to-neutral-900 border-b border-neutral-800 flex items-center justify-between">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs select-none">
+          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+            <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <Edit2 className="w-5 h-5 text-amber-400" />
-                <h3 className="font-bold text-white text-sm">Editar Consultorio / Clínica</h3>
+                <Edit2 className="w-5 h-5 text-amber-600" />
+                <h3 className="font-bold text-slate-900 text-sm">Editar Consultorio / Clínica</h3>
               </div>
-              <button onClick={() => setEditingClinic(null)} className="text-neutral-400 hover:text-white">
+              <button onClick={() => setEditingClinic(null)} className="text-slate-400 hover:text-slate-700 cursor-pointer">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -760,111 +760,111 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
             <form onSubmit={handleSaveEditedClinic} className="p-5 overflow-y-auto space-y-4 text-xs">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Nombre de la Clínica:</label>
+                  <label className="text-[11px] font-semibold text-slate-700 block mb-1">Nombre de la Clínica:</label>
                   <input
                     type="text"
                     required
                     value={editingClinic.clinicName}
                     onChange={e => setEditingClinic({ ...editingClinic, clinicName: e.target.value })}
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-2 text-white"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 focus:bg-white focus:border-cyan-600"
                   />
                 </div>
                 <div>
-                  <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Sucursal / Ciudad:</label>
+                  <label className="text-[11px] font-semibold text-slate-700 block mb-1">Sucursal / Ciudad:</label>
                   <input
                     type="text"
                     value={editingClinic.branch}
                     onChange={e => setEditingClinic({ ...editingClinic, branch: e.target.value })}
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-2 text-white"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 focus:bg-white focus:border-cyan-600"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="sm:col-span-1">
-                  <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Prefijo:</label>
+                  <label className="text-[11px] font-semibold text-slate-700 block mb-1">Prefijo:</label>
                   <select
                     value={editingClinic.doctorPrefix}
                     onChange={e => setEditingClinic({ ...editingClinic, doctorPrefix: e.target.value as any })}
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-2 text-white"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 focus:bg-white focus:border-cyan-600"
                   >
                     <option value="Dr.">Dr.</option>
                     <option value="Dra.">Dra.</option>
                   </select>
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Médico Titular:</label>
+                  <label className="text-[11px] font-semibold text-slate-700 block mb-1">Médico Titular:</label>
                   <input
                     type="text"
                     required
                     value={editingClinic.doctorName}
                     onChange={e => setEditingClinic({ ...editingClinic, doctorName: e.target.value })}
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-2 text-white"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 focus:bg-white focus:border-cyan-600"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Cédula General:</label>
+                  <label className="text-[11px] font-semibold text-slate-700 block mb-1">Cédula General:</label>
                   <input
                     type="text"
                     value={editingClinic.generalLicense}
                     onChange={e => setEditingClinic({ ...editingClinic, generalLicense: e.target.value })}
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 font-mono focus:bg-white focus:border-cyan-600"
                   />
                 </div>
                 <div>
-                  <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Cédula Especialidad:</label>
+                  <label className="text-[11px] font-semibold text-slate-700 block mb-1">Cédula Especialidad:</label>
                   <input
                     type="text"
                     value={editingClinic.specialtyLicense}
                     onChange={e => setEditingClinic({ ...editingClinic, specialtyLicense: e.target.value })}
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 font-mono focus:bg-white focus:border-cyan-600"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Usuario de Acceso:</label>
+                  <label className="text-[11px] font-semibold text-slate-700 block mb-1">Usuario de Acceso:</label>
                   <input
                     type="text"
                     required
                     value={editingClinic.username}
                     onChange={e => setEditingClinic({ ...editingClinic, username: e.target.value.toLowerCase().replace(/\s+/g, '') })}
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 font-mono focus:bg-white focus:border-cyan-600"
                   />
                 </div>
                 <div>
-                  <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Contraseña:</label>
+                  <label className="text-[11px] font-semibold text-slate-700 block mb-1">Contraseña:</label>
                   <input
                     type="text"
                     required
                     value={editingClinic.password}
                     onChange={e => setEditingClinic({ ...editingClinic, password: e.target.value })}
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 font-mono focus:bg-white focus:border-cyan-600"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Fecha Vencimiento Licencia:</label>
+                  <label className="text-[11px] font-semibold text-slate-700 block mb-1">Fecha Vencimiento Licencia:</label>
                   <input
                     type="date"
                     required
                     value={editingClinic.licenseValidUntil}
                     onChange={e => setEditingClinic({ ...editingClinic, licenseValidUntil: e.target.value })}
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-2 text-white font-mono"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 font-mono focus:bg-white focus:border-cyan-600"
                   />
                 </div>
                 <div>
-                  <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Estado de Licencia:</label>
+                  <label className="text-[11px] font-semibold text-slate-700 block mb-1">Estado de Licencia:</label>
                   <select
                     value={editingClinic.licenseStatus}
                     onChange={e => setEditingClinic({ ...editingClinic, licenseStatus: e.target.value as any })}
-                    className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-2 text-white"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 focus:bg-white focus:border-cyan-600"
                   >
                     <option value="active">Activa (Acceso Permitido)</option>
                     <option value="suspended">Suspendida (Bloqueo Manual)</option>
@@ -873,17 +873,17 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
                 </div>
               </div>
 
-              <div className="flex items-center justify-between pt-3 border-t border-neutral-800">
+              <div className="flex items-center justify-between pt-3 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={() => setEditingClinic(null)}
-                  className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded-xl"
+                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-amber-600 hover:bg-amber-500 text-neutral-950 font-bold rounded-xl shadow-md"
+                  className="px-5 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl shadow-xs cursor-pointer"
                 >
                   Guardar Modificaciones
                 </button>
@@ -895,78 +895,78 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
 
       {/* 3. SuperAdmin Contact Edit Modal */}
       {showContactModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md select-none">
-          <div className="bg-neutral-900 border border-neutral-700 rounded-3xl w-full max-w-md shadow-2xl overflow-hidden flex flex-col">
-            <div className="p-4 bg-gradient-to-r from-neutral-900 via-amber-950/40 to-neutral-900 border-b border-neutral-800 flex items-center justify-between">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs select-none">
+          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-md shadow-2xl overflow-hidden flex flex-col">
+            <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <MessageSquare className="w-5 h-5 text-amber-400" />
-                <h3 className="font-bold text-white text-sm">Mis Datos de Contacto (Fernando)</h3>
+                <MessageSquare className="w-5 h-5 text-amber-600" />
+                <h3 className="font-bold text-slate-900 text-sm">Mis Datos de Contacto (Fernando)</h3>
               </div>
-              <button onClick={() => setShowContactModal(false)} className="text-neutral-400 hover:text-white">
+              <button onClick={() => setShowContactModal(false)} className="text-slate-400 hover:text-slate-700 cursor-pointer">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <form onSubmit={handleSaveSuperAdminContact} className="p-5 space-y-3.5 text-xs">
-              <p className="text-[11px] text-neutral-400">
+              <p className="text-[11px] text-slate-500">
                 Estos datos aparecen en los modales de bloqueo para que las clínicas vencidas te contacten directamente por WhatsApp o correo.
               </p>
 
               <div>
-                <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Nombre para Mostrar:</label>
+                <label className="text-[11px] font-semibold text-slate-700 block mb-1">Nombre para Mostrar:</label>
                 <input
                   type="text"
                   required
                   value={contactName}
                   onChange={e => setContactName(e.target.value)}
-                  className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-2 text-white"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 focus:bg-white focus:border-cyan-600"
                 />
               </div>
 
               <div>
-                <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Teléfono / WhatsApp (con código de país):</label>
+                <label className="text-[11px] font-semibold text-slate-700 block mb-1">Teléfono / WhatsApp (con código de país):</label>
                 <input
                   type="tel"
                   required
                   value={contactPhone}
                   onChange={e => setContactPhone(e.target.value)}
                   placeholder="Ej. +52 1 55 1234 5678"
-                  className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-2 text-white font-mono"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 font-mono focus:bg-white focus:border-cyan-600"
                 />
               </div>
 
               <div>
-                <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Correo Electrónico:</label>
+                <label className="text-[11px] font-semibold text-slate-700 block mb-1">Correo Electrónico:</label>
                 <input
                   type="email"
                   required
                   value={contactEmail}
                   onChange={e => setContactEmail(e.target.value)}
-                  className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-2 text-white"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 focus:bg-white focus:border-cyan-600"
                 />
               </div>
 
               <div>
-                <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Mensaje de Ayuda Predeterminado:</label>
+                <label className="text-[11px] font-semibold text-slate-700 block mb-1">Mensaje de Ayuda Predeterminado:</label>
                 <textarea
                   rows={2}
                   value={contactHelpMessage}
                   onChange={e => setContactHelpMessage(e.target.value)}
-                  className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3 py-2 text-white resize-none"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 resize-none focus:bg-white focus:border-cyan-600"
                 />
               </div>
 
-              <div className="flex items-center justify-between pt-3 border-t border-neutral-800">
+              <div className="flex items-center justify-between pt-3 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={() => setShowContactModal(false)}
-                  className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded-xl"
+                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold rounded-xl shadow-md"
+                  className="px-5 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl shadow-xs cursor-pointer"
                 >
                   Guardar & Sincronizar
                 </button>
@@ -978,14 +978,14 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
 
       {/* 4. Delete Confirmation Dialog */}
       {showDeleteConfirmId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md select-none">
-          <div className="bg-neutral-900 border border-rose-600/50 rounded-3xl w-full max-w-sm p-5 shadow-2xl space-y-4 text-center">
-            <div className="w-12 h-12 rounded-2xl bg-rose-950 border border-rose-700/60 flex items-center justify-center text-rose-400 mx-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs select-none">
+          <div className="bg-white border border-rose-200 rounded-3xl w-full max-w-sm p-5 shadow-2xl space-y-4 text-center">
+            <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600 mx-auto">
               <Trash2 className="w-6 h-6" />
             </div>
             <div className="space-y-1">
-              <h4 className="text-base font-bold text-white">¿Eliminar Consultorio Definitivamente?</h4>
-              <p className="text-xs text-neutral-400">
+              <h4 className="text-base font-bold text-slate-900">¿Eliminar Consultorio Definitivamente?</h4>
+              <p className="text-xs text-slate-500">
                 Esta acción eliminará la base de datos local y registrará una marca de borrado permanente (Tombstone) en la nube.
               </p>
             </div>
@@ -993,14 +993,14 @@ export const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({
               <button
                 type="button"
                 onClick={() => setShowDeleteConfirmId(null)}
-                className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded-xl text-xs font-semibold"
+                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold cursor-pointer"
               >
                 Cancelar
               </button>
               <button
                 type="button"
                 onClick={() => handleDeleteClinic(showDeleteConfirmId)}
-                className="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-bold shadow-md shadow-rose-950/40"
+                className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow-xs cursor-pointer"
               >
                 Sí, Eliminar Definitivo
               </button>

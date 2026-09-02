@@ -307,16 +307,16 @@ export const RadiologyReportEditor: React.FC<RadiologyReportEditorProps> = ({
   };
 
   return (
-    <div className="w-full lg:w-[500px] bg-neutral-900 border-l border-neutral-800 flex flex-col h-full overflow-hidden text-neutral-100 select-none shadow-2xl z-30 antialiased">
+    <div className="w-full lg:w-[500px] bg-white border-l border-slate-200 flex flex-col h-full overflow-hidden text-slate-800 select-none shadow-2xl z-30 antialiased">
       {/* Header */}
-      <div className="p-3.5 bg-neutral-950 border-b border-neutral-800 flex items-center justify-between">
+      <div className="p-3.5 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 bg-cyan-950/80 border border-cyan-500/40 rounded-lg text-cyan-400">
+          <div className="p-1.5 bg-cyan-50 border border-cyan-200 rounded-lg text-cyan-700">
             <Edit3 className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-white">Informe Radiológico</h3>
-            <p className="text-[10px] text-neutral-400 font-mono">
+            <h3 className="text-sm font-bold text-slate-900">Informe Radiológico</h3>
+            <p className="text-[10px] text-slate-500 font-mono font-bold">
               [{study.modality}] {study.studyName}
             </p>
           </div>
@@ -325,7 +325,7 @@ export const RadiologyReportEditor: React.FC<RadiologyReportEditorProps> = ({
         <div className="flex items-center gap-1.5">
           <button
             onClick={onOpenPrintPreview}
-            className="flex items-center gap-1 px-2.5 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 text-xs font-semibold rounded-lg border border-neutral-700 transition-colors cursor-pointer"
+            className="flex items-center gap-1 px-2.5 py-1.5 bg-white hover:bg-slate-100 text-slate-700 text-xs font-bold rounded-lg border border-slate-200 transition-colors cursor-pointer shadow-xs"
             title="Vista de Impresión / Exportar PDF Oficial"
           >
             <Printer className="w-3.5 h-3.5" />
@@ -333,7 +333,7 @@ export const RadiologyReportEditor: React.FC<RadiologyReportEditorProps> = ({
           </button>
           <button
             onClick={onClose}
-            className="p-1.5 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-lg transition-colors cursor-pointer"
+            className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -341,33 +341,33 @@ export const RadiologyReportEditor: React.FC<RadiologyReportEditorProps> = ({
       </div>
 
       {/* Top Clinical Macros & AI Quick Actions Bar */}
-      <div className="p-2.5 bg-neutral-950/80 border-b border-neutral-800 flex items-center gap-2 relative">
+      <div className="p-2.5 bg-slate-50 border-b border-slate-200 flex items-center gap-2 relative">
         {/* Quick Normal Templates Dropdown */}
         <div className="relative flex-1">
           <button
             onClick={() => setShowMacroMenu(!showMacroMenu)}
-            className="w-full flex items-center justify-between gap-1.5 px-3 py-1.5 bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-700/80 text-emerald-300 text-xs font-bold rounded-xl shadow-xs transition-all cursor-pointer"
+            className="w-full flex items-center justify-between gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-bold rounded-xl shadow-xs transition-all cursor-pointer"
           >
             <div className="flex items-center gap-1.5 truncate">
-              <Zap className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <Zap className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
               <span className="truncate">Plantillas Normales Rápidas</span>
             </div>
             <ChevronDown className="w-3.5 h-3.5 shrink-0" />
           </button>
 
           {showMacroMenu && (
-            <div className="absolute left-0 top-full mt-1.5 w-72 bg-neutral-900 border border-neutral-700 rounded-xl shadow-2xl py-1.5 z-50 max-h-80 overflow-y-auto">
-              <div className="px-3 py-1 text-[10px] font-bold text-neutral-400 uppercase tracking-wider border-b border-neutral-800">
+            <div className="absolute left-0 top-full mt-1.5 w-72 bg-white border border-slate-200 rounded-2xl shadow-2xl py-1.5 z-50 max-h-80 overflow-y-auto">
+              <div className="px-3 py-1 text-[10px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-100">
                 Seleccionar Plantilla Normal:
               </div>
               {REPORT_MACRO_TEMPLATES.map(tpl => (
                 <button
                   key={tpl.id}
                   onClick={() => handleApplyMacroTemplate(tpl)}
-                  className="w-full text-left px-3 py-2 text-xs text-neutral-200 hover:bg-emerald-950 hover:text-emerald-300 transition-colors flex items-center justify-between gap-2 border-b border-neutral-800/50 last:border-none"
+                  className="w-full text-left px-3 py-2 text-xs text-slate-800 hover:bg-emerald-50 hover:text-emerald-900 transition-colors flex items-center justify-between gap-2 border-b border-slate-100 last:border-none cursor-pointer"
                 >
-                  <span className="font-semibold">{tpl.name}</span>
-                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-neutral-950 text-neutral-400 font-mono">
+                  <span className="font-bold">{tpl.name}</span>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-600 font-mono font-bold">
                     {tpl.modality}
                   </span>
                 </button>
@@ -380,7 +380,7 @@ export const RadiologyReportEditor: React.FC<RadiologyReportEditorProps> = ({
         <button
           onClick={handleGenerateWithAI}
           disabled={isGeneratingAI}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold rounded-xl shadow-md transition-all cursor-pointer disabled:opacity-50 shrink-0"
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-bold rounded-xl shadow-xs transition-all cursor-pointer disabled:opacity-50 shrink-0"
         >
           <Sparkles className={`w-3.5 h-3.5 ${isGeneratingAI ? 'animate-spin' : ''}`} />
           <span>{isGeneratingAI ? 'Generando...' : 'Asistente IA'}</span>
@@ -390,23 +390,23 @@ export const RadiologyReportEditor: React.FC<RadiologyReportEditorProps> = ({
       {/* Main Form Fields */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4 text-xs">
         {/* Doctor Signature Header */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-neutral-950 p-3 rounded-xl border border-neutral-800">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-slate-50 p-3 rounded-2xl border border-slate-200">
           <div>
-            <label className="text-[10px] font-semibold text-neutral-400 block mb-0.5">Médico Radiólogo:</label>
+            <label className="text-[10px] font-bold text-slate-600 block mb-0.5">Médico Radiólogo:</label>
             <input
               type="text"
               value={radiologistName}
               onChange={e => setRadiologistName(e.target.value)}
-              className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+              className="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600"
             />
           </div>
           <div>
-            <label className="text-[10px] font-semibold text-neutral-400 block mb-0.5">Cédula / Matrícula:</label>
+            <label className="text-[10px] font-bold text-slate-600 block mb-0.5">Cédula / Matrícula:</label>
             <input
               type="text"
               value={radiologistLicense}
               onChange={e => setRadiologistLicense(e.target.value)}
-              className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+              className="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600"
             />
           </div>
         </div>
@@ -414,13 +414,13 @@ export const RadiologyReportEditor: React.FC<RadiologyReportEditorProps> = ({
         {/* Technique */}
         <div>
           <div className="flex items-center justify-between mb-1">
-            <label className="font-bold text-neutral-200">1. Técnica de Adquisición:</label>
+            <label className="font-bold text-slate-900">1. Técnica de Adquisición:</label>
             <button
               onClick={() => toggleVoiceDictation('technique')}
-              className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold transition-all ${
+              className={`flex items-center gap-1 px-2.5 py-0.5 rounded-lg text-[10px] font-bold transition-all cursor-pointer ${
                 activeSpeechField === 'technique'
                   ? 'bg-rose-600 text-white animate-pulse'
-                  : 'bg-neutral-800 text-cyan-400 hover:bg-neutral-700'
+                  : 'bg-slate-100 text-cyan-800 hover:bg-slate-200 border border-slate-200'
               }`}
               title="Dictar técnica por voz"
             >
@@ -432,20 +432,20 @@ export const RadiologyReportEditor: React.FC<RadiologyReportEditorProps> = ({
             rows={2}
             value={technique}
             onChange={e => setTechnique(e.target.value)}
-            className="w-full bg-neutral-950 border border-neutral-700 rounded-xl p-2.5 text-xs text-neutral-200 focus:outline-hidden focus:border-cyan-500 leading-relaxed font-sans"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs text-slate-900 focus:outline-hidden focus:bg-white focus:border-cyan-600 leading-relaxed font-sans"
           />
         </div>
 
         {/* Findings */}
         <div>
           <div className="flex items-center justify-between mb-1">
-            <label className="font-bold text-neutral-200">2. Hallazgos Radiológicos:</label>
+            <label className="font-bold text-slate-900">2. Hallazgos Radiológicos:</label>
             <button
               onClick={() => toggleVoiceDictation('findings')}
-              className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold transition-all shadow-xs ${
+              className={`flex items-center gap-1 px-2.5 py-1 rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer ${
                 activeSpeechField === 'findings'
                   ? 'bg-rose-600 text-white animate-pulse'
-                  : 'bg-cyan-950 border border-cyan-700 text-cyan-300 hover:bg-cyan-900'
+                  : 'bg-cyan-50 border border-cyan-300 text-cyan-900 hover:bg-cyan-100'
               }`}
               title="Dictar hallazgos con tu voz en tiempo real"
             >
@@ -458,20 +458,20 @@ export const RadiologyReportEditor: React.FC<RadiologyReportEditorProps> = ({
             value={findings}
             onChange={e => setFindings(e.target.value)}
             placeholder="Describa los hallazgos anatómicos o use el botón de dictado..."
-            className="w-full bg-neutral-950 border border-neutral-700 rounded-xl p-3 text-xs text-neutral-200 focus:outline-hidden focus:border-cyan-500 leading-relaxed font-mono"
+            className="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3 text-xs text-slate-900 focus:outline-hidden focus:bg-white focus:border-cyan-600 leading-relaxed font-mono"
           />
         </div>
 
         {/* Impression / Conclusions */}
         <div>
           <div className="flex items-center justify-between mb-1">
-            <label className="font-bold text-cyan-400">3. Conclusión / Impresión Diagnóstica:</label>
+            <label className="font-bold text-cyan-900">3. Conclusión / Impresión Diagnóstica:</label>
             <button
               onClick={() => toggleVoiceDictation('impression')}
-              className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold transition-all ${
+              className={`flex items-center gap-1 px-2.5 py-0.5 rounded-lg text-[10px] font-bold transition-all cursor-pointer ${
                 activeSpeechField === 'impression'
                   ? 'bg-rose-600 text-white animate-pulse'
-                  : 'bg-neutral-800 text-cyan-400 hover:bg-neutral-700'
+                  : 'bg-slate-100 text-cyan-800 hover:bg-slate-200 border border-slate-200'
               }`}
               title="Dictar conclusión por voz"
             >
@@ -483,63 +483,63 @@ export const RadiologyReportEditor: React.FC<RadiologyReportEditorProps> = ({
             rows={3}
             value={impression}
             onChange={e => setImpression(e.target.value)}
-            className="w-full bg-neutral-950 border border-cyan-800/80 rounded-xl p-2.5 text-xs text-white font-bold focus:outline-hidden focus:border-cyan-500 leading-relaxed font-sans"
+            className="w-full bg-cyan-50/50 border border-cyan-300 rounded-2xl p-2.5 text-xs text-slate-900 font-bold focus:outline-hidden focus:bg-white focus:border-cyan-600 leading-relaxed font-sans"
           />
         </div>
 
         {/* Recommendations & BI-RADS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Recomendaciones:</label>
+            <label className="text-[11px] font-bold text-slate-700 block mb-1">Recomendaciones:</label>
             <input
               type="text"
               value={recommendations}
               onChange={e => setRecommendations(e.target.value)}
-              className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-2.5 py-1.5 text-xs text-neutral-300 focus:outline-hidden focus:border-cyan-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs text-slate-900 focus:outline-hidden focus:bg-white focus:border-cyan-600"
             />
           </div>
           <div>
-            <label className="text-[11px] font-semibold text-neutral-300 block mb-1">Score / BI-RADS / T-Score:</label>
+            <label className="text-[11px] font-bold text-slate-700 block mb-1">Score / BI-RADS / T-Score:</label>
             <input
               type="text"
               value={biRadsOrScore}
               onChange={e => setBiRadsOrScore(e.target.value)}
               placeholder="ej. BI-RADS 1, T-Score +0.2"
-              className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-2.5 py-1.5 text-xs text-emerald-300 font-bold focus:outline-hidden focus:border-emerald-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs text-emerald-800 font-bold focus:outline-hidden focus:bg-white focus:border-emerald-600"
             />
           </div>
         </div>
 
         {/* Report Status Selector */}
-        <div className="bg-neutral-950 p-3 rounded-xl border border-neutral-800 flex items-center justify-between">
-          <span className="text-[11px] font-bold text-neutral-300">Estado del Dictamen:</span>
+        <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200 flex items-center justify-between">
+          <span className="text-[11px] font-bold text-slate-700">Estado del Dictamen:</span>
           <div className="flex items-center gap-1.5">
             <button
               onClick={() => setStatus('BORRADOR')}
-              className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all ${
+              className={`px-2.5 py-1 rounded-xl text-[11px] font-bold transition-all cursor-pointer ${
                 status === 'BORRADOR'
-                  ? 'bg-neutral-700 text-white'
-                  : 'text-neutral-400 hover:text-neutral-200'
+                  ? 'bg-slate-700 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900 bg-white border border-slate-200'
               }`}
             >
               Borrador
             </button>
             <button
               onClick={() => setStatus('PRELIMINAR')}
-              className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all ${
+              className={`px-2.5 py-1 rounded-xl text-[11px] font-bold transition-all cursor-pointer ${
                 status === 'PRELIMINAR'
-                  ? 'bg-amber-950 text-amber-300 border border-amber-800'
-                  : 'text-neutral-400 hover:text-neutral-200'
+                  ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                  : 'text-slate-600 hover:text-slate-900 bg-white border border-slate-200'
               }`}
             >
               Preliminar
             </button>
             <button
               onClick={() => setStatus('FIRMADO_FINAL')}
-              className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all ${
+              className={`px-2.5 py-1 rounded-xl text-[11px] font-bold transition-all cursor-pointer ${
                 status === 'FIRMADO_FINAL'
-                  ? 'bg-emerald-600 text-white shadow-sm'
-                  : 'text-neutral-400 hover:text-neutral-200'
+                  ? 'bg-emerald-600 text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900 bg-white border border-slate-200'
               }`}
             >
               ✓ Firmado Final
@@ -549,14 +549,14 @@ export const RadiologyReportEditor: React.FC<RadiologyReportEditorProps> = ({
       </div>
 
       {/* Footer Actions */}
-      <div className="p-3 bg-neutral-950 border-t border-neutral-800 flex items-center justify-between gap-3">
+      <div className="p-3.5 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-3">
         {savedSuccess ? (
-          <span className="text-emerald-400 text-xs font-bold flex items-center gap-1 animate-pulse">
+          <span className="text-emerald-700 text-xs font-bold flex items-center gap-1 animate-pulse">
             <CheckCircle2 className="w-4 h-4" />
             <span>¡Informe guardado y firmado!</span>
           </span>
         ) : (
-          <span className="text-[11px] text-neutral-500 font-mono">
+          <span className="text-[11px] text-slate-500 font-mono font-semibold">
             {status === 'FIRMADO_FINAL' ? '🔏 Con Firma Digital' : '📝 En Edición'}
           </span>
         )}
@@ -564,7 +564,7 @@ export const RadiologyReportEditor: React.FC<RadiologyReportEditorProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={handleSave}
-            className="flex items-center gap-1.5 px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl shadow-md transition-all cursor-pointer active:scale-[0.98]"
+            className="flex items-center gap-1.5 px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded-xl shadow-xs transition-all cursor-pointer active:scale-[0.98]"
           >
             <Save className="w-4 h-4" />
             <span>Guardar Informe</span>

@@ -90,73 +90,73 @@ export const NewPatientModal: React.FC<NewPatientModalProps> = ({ onSavePatient,
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs select-none">
-      <div className="bg-neutral-900 border border-neutral-700 rounded-2xl w-full max-w-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs select-none">
+      <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="p-4 bg-gradient-to-r from-cyan-950/60 to-neutral-900 border-b border-neutral-800 flex items-center justify-between">
+        <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 bg-cyan-500/10 border border-cyan-500/30 rounded-xl text-cyan-400">
+            <div className="p-2 bg-cyan-50 border border-cyan-200 rounded-xl text-cyan-700">
               <UserPlus className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-base font-semibold text-white">Registrar Nuevo Paciente</h3>
-              <p className="text-xs text-neutral-400">Ficha clínica de filiación y perfil de seguridad radiológica</p>
+              <h3 className="text-base font-bold text-slate-900">Registrar Nuevo Paciente</h3>
+              <p className="text-xs text-slate-500">Ficha clínica de filiación y perfil de seguridad radiológica</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-lg transition-colors"
+            className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-5 flex-1 overflow-y-auto space-y-4 text-xs text-neutral-300">
+        <form onSubmit={handleSubmit} className="p-5 flex-1 overflow-y-auto space-y-4 text-xs text-slate-700">
           {/* Personal Demographic Data */}
           <div>
-            <h4 className="font-semibold text-white text-xs mb-2 flex items-center gap-1.5">
-              <HeartPulse className="w-4 h-4 text-cyan-400" />
+            <h4 className="font-bold text-slate-900 text-xs mb-2 flex items-center gap-1.5">
+              <HeartPulse className="w-4 h-4 text-cyan-600" />
               <span>Datos Personales y Contacto</span>
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="sm:col-span-2">
-                <label className="block text-neutral-400 mb-1">Nombre Completo y Apellidos *</label>
+                <label className="block text-slate-600 mb-1 font-semibold">Nombre Completo y Apellidos *</label>
                 <input
                   type="text"
                   required
                   placeholder="ej. Dra. Elena Quispe Ramos"
                   value={fullName}
                   onChange={e => setFullName(e.target.value)}
-                  className="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2 text-white focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:bg-white focus:border-cyan-600"
                 />
               </div>
               <div>
-                <label className="block text-neutral-400 mb-1">DNI / Cédula *</label>
+                <label className="block text-slate-600 mb-1 font-semibold">DNI / Cédula *</label>
                 <input
                   type="text"
                   required
                   placeholder="ej. 45892104"
                   value={dni}
                   onChange={e => setDni(e.target.value)}
-                  className="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2 text-white focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:bg-white focus:border-cyan-600"
                 />
               </div>
               <div>
-                <label className="block text-neutral-400 mb-1">Edad</label>
+                <label className="block text-slate-600 mb-1 font-semibold">Edad</label>
                 <input
                   type="number"
                   value={age}
                   onChange={e => setAge(Number(e.target.value))}
-                  className="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2 text-white focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:bg-white focus:border-cyan-600"
                 />
               </div>
               <div>
-                <label className="block text-neutral-400 mb-1">Género</label>
+                <label className="block text-slate-600 mb-1 font-semibold">Género</label>
                 <select
                   value={gender}
                   onChange={e => setGender(e.target.value as any)}
-                  className="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2 text-white focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:bg-white focus:border-cyan-600"
                 >
                   <option value="M">Masculino</option>
                   <option value="F">Femenino</option>
@@ -164,47 +164,47 @@ export const NewPatientModal: React.FC<NewPatientModalProps> = ({ onSavePatient,
                 </select>
               </div>
               <div>
-                <label className="block text-neutral-400 mb-1">Teléfono Móvil</label>
+                <label className="block text-slate-600 mb-1 font-semibold">Teléfono Móvil</label>
                 <input
                   type="text"
                   placeholder="+51 987 654 321"
                   value={phone}
                   onChange={e => setPhone(e.target.value)}
-                  className="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2 text-white focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:bg-white focus:border-cyan-600"
                 />
               </div>
               <div className="sm:col-span-2">
-                <label className="block text-neutral-400 mb-1">Correo Electrónico</label>
+                <label className="block text-slate-600 mb-1 font-semibold">Correo Electrónico</label>
                 <input
                   type="email"
                   placeholder="paciente@correo.com"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  className="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2 text-white focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:bg-white focus:border-cyan-600"
                 />
               </div>
               <div>
-                <label className="block text-neutral-400 mb-1">Seguro Médico / EPS</label>
+                <label className="block text-slate-600 mb-1 font-semibold">Seguro Médico / EPS</label>
                 <input
                   type="text"
                   placeholder="ej. Pacífico EPS / Rímac"
                   value={insuranceProvider}
                   onChange={e => setInsuranceProvider(e.target.value)}
-                  className="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2 text-white focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:bg-white focus:border-cyan-600"
                 />
               </div>
             </div>
           </div>
 
           {/* Safety & Contraindications Profile */}
-          <div className="bg-neutral-950/80 p-4 rounded-xl border border-neutral-800 space-y-3">
-            <h4 className="font-semibold text-white text-xs flex items-center gap-1.5">
-              <ShieldAlert className="w-4 h-4 text-amber-400" />
+          <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+            <h4 className="font-bold text-slate-900 text-xs flex items-center gap-1.5">
+              <ShieldAlert className="w-4 h-4 text-amber-600" />
               <span>Perfil de Seguridad Radiológica y Alergias</span>
             </h4>
 
             <div>
-              <label className="block text-neutral-400 mb-1">
+              <label className="block text-slate-600 mb-1 font-semibold">
                 Alergias conocidas (separar por comas):
               </label>
               <input
@@ -212,28 +212,28 @@ export const NewPatientModal: React.FC<NewPatientModalProps> = ({ onSavePatient,
                 placeholder="ej. Yodo, Penicilina, Mariscos, Ninguna"
                 value={allergiesStr}
                 onChange={e => setAllergiesStr(e.target.value)}
-                className="w-full bg-neutral-900 border border-neutral-700 rounded-lg p-2 text-white focus:outline-none focus:border-amber-400"
+                className="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-amber-400"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
               <div>
-                <label className="block text-neutral-500 text-[11px]">Creatinina Sérica (mg/dL)</label>
+                <label className="block text-slate-500 text-[11px]">Creatinina Sérica (mg/dL)</label>
                 <input
                   type="number"
                   step="0.01"
                   value={creatinineLevel}
                   onChange={e => setCreatinineLevel(Number(e.target.value))}
-                  className="w-full bg-neutral-900 border border-neutral-700 rounded p-1.5 text-white"
+                  className="w-full bg-white border border-slate-200 rounded-xl p-2 text-slate-900"
                 />
               </div>
               <div>
-                <label className="block text-neutral-500 text-[11px]">eGFR Estimada (mL/min/1.73m²)</label>
+                <label className="block text-slate-500 text-[11px]">eGFR Estimada (mL/min/1.73m²)</label>
                 <input
                   type="number"
                   value={eGFR}
                   onChange={e => setEGFR(Number(e.target.value))}
-                  className="w-full bg-neutral-900 border border-neutral-700 rounded p-1.5 text-white"
+                  className="w-full bg-white border border-slate-200 rounded-xl p-2 text-slate-900"
                 />
               </div>
             </div>
@@ -244,41 +244,41 @@ export const NewPatientModal: React.FC<NewPatientModalProps> = ({ onSavePatient,
                   type="checkbox"
                   checked={hasPacemaker}
                   onChange={e => setHasPacemaker(e.target.checked)}
-                  className="rounded text-amber-500 focus:ring-0"
+                  className="rounded border-slate-300 text-amber-600 focus:ring-0"
                 />
-                <span>Portador de Marcapasos</span>
+                <span className="font-semibold text-slate-700">Portador de Marcapasos</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={hasMetalImplants}
                   onChange={e => setHasMetalImplants(e.target.checked)}
-                  className="rounded text-amber-500 focus:ring-0"
+                  className="rounded border-slate-300 text-amber-600 focus:ring-0"
                 />
-                <span>Prótesis / Implantes Metálicos</span>
+                <span className="font-semibold text-slate-700">Prótesis / Implantes Metálicos</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={isPregnantOrPossible}
                   onChange={e => setIsPregnantOrPossible(e.target.checked)}
-                  className="rounded text-amber-500 focus:ring-0"
+                  className="rounded border-slate-300 text-amber-600 focus:ring-0"
                 />
-                <span>Embarazo / Posible Gestación</span>
+                <span className="font-semibold text-slate-700">Embarazo / Posible Gestación</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={hasClaustrophobia}
                   onChange={e => setHasClaustrophobia(e.target.checked)}
-                  className="rounded text-amber-500 focus:ring-0"
+                  className="rounded border-slate-300 text-amber-600 focus:ring-0"
                 />
-                <span>Claustrofobia Severa</span>
+                <span className="font-semibold text-slate-700">Claustrofobia Severa</span>
               </label>
             </div>
 
             {/* Auto Credentials Info Banner */}
-            <div className="mt-3 p-3 bg-cyan-950/40 border border-cyan-800/60 rounded-xl text-[11px] text-cyan-300 flex items-center gap-2">
+            <div className="mt-3 p-3 bg-cyan-50 border border-cyan-200 rounded-xl text-[11px] text-cyan-900 flex items-center gap-2">
               <span className="text-base">🔑</span>
               <div>
                 <strong>Acceso Automático al Expediente:</strong> Al guardar se generará automáticamente el <strong>Usuario (DNI)</strong> y <strong>Contraseña (PIN)</strong> para que el paciente consulte sus estudios en línea.
@@ -287,17 +287,17 @@ export const NewPatientModal: React.FC<NewPatientModalProps> = ({ onSavePatient,
           </div>
 
           {/* Footer */}
-          <div className="p-4 bg-neutral-950 -mx-5 -mb-5 border-t border-neutral-800 flex items-center justify-between mt-4">
+          <div className="p-4 bg-slate-50 -mx-5 -mb-5 border-t border-slate-200 flex items-center justify-between mt-4">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded-lg text-xs font-medium transition-colors"
+              className="px-4 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold transition-colors cursor-pointer shadow-xs"
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="flex items-center gap-1.5 px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg text-xs font-semibold shadow-md shadow-cyan-600/30 transition-all"
+              className="flex items-center gap-1.5 px-5 py-2.5 bg-cyan-600 hover:bg-cyan-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
             >
               <UserPlus className="w-4 h-4" />
               <span>Guardar Ficha del Paciente</span>

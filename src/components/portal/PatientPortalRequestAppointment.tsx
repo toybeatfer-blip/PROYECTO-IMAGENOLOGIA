@@ -93,37 +93,37 @@ export const PatientPortalRequestAppointment: React.FC<PatientPortalRequestAppoi
 
   if (submittedSuccess) {
     return (
-      <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-8 max-w-xl mx-auto text-center space-y-5 animate-fadeIn">
-        <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center justify-center text-emerald-400 mx-auto">
+      <div className="bg-white border border-slate-200 rounded-3xl p-8 max-w-xl mx-auto text-center space-y-5 animate-fadeIn shadow-xl">
+        <div className="w-16 h-16 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center justify-center text-emerald-600 mx-auto">
           <CheckCircle2 className="w-8 h-8" />
         </div>
 
         <div className="space-y-1">
-          <h2 className="text-xl font-bold text-white">¡Solicitud de Cita Recibida!</h2>
-          <p className="text-xs text-neutral-400">
+          <h2 className="text-xl font-bold text-slate-900">¡Solicitud de Cita Recibida!</h2>
+          <p className="text-xs text-slate-500">
             Hemos registrado su solicitud para <strong>{studyName}</strong>. Nuestro equipo de coordinación
             médica revisará la orden médica y le asignará su horario definitivo en menos de 2 horas.
           </p>
         </div>
 
-        <div className="bg-neutral-950 p-4 rounded-2xl border border-neutral-800 text-left text-xs space-y-2">
+        <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-left text-xs space-y-2">
           <div className="flex justify-between">
-            <span className="text-neutral-400">Modalidad:</span>
-            <span className="font-bold text-cyan-300">{modality}</span>
+            <span className="text-slate-500">Modalidad:</span>
+            <span className="font-bold text-cyan-700">{modality}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-neutral-400">Fecha solicitada:</span>
-            <span className="font-bold text-white">{preferredDate} (Turno {preferredTimeSlot})</span>
+            <span className="text-slate-500">Fecha solicitada:</span>
+            <span className="font-bold text-slate-900">{preferredDate} (Turno {preferredTimeSlot})</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-neutral-400">Canal de confirmación:</span>
-            <span className="text-emerald-400 font-bold">SMS al {patient.phone} & Correo</span>
+            <span className="text-slate-500">Canal de confirmación:</span>
+            <span className="text-emerald-700 font-bold">SMS al {patient.phone} & Correo</span>
           </div>
         </div>
 
         <button
           onClick={onCancel}
-          className="px-6 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-xs font-bold transition-all"
+          className="px-6 py-2.5 bg-cyan-600 hover:bg-cyan-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-xs"
         >
           Volver a Mis Citas
         </button>
@@ -132,30 +132,30 @@ export const PatientPortalRequestAppointment: React.FC<PatientPortalRequestAppoi
   }
 
   return (
-    <div className="max-w-3xl mx-auto bg-neutral-900 border border-neutral-800 rounded-3xl p-6 sm:p-8 shadow-xl space-y-6">
+    <div className="max-w-3xl mx-auto bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xl space-y-6">
       {/* Header */}
-      <div className="border-b border-neutral-800 pb-4 flex items-center justify-between">
+      <div className="border-b border-slate-100 pb-4 flex items-center justify-between">
         <div>
-          <span className="text-[11px] font-bold text-cyan-400 uppercase tracking-wider">
+          <span className="text-[11px] font-bold text-cyan-700 uppercase tracking-wider">
             Formulario de Admisión Digital
           </span>
-          <h2 className="text-xl font-bold text-white mt-0.5">Solicitar Nueva Cita de Imagenología</h2>
-          <p className="text-xs text-neutral-400 mt-1">
+          <h2 className="text-xl font-bold text-slate-900 mt-0.5">Solicitar Nueva Cita de Imagenología</h2>
+          <p className="text-xs text-slate-500 mt-1">
             Complete los datos del estudio requerido por su médico para agendar su turno prioritario.
           </p>
         </div>
         <button
           onClick={onCancel}
-          className="p-1.5 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-lg"
+          className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6 text-xs text-neutral-200">
+      <form onSubmit={handleSubmit} className="space-y-6 text-xs text-slate-700">
         {/* Step 1: Modality Selection */}
         <div className="space-y-2">
-          <label className="text-xs font-bold text-neutral-300 block">
+          <label className="text-xs font-bold text-slate-800 block">
             1. Seleccione el Tipo de Estudio (Modalidad):
           </label>
           <div className="grid grid-cols-2 sm:grid-cols-2 gap-2.5">
@@ -175,10 +175,10 @@ export const PatientPortalRequestAppointment: React.FC<PatientPortalRequestAppoi
                   if (item.id === 'RAYOS_X') handleStudyPreset('Radiografía de Tórax PA', 'Tórax');
                   if (item.id === 'RESONANCIA') handleStudyPreset('RMN de Columna Lumbar', 'Columna Lumbar');
                 }}
-                className={`p-3.5 rounded-2xl border text-left font-semibold transition-all ${
+                className={`p-3.5 rounded-2xl border text-left font-semibold transition-all cursor-pointer ${
                   modality === item.id
-                    ? 'bg-cyan-950/80 border-cyan-500 text-cyan-300 shadow-xs'
-                    : 'bg-neutral-950 border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700'
+                    ? 'bg-cyan-50 border-cyan-400 text-cyan-900 shadow-xs font-bold'
+                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900 hover:border-slate-300'
                 }`}
               >
                 {item.label}
@@ -190,7 +190,7 @@ export const PatientPortalRequestAppointment: React.FC<PatientPortalRequestAppoi
         {/* Step 2: Specific Study Name */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="text-xs font-semibold text-neutral-300 block mb-1.5">
+            <label className="text-xs font-semibold text-slate-700 block mb-1.5">
               Nombre del estudio según orden médica:
             </label>
             <input
@@ -198,12 +198,12 @@ export const PatientPortalRequestAppointment: React.FC<PatientPortalRequestAppoi
               required
               value={studyName}
               onChange={e => setStudyName(e.target.value)}
-              className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-hidden focus:bg-white focus:border-cyan-600"
             />
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-neutral-300 block mb-1.5">
+            <label className="text-xs font-semibold text-slate-700 block mb-1.5">
               Región anatómica a evaluar:
             </label>
             <input
@@ -211,7 +211,7 @@ export const PatientPortalRequestAppointment: React.FC<PatientPortalRequestAppoi
               required
               value={anatomicalRegion}
               onChange={e => setAnatomicalRegion(e.target.value)}
-              className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-hidden focus:bg-white focus:border-cyan-600"
             />
           </div>
         </div>
@@ -219,7 +219,7 @@ export const PatientPortalRequestAppointment: React.FC<PatientPortalRequestAppoi
         {/* Step 3: Date & Slot Preference */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="text-xs font-semibold text-neutral-300 block mb-1.5">
+            <label className="text-xs font-semibold text-slate-700 block mb-1.5">
               Fecha preferida para la cita:
             </label>
             <input
@@ -227,12 +227,12 @@ export const PatientPortalRequestAppointment: React.FC<PatientPortalRequestAppoi
               required
               value={preferredDate}
               onChange={e => setPreferredDate(e.target.value)}
-              className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-hidden focus:bg-white focus:border-cyan-600"
             />
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-neutral-300 block mb-1.5">
+            <label className="text-xs font-semibold text-slate-700 block mb-1.5">
               Turno horario de preferencia:
             </label>
             <div className="grid grid-cols-3 gap-2">
@@ -245,10 +245,10 @@ export const PatientPortalRequestAppointment: React.FC<PatientPortalRequestAppoi
                   key={slot.id}
                   type="button"
                   onClick={() => setPreferredTimeSlot(slot.id as any)}
-                  className={`p-2 rounded-xl border text-[11px] font-semibold text-center transition-all ${
+                  className={`p-2 rounded-xl border text-[11px] font-semibold text-center transition-all cursor-pointer ${
                     preferredTimeSlot === slot.id
-                      ? 'bg-cyan-950/80 border-cyan-500 text-cyan-300'
-                      : 'bg-neutral-950 border-neutral-800 text-neutral-400 hover:text-white'
+                      ? 'bg-cyan-50 border-cyan-400 text-cyan-900 font-bold shadow-xs'
+                      : 'bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900'
                   }`}
                 >
                   {slot.id === 'MANANA' ? '🌅 Mañana' : slot.id === 'TARDE' ? '☀️ Tarde' : '🌙 Noche'}
@@ -260,15 +260,15 @@ export const PatientPortalRequestAppointment: React.FC<PatientPortalRequestAppoi
 
         {/* Step 4: Medical Order Upload */}
         <div className="space-y-2">
-          <label className="text-xs font-semibold text-neutral-300 block">
+          <label className="text-xs font-semibold text-slate-700 block">
             Adjuntar Orden Médica o Receta (Opcional pero recomendado):
           </label>
-          <label className="flex flex-col items-center justify-center p-5 border-2 border-dashed border-neutral-700 hover:border-cyan-500 rounded-2xl bg-neutral-950/50 cursor-pointer transition-colors">
-            <FileUp className="w-7 h-7 text-cyan-400 mb-2" />
-            <span className="font-semibold text-white text-xs">
+          <label className="flex flex-col items-center justify-center p-5 border-2 border-dashed border-slate-200 hover:border-cyan-500 rounded-2xl bg-slate-50 cursor-pointer transition-colors">
+            <FileUp className="w-7 h-7 text-cyan-600 mb-2" />
+            <span className="font-semibold text-slate-800 text-xs">
               {uploadedFileName ? uploadedFileName : 'Haga clic para subir archivo (PDF, JPG, PNG)'}
             </span>
-            <span className="text-[11px] text-neutral-500 mt-0.5">
+            <span className="text-[11px] text-slate-500 mt-0.5">
               {uploadedFileName ? 'Archivo cargado con éxito' : 'O arrastre y suelte su documento aquí'}
             </span>
             <input
@@ -282,7 +282,7 @@ export const PatientPortalRequestAppointment: React.FC<PatientPortalRequestAppoi
 
         {/* Step 5: Clinical Reason */}
         <div>
-          <label className="text-xs font-semibold text-neutral-300 block mb-1.5">
+          <label className="text-xs font-semibold text-slate-700 block mb-1.5">
             Motivo de consulta o síntomas principales:
           </label>
           <textarea
@@ -290,62 +290,62 @@ export const PatientPortalRequestAppointment: React.FC<PatientPortalRequestAppoi
             value={clinicalReason}
             onChange={e => setClinicalReason(e.target.value)}
             placeholder="Ej. Dolor lumbar irradiado, control anual ginecológico, traumatismo reciente..."
-            className="w-full bg-neutral-950 border border-neutral-700 rounded-xl p-3 text-xs text-white placeholder:text-neutral-600 focus:outline-hidden focus:border-cyan-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:bg-white focus:border-cyan-600"
           />
         </div>
 
         {/* Step 6: Safety Questionnaire */}
-        <div className="bg-neutral-950 p-4 rounded-2xl border border-neutral-800 space-y-3">
-          <div className="flex items-center gap-2 text-xs font-bold text-amber-400">
-            <ShieldCheck className="w-4 h-4" />
+        <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+          <div className="flex items-center gap-2 text-xs font-bold text-amber-800">
+            <ShieldCheck className="w-4 h-4 text-amber-600" />
             <span>Cuestionario Preventivo de Seguridad Radiológica</span>
           </div>
 
           <div className="space-y-2">
-            <label className="flex items-center justify-between p-2 rounded-lg bg-neutral-900 border border-neutral-800 cursor-pointer">
-              <span className="text-xs text-neutral-300">
+            <label className="flex items-center justify-between p-2 rounded-xl bg-white border border-slate-200 cursor-pointer">
+              <span className="text-xs text-slate-700">
                 ¿Tiene marcapasos cardíaco, clips aneurismáticos o prótesis metálicas?
               </span>
               <input
                 type="checkbox"
                 checked={hasMetalImplants}
                 onChange={e => setHasMetalImplants(e.target.checked)}
-                className="w-4 h-4 rounded text-cyan-600 bg-neutral-950 border-neutral-700"
+                className="w-4 h-4 rounded text-cyan-600 bg-white border-slate-300"
               />
             </label>
 
-            <label className="flex items-center justify-between p-2 rounded-lg bg-neutral-900 border border-neutral-800 cursor-pointer">
-              <span className="text-xs text-neutral-300">
+            <label className="flex items-center justify-between p-2 rounded-xl bg-white border border-slate-200 cursor-pointer">
+              <span className="text-xs text-slate-700">
                 ¿Ha tenido reacciones alérgicas previas a medios de contraste yodados o gadolinio?
               </span>
               <input
                 type="checkbox"
                 checked={hasContrastAllergy}
                 onChange={e => setHasContrastAllergy(e.target.checked)}
-                className="w-4 h-4 rounded text-cyan-600 bg-neutral-950 border-neutral-700"
+                className="w-4 h-4 rounded text-cyan-600 bg-white border-slate-300"
               />
             </label>
 
-            <label className="flex items-center justify-between p-2 rounded-lg bg-neutral-900 border border-neutral-800 cursor-pointer">
-              <span className="text-xs text-neutral-300">
+            <label className="flex items-center justify-between p-2 rounded-xl bg-white border border-slate-200 cursor-pointer">
+              <span className="text-xs text-slate-700">
                 ¿Existe posibilidad de embarazo o periodo de lactancia activa?
               </span>
               <input
                 type="checkbox"
                 checked={isPregnant}
                 onChange={e => setIsPregnant(e.target.checked)}
-                className="w-4 h-4 rounded text-cyan-600 bg-neutral-950 border-neutral-700"
+                className="w-4 h-4 rounded text-cyan-600 bg-white border-slate-300"
               />
             </label>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-between pt-4 border-t border-neutral-800">
+        <div className="flex items-center justify-between pt-4 border-t border-slate-100">
           <button
             type="button"
             onClick={onCancel}
-            className="px-4 py-2 text-xs text-neutral-400 hover:text-white"
+            className="px-4 py-2 text-xs text-slate-500 hover:text-slate-800 cursor-pointer font-semibold"
           >
             Cancelar
           </button>
@@ -353,7 +353,7 @@ export const PatientPortalRequestAppointment: React.FC<PatientPortalRequestAppoi
           <button
             type="submit"
             disabled={isSubmitting}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white shadow-md transition-all active:scale-[0.99]"
+            className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-700 hover:to-emerald-700 text-white shadow-md transition-all active:scale-[0.99] cursor-pointer"
           >
             <Send className="w-4 h-4" />
             <span>{isSubmitting ? 'Enviando Solicitud...' : 'Enviar Solicitud de Cita'}</span>

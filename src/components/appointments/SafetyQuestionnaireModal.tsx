@@ -105,107 +105,107 @@ export const SafetyQuestionnaireModal: React.FC<SafetyQuestionnaireModalProps> =
   const patientDisplayName = patient?.fullName || (patient as any)?.name || appointment?.patientName || 'Paciente';
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs select-none">
-      <div className="bg-neutral-900 border border-neutral-700 rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs select-none">
+      <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="p-4 bg-gradient-to-r from-amber-950/60 to-neutral-900 border-b border-neutral-800 flex items-center justify-between">
+        <div className="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-400">
+            <div className="p-2 bg-amber-50 border border-amber-200 rounded-xl text-amber-600">
               <ShieldAlert className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-base font-semibold text-white">Triaje de Seguridad Radiológica</h3>
-              <p className="text-xs text-neutral-400">
+              <h3 className="text-base font-bold text-slate-900">Triaje de Seguridad Radiológica</h3>
+              <p className="text-xs text-slate-500">
                 {patientDisplayName} | {appointment.studyName}
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-lg transition-colors"
+            className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Questionnaire Form */}
-        <div className="p-5 flex-1 overflow-y-auto space-y-4 text-xs text-neutral-300">
+        <div className="p-5 flex-1 overflow-y-auto space-y-4 text-xs text-slate-700">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Allergies */}
             <div className="col-span-2">
-              <label className="block text-neutral-400 font-medium mb-1">
+              <label className="block text-slate-700 font-bold mb-1">
                 Alergias Conocidas (Especialmente a Iodo / Gadolinio / Medicamentos)
               </label>
               <input
                 type="text"
                 value={allergies}
                 onChange={e => setAllergies(e.target.value)}
-                className="w-full bg-neutral-950 border border-neutral-700 rounded-lg p-2 text-white focus:outline-none focus:border-amber-400"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:bg-white focus:border-cyan-600"
               />
             </div>
 
             {/* Renal Function for Contrast */}
-            <div className="bg-neutral-950/60 p-3 rounded-xl border border-neutral-800/80 space-y-2">
-              <span className="font-semibold text-neutral-200 block">Función Renal (Contraste IV)</span>
+            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
+              <span className="font-bold text-slate-800 block">Función Renal (Contraste IV)</span>
               <div>
-                <label className="block text-neutral-500 text-[11px]">Creatinina Sérica (mg/dL)</label>
+                <label className="block text-slate-500 text-[11px]">Creatinina Sérica (mg/dL)</label>
                 <input
                   type="number"
                   step="0.01"
                   value={creatinine || ''}
                   onChange={e => setCreatinine(Number(e.target.value))}
-                  className="w-full bg-neutral-900 border border-neutral-700 rounded p-1.5 text-white focus:outline-none"
+                  className="w-full bg-white border border-slate-200 rounded-lg p-2 text-slate-900 focus:outline-none focus:border-cyan-600"
                 />
               </div>
               <div>
-                <label className="block text-neutral-500 text-[11px]">eGFR Estimada (mL/min/1.73m²)</label>
+                <label className="block text-slate-500 text-[11px]">eGFR Estimada (mL/min/1.73m²)</label>
                 <input
                   type="number"
                   value={eGFR || ''}
                   onChange={e => setEGFR(Number(e.target.value))}
-                  className="w-full bg-neutral-900 border border-neutral-700 rounded p-1.5 text-white focus:outline-none"
+                  className="w-full bg-white border border-slate-200 rounded-lg p-2 text-slate-900 focus:outline-none focus:border-cyan-600"
                 />
               </div>
             </div>
 
             {/* MRI & Ferromagnetic Screening */}
-            <div className="bg-neutral-950/60 p-3 rounded-xl border border-neutral-800/80 space-y-2.5">
-              <span className="font-semibold text-neutral-200 block">Seguridad Magnética y Embarazo</span>
+            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2.5">
+              <span className="font-bold text-slate-800 block">Seguridad Magnética y Embarazo</span>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={hasPacemaker}
                   onChange={e => setHasPacemaker(e.target.checked)}
-                  className="rounded border-neutral-700 text-amber-500 focus:ring-0"
+                  className="rounded border-slate-300 text-amber-600 focus:ring-0 w-4 h-4"
                 />
-                <span>Marcapasos / Dispositivo Cardíaco</span>
+                <span className="text-slate-700 font-semibold">Marcapasos / Dispositivo Cardíaco</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={hasMetalImplants}
                   onChange={e => setHasMetalImplants(e.target.checked)}
-                  className="rounded border-neutral-700 text-amber-500 focus:ring-0"
+                  className="rounded border-slate-300 text-amber-600 focus:ring-0 w-4 h-4"
                 />
-                <span>Implantes metálicos / Prótesis</span>
+                <span className="text-slate-700 font-semibold">Implantes metálicos / Prótesis</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={isPregnant}
                   onChange={e => setIsPregnant(e.target.checked)}
-                  className="rounded border-neutral-700 text-amber-500 focus:ring-0"
+                  className="rounded border-slate-300 text-amber-600 focus:ring-0 w-4 h-4"
                 />
-                <span>Embarazo o sospecha</span>
+                <span className="text-slate-700 font-semibold">Embarazo o sospecha</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={diabeticOnMetformin}
                   onChange={e => setDiabeticOnMetformin(e.target.checked)}
-                  className="rounded border-neutral-700 text-amber-500 focus:ring-0"
+                  className="rounded border-slate-300 text-amber-600 focus:ring-0 w-4 h-4"
                 />
-                <span>Tratamiento con Metformina</span>
+                <span className="text-slate-700 font-semibold">Tratamiento con Metformina</span>
               </label>
             </div>
           </div>
@@ -215,7 +215,7 @@ export const SafetyQuestionnaireModal: React.FC<SafetyQuestionnaireModalProps> =
             <button
               onClick={handleRunSafetyEvaluation}
               disabled={isCheckingAI}
-              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white rounded-xl font-medium transition-all shadow-md"
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white rounded-xl font-bold transition-all shadow-xs cursor-pointer"
             >
               <Sparkles className="w-4 h-4" />
               <span>{isCheckingAI ? 'Evaluando contraindicaciones con IA...' : 'Verificar Seguridad con IA (Gemini)'}</span>
@@ -225,22 +225,22 @@ export const SafetyQuestionnaireModal: React.FC<SafetyQuestionnaireModalProps> =
           {/* AI Assessment Result Card */}
           {aiEvaluation && (
             <div
-              className={`p-4 rounded-xl border space-y-2 ${
+              className={`p-4 rounded-2xl border space-y-2 ${
                 aiEvaluation.riskLevel === 'Alto' || aiEvaluation.riskLevel === 'Crítico'
-                  ? 'bg-rose-950/40 border-rose-800/80 text-rose-200'
-                  : 'bg-emerald-950/40 border-emerald-800/80 text-emerald-200'
+                  ? 'bg-rose-50 border-rose-200 text-rose-800'
+                  : 'bg-emerald-50 border-emerald-200 text-emerald-800'
               }`}
             >
-              <div className="flex items-center justify-between font-semibold text-sm">
+              <div className="flex items-center justify-between font-bold text-sm">
                 <div className="flex items-center gap-1.5">
                   {aiEvaluation.riskLevel === 'Alto' ? (
-                    <AlertTriangle className="w-4 h-4 text-rose-400" />
+                    <AlertTriangle className="w-4 h-4 text-rose-600" />
                   ) : (
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   )}
                   <span>Nivel de Riesgo: {aiEvaluation.riskLevel || 'Bajo'}</span>
                 </div>
-                <span className="text-xs px-2 py-0.5 rounded bg-black/40">
+                <span className="text-xs px-2.5 py-0.5 rounded-full bg-white border font-bold">
                   {aiEvaluation.cleared ? 'Apto' : 'Requiere Precaución'}
                 </span>
               </div>
@@ -254,13 +254,13 @@ export const SafetyQuestionnaireModal: React.FC<SafetyQuestionnaireModalProps> =
               )}
 
               {aiEvaluation.recommendations && (
-                <p className="text-xs italic text-neutral-300">
+                <p className="text-xs italic text-slate-700">
                   Recomendación clínica: {aiEvaluation.recommendations}
                 </p>
               )}
 
               {aiEvaluation.preparationGuide && (
-                <div className="text-[11px] bg-black/30 p-2 rounded text-neutral-300">
+                <div className="text-[11px] bg-white p-2.5 rounded-xl border border-slate-200 text-slate-700">
                   Guía de preparación: {aiEvaluation.preparationGuide}
                 </div>
               )}
@@ -269,17 +269,17 @@ export const SafetyQuestionnaireModal: React.FC<SafetyQuestionnaireModalProps> =
         </div>
 
         {/* Footer */}
-        <div className="p-4 bg-neutral-950 border-t border-neutral-800 flex items-center justify-between">
+        <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded-lg text-xs font-medium transition-colors"
+            className="px-4 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold transition-colors cursor-pointer shadow-xs"
           >
             Cancelar
           </button>
 
           <button
             onClick={handleConfirm}
-            className="flex items-center gap-1.5 px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold shadow-sm transition-all"
+            className="flex items-center gap-1.5 px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer"
           >
             <ShieldCheck className="w-4 h-4" />
             <span>Aprobar y Registrar Triaje de Seguridad</span>

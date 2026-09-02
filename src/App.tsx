@@ -825,12 +825,12 @@ export default function App() {
   // RENDER: STAFF CLINICAL CONSOLE MODE
   // ==========================================
   return (
-    <div className="flex flex-col h-screen w-screen bg-neutral-950 text-neutral-100 overflow-hidden font-sans select-none antialiased">
+    <div className="flex flex-col h-screen w-screen bg-slate-50 text-slate-800 overflow-hidden font-sans select-none antialiased">
       {/* Super Admin Impersonation Top Bar */}
       {isSuperAdmin && (
-        <div className="bg-gradient-to-r from-amber-950 via-neutral-900 to-amber-950 border-b border-amber-500/50 px-4 py-2 text-xs font-semibold flex items-center justify-between z-50 shrink-0 shadow-md">
-          <div className="flex items-center gap-2 text-amber-300">
-            <Crown className="w-4 h-4 text-amber-400" />
+        <div className="bg-amber-50 border-b border-amber-300 px-4 py-2 text-xs font-semibold flex items-center justify-between z-50 shrink-0 shadow-xs">
+          <div className="flex items-center gap-2 text-amber-900">
+            <Crown className="w-4 h-4 text-amber-600" />
             <span>
               <strong>Modo Creador (Super Admin):</strong> Inspeccionando sede <strong>{currentTenant.name}</strong> ({currentTenant.slug}).
             </span>
@@ -838,7 +838,7 @@ export default function App() {
           <button
             type="button"
             onClick={() => setSuperAdminViewMode('MASTER_DASHBOARD')}
-            className="px-3.5 py-1 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-neutral-950 font-bold rounded-lg text-xs transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+            className="px-3.5 py-1 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-lg text-xs transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
           >
             <Crown className="w-3.5 h-3.5" />
             <span>Volver al Panel Maestro SaaS</span>
@@ -855,38 +855,38 @@ export default function App() {
       )}
 
       {/* Top Application Header / Navigation Bar */}
-      <header className="bg-neutral-900 border-b border-neutral-800 px-4 py-2.5 flex items-center justify-between gap-4 z-40 shrink-0">
+      <header className="bg-white border-b border-slate-200 px-4 py-2.5 flex items-center justify-between gap-4 z-40 shrink-0 shadow-xs">
         {/* Brand & Clinic Identity */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-neutral-950 font-bold shadow-md shadow-cyan-500/20 p-1.5 overflow-hidden">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold shadow-md shadow-cyan-500/20 p-1.5 overflow-hidden">
             {renderHeaderLogo()}
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-sm font-bold text-white tracking-wide">
+              <h1 className="text-sm font-bold text-slate-900 tracking-wide">
                 {clinicSettings.name}{' '}
-                <span className="text-cyan-400 font-medium">{clinicSettings.shortName}</span>
+                <span className="text-cyan-700 font-semibold">{clinicSettings.shortName}</span>
               </h1>
 
               {/* Live Internet & Cloud NTP Status Badge */}
               <div
                 onClick={handleSyncNetwork}
-                className="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full font-mono bg-neutral-950 border border-neutral-800 text-emerald-400 cursor-pointer hover:border-cyan-700 transition-all"
+                className="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full font-mono bg-emerald-50 border border-emerald-200 text-emerald-700 cursor-pointer hover:bg-emerald-100 transition-all"
                 title={`Hora Oficial de la Nube: ${verifiedNetworkTime?.formattedDate || ''} ${verifiedNetworkTime?.formattedTime || ''} • Clic para resincronizar`}
               >
                 <Wifi className="w-2.5 h-2.5" />
-                <span className="hidden xl:inline">En Línea</span>
-                <span className="text-neutral-400 font-mono text-[9px]">{verifiedNetworkTime?.formattedTime || ''}</span>
+                <span className="hidden xl:inline font-semibold">En Línea</span>
+                <span className="text-slate-600 font-mono text-[9px]">{verifiedNetworkTime?.formattedTime || ''}</span>
               </div>
             </div>
-            <p className="text-[11px] text-neutral-400">
+            <p className="text-[11px] text-slate-500">
               {clinicSettings.tagline}
             </p>
           </div>
         </div>
 
         {/* Main Navigation Tabs */}
-        <nav className="flex items-center gap-1 bg-neutral-950/80 p-1 rounded-xl border border-neutral-800/80">
+        <nav className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
           <button
             onClick={() => {
               setActiveTab('AGENDA');
@@ -895,12 +895,14 @@ export default function App() {
             className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
               activeTab === 'AGENDA'
                 ? 'bg-cyan-600 text-white shadow-sm shadow-cyan-600/30'
-                : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white'
             }`}
           >
             <Calendar className="w-3.5 h-3.5" />
             <span>Citas & Agenda</span>
-            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/40 font-mono">
+            <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono font-bold ${
+              activeTab === 'AGENDA' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
+            }`}>
               {appointments.length}
             </span>
           </button>
@@ -913,12 +915,14 @@ export default function App() {
             className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
               activeTab === 'PACIENTES'
                 ? 'bg-cyan-600 text-white shadow-sm shadow-cyan-600/30'
-                : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white'
             }`}
           >
             <Users className="w-3.5 h-3.5" />
             <span>Pacientes</span>
-            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/40 font-mono">
+            <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono font-bold ${
+              activeTab === 'PACIENTES' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
+            }`}>
               {patients.length}
             </span>
           </button>
@@ -931,12 +935,14 @@ export default function App() {
             className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
               activeTab === 'ESTUDIOS'
                 ? 'bg-cyan-600 text-white shadow-sm shadow-cyan-600/30'
-                : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white'
             }`}
           >
             <Layers className="w-3.5 h-3.5" />
             <span>Estudios PACS</span>
-            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-black/40 font-mono">
+            <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono font-bold ${
+              activeTab === 'ESTUDIOS' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
+            }`}>
               {studies.length}
             </span>
           </button>
@@ -947,10 +953,10 @@ export default function App() {
           {/* Notification System Settings */}
           <button
             onClick={() => setShowNotificationSettingsModal(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-700 rounded-lg text-xs font-semibold transition-all relative cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-lg text-xs font-semibold transition-all relative cursor-pointer"
             title="Configurar recordatorios SMS y correo electrónico"
           >
-            <Bell className="w-3.5 h-3.5 text-cyan-400" />
+            <Bell className="w-3.5 h-3.5 text-cyan-700" />
             <span className="hidden lg:inline">Notificaciones</span>
             {notificationLogs.length > 0 && (
               <span className="w-2 h-2 rounded-full bg-emerald-500 absolute top-1 right-1" />
@@ -961,9 +967,9 @@ export default function App() {
           {pendingRequestsCount > 0 && (
             <button
               onClick={() => setShowReviewRequestsModal(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-purple-950/80 hover:bg-purple-900/80 text-purple-300 border border-purple-700/80 rounded-lg text-xs font-semibold shadow-xs animate-pulse transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 rounded-lg text-xs font-bold shadow-xs animate-pulse transition-all cursor-pointer"
             >
-              <Inbox className="w-3.5 h-3.5" />
+              <Inbox className="w-3.5 h-3.5 text-purple-600" />
               <span>Solicitudes ({pendingRequestsCount})</span>
             </button>
           )}
@@ -971,10 +977,10 @@ export default function App() {
           {/* Upload Study Action Button */}
           <button
             onClick={() => setShowUploadStudyModal(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-cyan-300 border border-cyan-800/80 rounded-lg text-xs font-semibold shadow-xs transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-cyan-50 hover:bg-cyan-100 text-cyan-800 border border-cyan-200 rounded-lg text-xs font-semibold shadow-xs transition-all cursor-pointer"
             title="Cargar y digitalizar estudio en formatos DICOM, JPG, PNG, MP4, PDF o ZIP"
           >
-            <Upload className="w-3.5 h-3.5 text-cyan-400" />
+            <Upload className="w-3.5 h-3.5 text-cyan-700" />
             <span className="hidden xl:inline">Cargar Estudio</span>
           </button>
 
@@ -982,10 +988,10 @@ export default function App() {
           {(currentStaffUser?.role === 'ADMIN' || isSuperAdmin) && (
             <button
               onClick={() => setShowClinicSettingsModal(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-cyan-950/80 hover:bg-cyan-900/80 text-cyan-300 border border-cyan-700/80 rounded-lg text-xs font-semibold transition-all shadow-xs cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-lg text-xs font-semibold transition-all shadow-xs cursor-pointer"
               title="Personalizar nombre del centro, dirección, logotipo, usuarios y renta de licencia"
             >
-              <Settings className="w-3.5 h-3.5 text-cyan-400" />
+              <Settings className="w-3.5 h-3.5 text-slate-600" />
               <span className="hidden lg:inline">Configuración</span>
             </button>
           )}
@@ -993,31 +999,31 @@ export default function App() {
           {/* New Appointment Modal Trigger */}
           <button
             onClick={() => setShowNewAppointmentModal(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg text-xs font-semibold shadow-sm transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg text-xs font-semibold shadow-sm transition-all cursor-pointer"
           >
             <Plus className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Nueva Cita</span>
           </button>
 
           {/* Active Staff User Badge & Logout Button */}
-          <div className="flex items-center gap-2 pl-2 border-l border-neutral-800">
-            <div className="flex items-center gap-2 bg-neutral-950/90 border border-neutral-800 px-2.5 py-1 rounded-xl">
+          <div className="flex items-center gap-2 pl-2 border-l border-slate-200">
+            <div className="flex items-center gap-2 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-xl">
               <div
                 className={`w-6 h-6 rounded-lg flex items-center justify-center text-xs font-bold ${
                   isSuperAdmin
-                    ? 'bg-amber-950 text-amber-300 border border-amber-700'
+                    ? 'bg-amber-100 text-amber-800 border border-amber-200'
                     : currentStaffUser.role === 'ADMIN'
-                    ? 'bg-cyan-950 text-cyan-300 border border-cyan-800'
-                    : 'bg-emerald-950 text-emerald-300 border border-emerald-800'
+                    ? 'bg-cyan-100 text-cyan-800 border border-cyan-200'
+                    : 'bg-emerald-100 text-emerald-800 border border-emerald-200'
                 }`}
               >
                 {isSuperAdmin ? '👑' : currentStaffUser.role === 'ADMIN' ? '🏢' : '🛡️'}
               </div>
               <div className="hidden 2xl:block text-left">
-                <div className="text-[11px] font-bold text-white leading-tight truncate max-w-[110px]">
+                <div className="text-[11px] font-bold text-slate-900 leading-tight truncate max-w-[110px]">
                   {currentStaffUser.fullName}
                 </div>
-                <div className="text-[9px] text-neutral-400 font-mono">
+                <div className="text-[9px] text-slate-500 font-mono">
                   {currentStaffUser.role}
                 </div>
               </div>
@@ -1025,11 +1031,11 @@ export default function App() {
 
             <button
               onClick={handleStaffLogout}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-rose-600 to-red-700 hover:from-rose-500 hover:to-red-600 text-white font-bold text-xs shadow-md shadow-rose-950/40 transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 hover:border-rose-300 font-semibold text-xs shadow-xs transition-all cursor-pointer"
               title="Cerrar sesión y salir"
             >
               <LogOut className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Cerrar Sesión</span>
+              <span className="hidden sm:inline">Salir</span>
             </button>
           </div>
         </div>

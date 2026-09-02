@@ -113,68 +113,68 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md select-none">
-      <div className="bg-neutral-900 border border-neutral-700 rounded-3xl w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] animate-in fade-in zoom-in-95 duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs select-none">
+      <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] animate-in fade-in zoom-in-95 duration-150">
         {/* Top Header */}
-        <div className="p-5 bg-gradient-to-r from-cyan-950 via-neutral-900 to-neutral-900 border-b border-neutral-800 flex items-center justify-between">
+        <div className="p-5 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-cyan-500/20 border border-cyan-500/40 rounded-2xl text-cyan-400">
+            <div className="p-2.5 bg-cyan-50 border border-cyan-200 rounded-2xl text-cyan-700">
               <Building2 className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white tracking-tight">
+              <h3 className="text-base font-bold text-slate-900 tracking-tight">
                 Registro de Nuevo Consultorio / Clínica
               </h3>
-              <p className="text-xs text-neutral-400">
+              <p className="text-xs text-slate-500">
                 Alta de espacio multi-tenant con licencia de 1 mes (30 días) y base en blanco
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-xl transition-colors cursor-pointer"
+            className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Content Body */}
-        <div className="p-6 overflow-y-auto space-y-5 text-xs text-neutral-200">
+        <div className="p-6 overflow-y-auto space-y-5 text-xs text-slate-700">
           {registeredClinic ? (
             /* Success View */
             <div className="space-y-5 py-4 text-center animate-in fade-in zoom-in-95">
-              <div className="w-16 h-16 rounded-3xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 mx-auto shadow-xl">
+              <div className="w-16 h-16 rounded-3xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 mx-auto shadow-xs">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
 
               <div className="space-y-1">
-                <h4 className="text-lg font-bold text-white">¡Consultorio Registrado con Éxito!</h4>
-                <p className="text-xs text-neutral-400 max-w-md mx-auto">
+                <h4 className="text-lg font-bold text-slate-900">¡Consultorio Registrado con Éxito!</h4>
+                <p className="text-xs text-slate-500 max-w-md mx-auto">
                   Su base de datos privada ha sido inicializada 100% en blanco y sincronizada en la nube.
                 </p>
               </div>
 
               {/* Summary Card */}
-              <div className="max-w-md mx-auto bg-neutral-950 p-4 rounded-2xl border border-cyan-500/30 text-left space-y-2 font-mono text-[11px]">
-                <div className="flex items-center justify-between border-b border-neutral-900 pb-2">
-                  <span className="text-neutral-400">Clínica / Sede:</span>
-                  <strong className="text-white">{registeredClinic.clinicName} ({registeredClinic.branch})</strong>
+              <div className="max-w-md mx-auto bg-slate-50 p-4 rounded-2xl border border-cyan-300 text-left space-y-2 font-mono text-[11px]">
+                <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                  <span className="text-slate-500 font-sans font-semibold">Clínica / Sede:</span>
+                  <strong className="text-slate-900">{registeredClinic.clinicName} ({registeredClinic.branch})</strong>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-neutral-400">Médico Titular:</span>
-                  <span className="text-neutral-200">{registeredClinic.doctorPrefix} {registeredClinic.doctorName}</span>
+                  <span className="text-slate-500 font-sans font-semibold">Médico Titular:</span>
+                  <span className="text-slate-800 font-bold">{registeredClinic.doctorPrefix} {registeredClinic.doctorName}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-neutral-400">Usuario de Acceso:</span>
-                  <strong className="text-cyan-400">{registeredClinic.username}</strong>
+                  <span className="text-slate-500 font-sans font-semibold">Usuario de Acceso:</span>
+                  <strong className="text-cyan-800">{registeredClinic.username}</strong>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-neutral-400">Contraseña:</span>
-                  <strong className="text-emerald-400">{registeredClinic.password}</strong>
+                  <span className="text-slate-500 font-sans font-semibold">Contraseña:</span>
+                  <strong className="text-emerald-800">{registeredClinic.password}</strong>
                 </div>
-                <div className="flex items-center justify-between border-t border-neutral-900 pt-2">
-                  <span className="text-neutral-400">Vigencia de Licencia:</span>
-                  <span className="text-amber-300 font-bold">1 Mes (30 días hasta {registeredClinic.licenseValidUntil})</span>
+                <div className="flex items-center justify-between border-t border-slate-200 pt-2">
+                  <span className="text-slate-500 font-sans font-semibold">Vigencia de Licencia:</span>
+                  <span className="text-amber-800 font-bold">1 Mes (30 días hasta {registeredClinic.licenseValidUntil})</span>
                 </div>
               </div>
 
@@ -182,7 +182,7 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
                 <button
                   type="button"
                   onClick={handleStartUsing}
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-950/40 transition-all cursor-pointer inline-flex items-center gap-2"
+                  className="px-6 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs shadow-xs transition-all cursor-pointer inline-flex items-center gap-2"
                 >
                   <span>Ingresar al Consultorio Ahora</span>
                   <ArrowRight className="w-4 h-4" />
@@ -193,22 +193,22 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
             /* Registration Form */
             <form onSubmit={handleSubmit} className="space-y-4">
               {errorMessage && (
-                <div className="p-3 rounded-2xl bg-rose-950/60 border border-rose-800/80 text-rose-200 text-xs flex items-start gap-2.5">
-                  <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+                <div className="p-3 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-2.5 font-medium">
+                  <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
                   <div className="leading-relaxed">{errorMessage}</div>
                 </div>
               )}
 
               {/* 1. Clinic Identification */}
-              <div className="space-y-3 p-4 bg-neutral-950 rounded-2xl border border-neutral-800">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
+              <div className="space-y-3 p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-cyan-800 flex items-center gap-1.5">
                   <Building2 className="w-3.5 h-3.5" />
                   1. Datos del Consultorio / Clínica
                 </span>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="text-[11px] font-semibold text-neutral-300 block mb-1">
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
                       Nombre de la Clínica / Gabinete: *
                     </label>
                     <input
@@ -217,12 +217,12 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
                       placeholder="Ej. Centro Radiológico Santa María"
                       value={clinicName}
                       onChange={e => setClinicName(e.target.value)}
-                      className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-semibold text-neutral-300 block mb-1">
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
                       Sucursal / Ciudad:
                     </label>
                     <input
@@ -230,13 +230,13 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
                       placeholder="Ej. Matriz / Sucursal Norte"
                       value={branch}
                       onChange={e => setBranch(e.target.value)}
-                      className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-semibold text-neutral-300 block mb-1">
+                  <label className="text-[11px] font-bold text-slate-700 block mb-1">
                     Dirección Física:
                   </label>
                   <input
@@ -244,27 +244,27 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
                     placeholder="Ej. Av. Hidalgo 1450, Col. Centro"
                     value={address}
                     onChange={e => setAddress(e.target.value)}
-                    className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                    className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600"
                   />
                 </div>
               </div>
 
               {/* 2. Doctor In Charge */}
-              <div className="space-y-3 p-4 bg-neutral-950 rounded-2xl border border-neutral-800">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+              <div className="space-y-3 p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
                   <Stethoscope className="w-3.5 h-3.5" />
                   2. Médico Titular Responsable
                 </span>
 
                 <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
                   <div className="sm:col-span-1">
-                    <label className="text-[11px] font-semibold text-neutral-300 block mb-1">
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
                       Prefijo:
                     </label>
                     <select
                       value={doctorPrefix}
                       onChange={e => setDoctorPrefix(e.target.value as any)}
-                      className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-500 cursor-pointer"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600 cursor-pointer font-bold"
                     >
                       <option value="Dr.">Dr.</option>
                       <option value="Dra.">Dra.</option>
@@ -272,7 +272,7 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
                   </div>
 
                   <div className="sm:col-span-3">
-                    <label className="text-[11px] font-semibold text-neutral-300 block mb-1">
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
                       Nombre Completo del Médico: *
                     </label>
                     <input
@@ -281,14 +281,14 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
                       placeholder="Ej. Alejandro Mendoza Valdivia"
                       value={doctorName}
                       onChange={e => setDoctorName(e.target.value)}
-                      className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="text-[11px] font-semibold text-neutral-300 block mb-1">
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
                       Cédula Profesional General: *
                     </label>
                     <input
@@ -297,12 +297,12 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
                       placeholder="Ej. 10445588"
                       value={generalLicense}
                       onChange={e => setGeneralLicense(e.target.value)}
-                      className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-500 font-mono"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600 font-mono"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-semibold text-neutral-300 block mb-1">
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
                       Cédula de Especialidad (Opcional):
                     </label>
                     <input
@@ -310,14 +310,14 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
                       placeholder="Ej. ESP-992314"
                       value={specialtyLicense}
                       onChange={e => setSpecialtyLicense(e.target.value)}
-                      className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-500 font-mono"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600 font-mono"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="text-[11px] font-semibold text-neutral-300 block mb-1">
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
                       Especialidad Médica:
                     </label>
                     <input
@@ -325,12 +325,12 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
                       placeholder="Ej. Radiología e Imagenología"
                       value={medicalSpecialty}
                       onChange={e => setMedicalSpecialty(e.target.value)}
-                      className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-semibold text-neutral-300 block mb-1">
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
                       Universidad / Escuela de Egreso:
                     </label>
                     <input
@@ -338,22 +338,22 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
                       placeholder="Ej. Universidad Nacional Autónoma"
                       value={university}
                       onChange={e => setUniversity(e.target.value)}
-                      className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600"
                     />
                   </div>
                 </div>
               </div>
 
               {/* 3. Credentials & Contact */}
-              <div className="space-y-3 p-4 bg-neutral-950 rounded-2xl border border-neutral-800">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+              <div className="space-y-3 p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-800 flex items-center gap-1.5">
                   <User className="w-3.5 h-3.5" />
                   3. Credenciales de Acceso & Contacto
                 </span>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="text-[11px] font-semibold text-neutral-300 block mb-1">
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
                       Usuario de Acceso Único: *
                     </label>
                     <input
@@ -362,12 +362,12 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
                       placeholder="Ej. dr_mendoza o clinica_norte"
                       value={username}
                       onChange={e => setUsername(e.target.value.toLowerCase().replace(/\s+/g, ''))}
-                      className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-500 font-mono"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600 font-mono"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-semibold text-neutral-300 block mb-1">
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
                       Contraseña: *
                     </label>
                     <input
@@ -376,14 +376,14 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
                       placeholder="Ej. pass123"
                       value={password}
                       onChange={e => setPassword(e.target.value)}
-                      className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-500 font-mono"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600 font-mono"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="text-[11px] font-semibold text-neutral-300 block mb-1">
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
                       Teléfono / WhatsApp: *
                     </label>
                     <input
@@ -392,12 +392,12 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
                       placeholder="Ej. +52 1 55 9876 5432"
                       value={phone}
                       onChange={e => setPhone(e.target.value)}
-                      className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-semibold text-neutral-300 block mb-1">
+                    <label className="text-[11px] font-bold text-slate-700 block mb-1">
                       Correo Electrónico:
                     </label>
                     <input
@@ -405,26 +405,26 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
                       placeholder="Ej. contacto@clinica.com"
                       value={email}
                       onChange={e => setEmail(e.target.value)}
-                      className="w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-500"
+                      className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-hidden focus:border-cyan-600"
                     />
                   </div>
                 </div>
               </div>
 
               {/* License Terms Note */}
-              <div className="p-3 bg-cyan-950/40 border border-cyan-800/60 rounded-xl text-[11px] text-cyan-300 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-cyan-400 shrink-0" />
+              <div className="p-3.5 bg-cyan-50 border border-cyan-200 rounded-2xl text-[11px] text-cyan-900 flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-cyan-700 shrink-0" />
                 <span>
-                  <strong>Licencia Mensual de 1 Mes:</strong> Su cuenta se creará con 30 días de vigencia activa y base de datos aislada en blanco.
+                  <strong className="font-bold">Licencia Mensual de 1 Mes:</strong> Su cuenta se creará con 30 días de vigencia activa y base de datos aislada en blanco.
                 </span>
               </div>
 
               {/* Footer Actions */}
-              <div className="p-4 bg-neutral-950 -mx-6 -mb-6 border-t border-neutral-800 flex items-center justify-between mt-4">
+              <div className="p-4 bg-slate-50 -mx-6 -mb-6 border-t border-slate-200 flex items-center justify-between mt-4">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 rounded-xl text-xs font-medium transition-colors cursor-pointer"
+                  className="px-4 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded-xl text-xs font-bold transition-colors cursor-pointer shadow-xs"
                 >
                   Cancelar
                 </button>
@@ -432,7 +432,7 @@ export const ClinicRegisterModal: React.FC<ClinicRegisterModalProps> = ({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl text-xs font-bold shadow-md shadow-cyan-950/40 transition-all cursor-pointer disabled:opacity-50"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-cyan-600 hover:bg-cyan-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all cursor-pointer disabled:opacity-50"
                 >
                   <ShieldCheck className="w-4 h-4" />
                   <span>{isSubmitting ? 'Registrando...' : 'Completar Registro (1 Mes Gratis)'}</span>
