@@ -7,8 +7,11 @@
     "helpMessage": "Estimado doctor/a, para reactivar o renovar su suscripción mensual de su consultorio, comuníquese directamente con el Administrador por WhatsApp o correo electrónico.",
     "updatedAt": "2026-09-05T00:14:42.689Z"
   },
-  "tombstones": [],
+  "tombstones": [
+    "clinic-77873503",
+    "tenant-clinic-demo"
+  ],
   "clinicRecords": {},
   "clinicSettings": {},
-  "lastUpdated": "2026-09-05T00:14:42.691Z"
+  "lastUpdated": "2026-09-05T00:18:19.899Z"
 }
