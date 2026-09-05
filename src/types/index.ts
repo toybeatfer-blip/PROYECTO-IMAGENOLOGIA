@@ -43,7 +43,6 @@ export interface PatientSafetyProfile {
 
 export interface Patient {
   id: string;
-  tenantId?: string; // Multi-tenant isolation key
   dni: string;
   fullName: string;
   birthDate: string;
@@ -73,7 +72,6 @@ export interface PrepCheckItem {
 
 export interface Appointment {
   id: string;
-  tenantId?: string; // Multi-tenant isolation key
   accessionNumber: string;
   patientId: string;
   patientName: string;
@@ -157,14 +155,12 @@ export interface RadiologyReport {
 
 export interface MedicalStudy {
   id: string;
-  tenantId?: string; // Multi-tenant isolation key
   accessionNumber: string;
   patientId: string;
   patientName: string;
   patientAge: number;
   patientGender: 'M' | 'F' | 'OTRO';
   patientDni: string;
-  dni?: string;
   modality: ModalityType;
   studyName: string;
   anatomicalRegion: string;
@@ -174,7 +170,6 @@ export interface MedicalStudy {
   institutionName: string;
   referringDoctor: string;
   clinicalIndication: string;
-  keyFindingsSummary?: string;
   contrastMediaUsed?: string; // e.g. "Iohexol 350 mg I/mL (75 mL IV)"
   acquisitionParams: {
     kVp?: number;
@@ -185,20 +180,11 @@ export interface MedicalStudy {
   };
   series: MedicalStudySeries[];
   report?: RadiologyReport;
-  keyImagesCount?: number;
-  fullName?: string;
-  birthDate?: string;
-  age?: number;
-  gender?: 'M' | 'F' | 'OTRO';
-  phone?: string;
-  email?: string;
-  address?: string;
-  studyStatus?: 'ADQUIRIDO' | 'EN_INTERPRETACION' | 'INFORME_LISTO' | 'VALIDADO';
-  fileFormat?: 'DICOM_STANDARD' | 'DICOM_COMPRESSED' | 'VOLUMETRIC_NIFTI';
+  keyFindingsSummary?: string;
+  isUrgent?: boolean;
 }
 
-export type DicomWindowPreset =
-  | 'DEFAULT'
+export type ViewerWindowPreset =
   | 'AUTO'
   | 'BONE'
   | 'SOFT_TISSUE'
@@ -207,8 +193,6 @@ export type DicomWindowPreset =
   | 'ANGIO'
   | 'HIGH_CONTRAST'
   | 'INVERTED';
-
-export type ViewerWindowPreset = DicomWindowPreset;
 
 export type ViewerToolType =
   | 'SELECT'
@@ -265,49 +249,33 @@ export interface NotificationTemplate {
 }
 
 export interface NotificationSettings {
-  tenantId?: string; // Multi-tenant isolation key
-  senderName?: string;
-  emailSenderName?: string;
-  senderEmail?: string;
-  emailSenderAddress?: string;
-  senderPhone?: string;
-  smsSenderId?: string;
-  whatsappBusinessEnabled?: boolean;
-  whatsappEnabled?: boolean;
-  smsEnabled?: boolean;
-  emailEnabled?: boolean;
-  reminder24hBefore?: boolean;
-  reminder2hBefore?: boolean;
-  notifyOnReportReady?: boolean;
-  notifyOnAppointmentCreated?: boolean;
-  clinicHeaderName?: string;
-  includePreparationChecklist?: boolean;
-  autoSendEnabled?: boolean;
-  rules?: any;
-  customTemplates?: Record<string, any>;
-  defaultEmailTemplate?: string;
-  defaultSmsTemplate?: string;
-  templatesByModality?: Record<string, { emailText: string; smsText: string; prepNotes: string }>;
-  advanceRules?: NotificationAdvanceRule[];
-  templates?: NotificationTemplate[];
+  autoSendEnabled: boolean;
+  rules: NotificationAdvanceRule[];
+  emailSenderName: string;
+  emailSenderAddress: string;
+  smsSenderId: string;
+  includePreparationChecklist: boolean;
+  defaultEmailTemplate: string;
+  defaultSmsTemplate: string;
+  templatesByModality: Record<string, { emailText: string; smsText: string; prepNotes: string }>;
 }
 
 export interface NotificationLog {
   id: string;
-  tenantId?: string; // Multi-tenant isolation key
-  appointmentId: string;
+  appointmentId?: string;
+  studyId?: string;
   patientId: string;
   patientName: string;
   patientDni: string;
-  recipient: string; // phone or email
+  recipient: string; // email address or phone number
   channel: NotificationChannel;
   type: NotificationType;
   title: string;
   body: string;
   status: NotificationStatus;
   sentAt: string;
-  advanceRuleLabel?: string;
-  modality?: string;
+  advanceRuleLabel: string;
+  modality?: ModalityType;
   studyName?: string;
   scheduledDate?: string;
   scheduledTime?: string;
@@ -328,7 +296,6 @@ export type PatientPortalTab =
 
 export interface PatientAppointmentRequest {
   id: string;
-  tenantId?: string; // Multi-tenant isolation key
   patientId: string;
   patientName: string;
   patientDni: string;
@@ -376,18 +343,16 @@ export interface ClinicSettings {
   enableDemoMode?: boolean; // Permite o bloquea botones de acceso rápido de prueba en el portal del paciente
   enableBruteForceProtection?: boolean; // Bloquea accesos tras 5 intentos fallidos
   sessionTimeoutMinutes?: number; // Cierre automático por inactividad
-  license?: TenantLicense; // Configuración de renta y licencia
 }
 
 // ==========================================
 // STAFF & USER AUTHENTICATION
 // ==========================================
 
-export type StaffRole = 'SUPER_ADMIN' | 'ADMIN' | 'ENCARGADO';
+export type StaffRole = 'ADMIN' | 'ENCARGADO';
 
 export interface StaffUser {
   id: string;
-  tenantId?: string; // Multi-tenant isolation key (or 'GLOBAL' for superadmin)
   username: string;
   fullName: string;
   role: StaffRole;
@@ -396,50 +361,43 @@ export interface StaffUser {
   position: string;
   avatarIcon?: string;
   password?: string;
-  isSuperAdmin?: boolean;
-  isProtected?: boolean; // Cannot be deleted or modified
 }
 
 // ==========================================
-// LICENSE & RENTAL SUBSCRIPTION TYPES
+// TENANT & LICENSING COMPATIBILITY
 // ==========================================
 
-export type LicenseBillingType = 'MONTHLY' | 'ANNUAL' | 'PERPETUAL' | 'TRIAL';
 export type LicenseStatus = 'ACTIVE' | 'WARNING_EXPIRING' | 'EXPIRED_LOCKED' | 'SUSPENDED';
+export type LicenseBillingType = 'MONTHLY' | 'ANNUAL' | 'PERPETUAL' | 'MENSUAL' | 'ANUAL' | 'VITALICIA';
 
 export interface TenantLicense {
   key: string;
+  status: LicenseStatus;
   billingType: LicenseBillingType;
   issuedDate: string;
-  expirationDate: string; // YYYY-MM-DD
-  gracePeriodDays: number; // e.g. 5 days
-  status: LicenseStatus;
-  monthlyRate?: number; // e.g. 59 USD
-  annualRate?: number; // e.g. 590 USD
-  currency: 'USD' | 'PEN' | 'MXN';
+  expirationDate: string;
+  gracePeriodDays?: number;
+  lastPaymentDate?: string;
+  price?: number;
+  currency?: string;
+  monthlyRate?: number;
+  annualRate?: number;
   contactBillingEmail?: string;
   contactBillingPhone?: string;
-  lastPaymentDate?: string;
-  autoRenewNotice?: boolean;
+  autoRenewNotice?: boolean | string;
 }
 
-// ==========================================
-// MULTI-TENANT SAAS ARCHITECTURE TYPES
-// ==========================================
-
-export type TenantStatus = 'ACTIVE' | 'SUSPENDED' | 'TRIAL';
-export type TenantPlan = 'CLINICA_BASIC' | 'HOSPITAL_PRO' | 'ENTERPRISE_PACS';
-
 export interface Tenant {
-  id: string; // e.g. 'tenant-imagis-central', 'tenant-san-pedro'
-  slug: string; // e.g. 'imagis-central'
-  name: string; // e.g. 'IMAGIS Sede Central'
-  status: TenantStatus;
-  plan: TenantPlan;
-  createdAt: string;
-  settings: ClinicSettings;
+  id: string;
+  name: string;
+  slug: string;
+  plan?: string;
+  settings?: any;
   license?: TenantLicense;
+  createdAt?: string;
+  [key: string]: any;
 }
 
 export * from './multiTenant';
+
 
