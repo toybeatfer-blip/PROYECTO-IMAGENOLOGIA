@@ -9,7 +9,6 @@ dotenv.config();
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
-const VAULT_FILE_PATH = path.join(process.cwd(), "data_vault.json");
 
 // Security Headers Middleware
 app.use((_req, res, next) => {
@@ -17,7 +16,7 @@ app.use((_req, res, next) => {
   res.setHeader("X-Frame-Options", "SAMEORIGIN");
   res.setHeader("X-XSS-Protection", "1; mode=block");
   res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
-  res.setHeader("Permissions-Policy", "camera=(), microphone=(self), geolocation=()");
+  res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
   next();
 });
 
@@ -65,20 +64,11 @@ function createRateLimiter(maxRequests: number, windowMs: number, message: strin
   };
 }
 
-const generalApiLimiter = createRateLimiter(600, 60000, "Límite de peticiones de API excedido. Por favor intente más tarde.");
-const aiGenerationLimiter = createRateLimiter(60, 60000, "Límite de solicitudes de IA excedido. Por favor espere un momento.");
+const generalApiLimiter = createRateLimiter(120, 60000, "Límite de peticiones de API excedido. Por favor intente más tarde.");
+const aiGenerationLimiter = createRateLimiter(30, 60000, "Límite de solicitudes de IA excedido (máx 30/min). Por favor espere un momento.");
 
-// Exclude internal heartbeat, time verification, and cloud sync routes from rate limiting
-app.use((req, res, next) => {
-  if (
-    req.path === "/api/health" ||
-    req.path === "/api/time" ||
-    req.path.startsWith("/api/cloud-sync")
-  ) {
-    return next();
-  }
-  generalApiLimiter(req, res, next);
-});
+// Apply general limiter to all /api routes
+app.use("/api", generalApiLimiter);
 
 // Lazy initializer for Gemini API client
 let aiClient: GoogleGenAI | null = null;
@@ -101,162 +91,139 @@ app.get("/api/health", (_req: Request, res: Response) => {
   res.json({ status: "ok", service: "Medical Imaging Management System", environment: process.env.NODE_ENV || "production" });
 });
 
-// Official Cloud Time & License Verification Endpoint (Tamper-Proof)
-app.get("/api/time", (_req: Request, res: Response) => {
-  const now = new Date();
-  res.json({
-    success: true,
-    timestamp: now.getTime(),
-    utcIso: now.toISOString(),
-    formattedDate: now.toISOString().split("T")[0],
-    formattedTime: now.toTimeString().split(" ")[0],
-    timezoneOffset: now.getTimezoneOffset(),
-    serverOnline: true,
-  });
-});
+// =========================================================================
+// UNIVERSAL CLOUD SYNC VAULT & ANTI-DEFAULT SHIELD
+// =========================================================================
+const DATA_VAULT_FILE = path.resolve(process.cwd(), "data_vault.json");
+const DEFAULT_PHONES_BLACKLIST = [
+  '+52 1 55 1234 5678',
+  '+52 55 1234 5678',
+  '55 1234 5678',
+  '1234 5678',
+  '+52 81 8300 0000',
+  '0000 0000',
+];
+const DEFAULT_EMAILS_BLACKLIST = [
+  'licencias@imagis-pacs.cloud',
+  'admin@clinica.com',
+  'super.admin@vetcare.master.com',
+];
 
-// ==========================================
-// CENTRAL CLOUD VAULT (MULTI-DEVICE SYNCHRONIZATION)
-// ==========================================
-interface CentralVaultData {
-  clinics: any[];
-  superAdminContact: any;
-  tombstones: string[];
-  lastUpdated: string;
-}
+const sanitizeSuperAdminContactServer = (contact: any) => {
+  const fallback = {
+    name: "Fernando (Administrador Maestro)",
+    phone: "+52 474 1539891",
+    email: "toybeatfer@gmail.com",
+    helpMessage: "Estimado doctor/a, para reactivar o renovar su suscripción mensual de su consultorio, comuníquese directamente con el Administrador por WhatsApp o correo electrónico.",
+    updatedAt: new Date().toISOString(),
+  };
+  if (!contact || typeof contact !== 'object') return fallback;
+  const res = { ...fallback, ...contact };
+  const phone = String(res.phone || '').trim();
+  const email = String(res.email || '').trim().toLowerCase();
+  if (!phone || DEFAULT_PHONES_BLACKLIST.some(d => phone.includes(d))) {
+    res.phone = "+52 474 1539891";
+  }
+  if (!email || DEFAULT_EMAILS_BLACKLIST.some(d => email.includes(d))) {
+    res.email = "toybeatfer@gmail.com";
+  }
+  return res;
+};
 
-function loadCentralVault(): CentralVaultData {
+const readVault = () => {
   try {
-    if (fs.existsSync(VAULT_FILE_PATH)) {
-      const raw = fs.readFileSync(VAULT_FILE_PATH, "utf-8");
-      return JSON.parse(raw);
+    if (fs.existsSync(DATA_VAULT_FILE)) {
+      const data = JSON.parse(fs.readFileSync(DATA_VAULT_FILE, "utf-8"));
+      data.superAdminContact = sanitizeSuperAdminContactServer(data.superAdminContact);
+      return data;
     }
   } catch (e) {
-    console.error("Error al leer bóveda central:", e);
+    console.error("Error reading data_vault.json:", e);
   }
   return {
     clinics: [],
-    superAdminContact: {
-      name: "Fernando (Administrador Maestro)",
-      phone: "+52 1 55 1234 5678",
-      email: "licencias@imagis-pacs.cloud",
-      helpMessage: "Para reactivar o renovar la suscripción de su consultorio, contacte al Super Administrador.",
-      updatedAt: new Date().toISOString(),
-    },
+    superAdminContact: sanitizeSuperAdminContactServer(null),
     tombstones: [],
+    clinicRecords: {},
+    clinicSettings: {},
     lastUpdated: new Date().toISOString(),
   };
-}
+};
 
-function saveCentralVault(vault: CentralVaultData): void {
+const writeVault = (data: any) => {
   try {
-    const prevClinics = JSON.stringify(memoryVault.clinics || []);
-    const nextClinics = JSON.stringify(vault.clinics || []);
-    const prevContact = JSON.stringify(memoryVault.superAdminContact || {});
-    const nextContact = JSON.stringify(vault.superAdminContact || {});
-    const prevTombstones = JSON.stringify(memoryVault.tombstones || []);
-    const nextTombstones = JSON.stringify(vault.tombstones || []);
-
-    const hasChanged =
-      prevClinics !== nextClinics ||
-      prevContact !== nextContact ||
-      prevTombstones !== nextTombstones ||
-      !fs.existsSync(VAULT_FILE_PATH);
-
-    if (hasChanged) {
-      fs.writeFileSync(VAULT_FILE_PATH, JSON.stringify(vault, null, 2), "utf-8");
-    }
+    fs.writeFileSync(DATA_VAULT_FILE, JSON.stringify(data, null, 2), "utf-8");
+    return true;
   } catch (e) {
-    console.error("Error al persistir bóveda central:", e);
+    console.error("Error writing data_vault.json:", e);
+    return false;
   }
-}
+};
 
-let memoryVault: CentralVaultData = loadCentralVault();
-
-// GET: Pull Central Vault
 app.get("/api/cloud-sync/vault", (_req: Request, res: Response) => {
-  res.json({
-    success: true,
-    vault: {
-      clinics: memoryVault.clinics || [],
-      superAdminContact: memoryVault.superAdminContact,
-      tombstones: memoryVault.tombstones || [],
-      serverTimestamp: new Date().toISOString(),
-    },
-  });
+  const vault = readVault();
+  res.json({ success: true, vault, timestamp: new Date().toISOString() });
 });
 
-// POST: Push & Merge with Conflict Resolution (Timestamp-based updatedAt)
 app.post("/api/cloud-sync/vault", (req: Request, res: Response) => {
   try {
-    const { clinics: incomingClinics = [], superAdminContact: incomingContact, tombstones: incomingTombstones = [] } = req.body;
+    const payload = req.body || {};
+    const currentVault = readVault();
 
-    // 1. Merge tombstones (union)
-    const tombstonesSet = new Set<string>([
-      ...(memoryVault.tombstones || []),
-      ...(incomingTombstones || []),
+    const tombstonesSet = new Set([
+      ...(currentVault.tombstones || []),
+      ...(payload.tombstones || [])
     ]);
-    const mergedTombstones = Array.from(tombstonesSet);
 
-    // 2. Merge clinics map with timestamp priority
-    const clinicMap = new Map<string, any>();
-
-    // Load existing
-    for (const c of memoryVault.clinics || []) {
-      if (!tombstonesSet.has(c.id)) {
-        clinicMap.set(c.id, c);
-      }
-    }
-
-    // Merge incoming
-    for (const inc of incomingClinics) {
-      if (tombstonesSet.has(inc.id)) {
-        clinicMap.delete(inc.id);
-        continue;
-      }
-
-      const existing = clinicMap.get(inc.id);
-      if (!existing) {
-        clinicMap.set(inc.id, inc);
-      } else {
-        const existingTime = new Date(existing.updatedAt || existing.createdAt || 0).getTime();
-        const incomingTime = new Date(inc.updatedAt || inc.createdAt || 0).getTime();
-        if (incomingTime >= existingTime) {
-          clinicMap.set(inc.id, { ...existing, ...inc });
+    const clinicMap = new Map();
+    (currentVault.clinics || []).forEach((c: any) => { if (c && c.id) clinicMap.set(c.id, c); });
+    (payload.clinics || []).forEach((c: any) => {
+      if (c && c.id && !tombstonesSet.has(c.id)) {
+        const prev = clinicMap.get(c.id);
+        if (!prev) {
+          clinicMap.set(c.id, c);
+        } else {
+          const t1 = new Date(prev.updatedAt || prev.createdAt || 0).getTime();
+          const t2 = new Date(c.updatedAt || c.createdAt || 0).getTime();
+          clinicMap.set(c.id, t2 >= t1 ? { ...prev, ...c } : { ...c, ...prev });
         }
       }
-    }
+    });
+    const mergedClinics = Array.from(clinicMap.values()).filter((c: any) => !tombstonesSet.has(c.id));
 
-    // 3. Merge superAdminContact with timestamp priority
-    let mergedContact = memoryVault.superAdminContact;
-    if (incomingContact) {
-      const existingTime = new Date(mergedContact?.updatedAt || 0).getTime();
-      const incomingTime = new Date(incomingContact.updatedAt || 0).getTime();
-      if (incomingTime >= existingTime) {
-        mergedContact = incomingContact;
-      }
-    }
+    const mergedContact = sanitizeSuperAdminContactServer({
+      ...(currentVault.superAdminContact || {}),
+      ...(payload.superAdminContact || {})
+    });
 
-    const updatedVault: CentralVaultData = {
-      clinics: Array.from(clinicMap.values()),
+    const mergedRecords = {
+      ...(currentVault.clinicRecords || {}),
+      ...(payload.clinicRecords || {})
+    };
+    const mergedSettings = {
+      ...(currentVault.clinicSettings || {}),
+      ...(payload.clinicSettings || {})
+    };
+
+    const newVault = {
+      clinics: mergedClinics,
       superAdminContact: mergedContact,
-      tombstones: mergedTombstones,
+      tombstones: Array.from(tombstonesSet),
+      clinicRecords: mergedRecords,
+      clinicSettings: mergedSettings,
       lastUpdated: new Date().toISOString(),
     };
 
-    memoryVault = updatedVault;
-    saveCentralVault(updatedVault);
+    writeVault(newVault);
 
     return res.json({
       success: true,
-      vault: {
-        ...updatedVault,
-        serverTimestamp: new Date().toISOString(),
-      },
+      vault: newVault,
+      timestamp: newVault.lastUpdated
     });
-  } catch (e: any) {
-    console.error("Error en sincronización de bóveda en la nube:", e);
-    return res.status(500).json({ success: false, error: e.message || "Error al sincronizar bóveda" });
+  } catch (err: any) {
+    console.error("Error in POST /api/cloud-sync/vault:", err);
+    return res.status(500).json({ success: false, error: err.message });
   }
 });
 
@@ -536,12 +503,7 @@ Mantén un tono cálido, humano, profesional y en español claro. Si el paciente
 async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
-      server: {
-        middlewareMode: true,
-        watch: {
-          ignored: ['**/data_vault.json', '**/*.json', '**/dist/**', '**/.git/**'],
-        },
-      },
+      server: { middlewareMode: true },
       appType: "spa",
     });
     app.use(vite.middlewares);
