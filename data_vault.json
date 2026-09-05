@@ -2,11 +2,13 @@
   "clinics": [],
   "superAdminContact": {
     "name": "Fernando (Administrador Maestro)",
-    "phone": "+52 1 55 1234 5678",
-    "email": "licencias@imagis-pacs.cloud",
+    "phone": "+52 474 1539891",
+    "email": "toybeatfer@gmail.com",
     "helpMessage": "Estimado doctor/a, para reactivar o renovar su suscripción mensual de su consultorio, comuníquese directamente con el Administrador por WhatsApp o correo electrónico.",
-    "updatedAt": "2026-08-26T00:00:00.000Z"
+    "updatedAt": "2026-09-05T00:14:42.689Z"
   },
   "tombstones": [],
-  "lastUpdated": "2026-08-26T00:00:00.000Z"
+  "clinicRecords": {},
+  "clinicSettings": {},
+  "lastUpdated": "2026-09-05T00:14:42.691Z"
 }
