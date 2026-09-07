@@ -43,6 +43,7 @@ export interface PatientSafetyProfile {
 
 export interface Patient {
   id: string;
+  tenantId?: string;
   dni: string;
   fullName: string;
   birthDate: string;
@@ -72,6 +73,7 @@ export interface PrepCheckItem {
 
 export interface Appointment {
   id: string;
+  tenantId?: string;
   accessionNumber: string;
   patientId: string;
   patientName: string;
@@ -155,6 +157,7 @@ export interface RadiologyReport {
 
 export interface MedicalStudy {
   id: string;
+  tenantId?: string;
   accessionNumber: string;
   patientId: string;
   patientName: string;
@@ -249,19 +252,32 @@ export interface NotificationTemplate {
 }
 
 export interface NotificationSettings {
-  autoSendEnabled: boolean;
-  rules: NotificationAdvanceRule[];
-  emailSenderName: string;
-  emailSenderAddress: string;
-  smsSenderId: string;
-  includePreparationChecklist: boolean;
-  defaultEmailTemplate: string;
-  defaultSmsTemplate: string;
-  templatesByModality: Record<string, { emailText: string; smsText: string; prepNotes: string }>;
+  tenantId?: string;
+  emailEnabled?: boolean;
+  smsEnabled?: boolean;
+  whatsappEnabled?: boolean;
+  reminder24hBefore?: boolean;
+  reminder2hBefore?: boolean;
+  notifyOnReportReady?: boolean;
+  notifyOnAppointmentCreated?: boolean;
+  senderEmail?: string;
+  senderPhone?: string;
+  clinicHeaderName?: string;
+  senderName?: string;
+  autoSendEnabled?: boolean;
+  rules?: NotificationAdvanceRule[];
+  emailSenderName?: string;
+  emailSenderAddress?: string;
+  smsSenderId?: string;
+  includePreparationChecklist?: boolean;
+  defaultEmailTemplate?: string;
+  defaultSmsTemplate?: string;
+  templatesByModality?: Record<string, { emailText: string; smsText: string; prepNotes: string }>;
 }
 
 export interface NotificationLog {
   id: string;
+  tenantId?: string;
   appointmentId?: string;
   studyId?: string;
   patientId: string;
@@ -296,6 +312,7 @@ export type PatientPortalTab =
 
 export interface PatientAppointmentRequest {
   id: string;
+  tenantId?: string;
   patientId: string;
   patientName: string;
   patientDni: string;
@@ -339,6 +356,7 @@ export interface ClinicSettings {
   logoImage?: string;
   logoIcon: 'Layers' | 'Activity' | 'HeartPulse' | 'Shield' | 'Cross' | 'Stethoscope' | 'Scan';
   accentColor: 'cyan' | 'emerald' | 'blue' | 'indigo' | 'purple' | 'amber' | 'rose';
+  license?: TenantLicense;
   // Opciones de Seguridad y Publicación en Internet
   enableDemoMode?: boolean; // Permite o bloquea botones de acceso rápido de prueba en el portal del paciente
   enableBruteForceProtection?: boolean; // Bloquea accesos tras 5 intentos fallidos
@@ -349,10 +367,11 @@ export interface ClinicSettings {
 // STAFF & USER AUTHENTICATION
 // ==========================================
 
-export type StaffRole = 'ADMIN' | 'ENCARGADO';
+export type StaffRole = 'ADMIN' | 'ENCARGADO' | 'SUPER_ADMIN';
 
 export interface StaffUser {
   id: string;
+  tenantId?: string;
   username: string;
   fullName: string;
   role: StaffRole;
@@ -361,6 +380,8 @@ export interface StaffUser {
   position: string;
   avatarIcon?: string;
   password?: string;
+  isSuperAdmin?: boolean;
+  isProtected?: boolean;
 }
 
 // ==========================================
