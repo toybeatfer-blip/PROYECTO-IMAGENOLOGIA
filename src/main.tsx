@@ -1,19 +1,14 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import {StrictMode} from 'react';
+import {createRoot} from 'react-dom/client';
 import App from './App.tsx';
-import { ErrorBoundary } from './components/common/ErrorBoundary';
-import { executeAutoPurgeAndCleanCache, initAutoUpdateBackgroundListener } from './utils/autoPurge';
+import { syncWithCloud } from './utils/cloudSync.ts';
 import './index.css';
 
-// 🚀 Ejecutar rutina de Auto-Purga y Sincronización de Versión Inmediata
-executeAutoPurgeAndCleanCache();
-initAutoUpdateBackgroundListener();
+// Disparo inmediato a la Bóveda Cloud antes de montar la aplicación
+syncWithCloud(true).catch(() => {});
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ErrorBoundary>
-      <App />
-    </ErrorBoundary>
+    <App />
   </StrictMode>,
 );
-
