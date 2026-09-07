@@ -53,11 +53,46 @@ export function generateUUID(): string {
 // ==========================================
 export const DEFAULT_SUPERADMIN_CONTACT: SuperAdminContactInfo = {
   name: 'Fernando (Administrador Maestro)',
-  phone: '+52 1 55 1234 5678', // Formato internacional
-  email: 'licencias@imagis-pacs.cloud',
+  phone: '+52 474 1539891',
+  email: 'toybeatfer@gmail.com',
   helpMessage: 'Estimado doctor/a, para reactivar o renovar su suscripción mensual de su consultorio, comuníquese directamente con el Administrador por WhatsApp o correo electrónico.',
-  updatedAt: new Date().toISOString(),
+  updatedAt: '2026-09-04T00:00:00.000Z',
 };
+
+const DEFAULT_PHONES_BLACKLIST = [
+  '+52 1 55 1234 5678',
+  '+52 55 1234 5678',
+  '55 1234 5678',
+  '1234 5678',
+  '+52 81 8300 0000',
+  '0000 0000',
+];
+
+const DEFAULT_EMAILS_BLACKLIST = [
+  'licencias@imagis-pacs.cloud',
+  'admin@clinica.com',
+  'super.admin@vetcare.master.com',
+];
+
+export function sanitizeSuperAdminContact(contact: Partial<SuperAdminContactInfo> | null | undefined): SuperAdminContactInfo {
+  if (!contact || typeof contact !== 'object') {
+    return { ...DEFAULT_SUPERADMIN_CONTACT };
+  }
+  const res: SuperAdminContactInfo = {
+    ...DEFAULT_SUPERADMIN_CONTACT,
+    ...contact,
+  };
+  const phone = (res.phone || '').trim();
+  const email = (res.email || '').trim().toLowerCase();
+
+  if (!phone || DEFAULT_PHONES_BLACKLIST.some(d => phone.includes(d))) {
+    res.phone = DEFAULT_SUPERADMIN_CONTACT.phone;
+  }
+  if (!email || DEFAULT_EMAILS_BLACKLIST.some(d => email.includes(d))) {
+    res.email = DEFAULT_SUPERADMIN_CONTACT.email;
+  }
+  return res;
+}
 
 // ==========================================
 // BLANK SCHEMAS FOR CRASH-PROOF DEEP MERGE
@@ -272,7 +307,11 @@ export function getSuperAdminContact(): SuperAdminContactInfo {
       return DEFAULT_SUPERADMIN_CONTACT;
     }
     const parsed = JSON.parse(raw);
-    return deepMergeBlank(parsed, DEFAULT_SUPERADMIN_CONTACT);
+    const sanitized = sanitizeSuperAdminContact(parsed);
+    if (sanitized.phone !== parsed.phone || sanitized.email !== parsed.email) {
+      saveSuperAdminContact(sanitized);
+    }
+    return sanitized;
   } catch {
     return DEFAULT_SUPERADMIN_CONTACT;
   }
@@ -280,9 +319,10 @@ export function getSuperAdminContact(): SuperAdminContactInfo {
 
 export function saveSuperAdminContact(contact: SuperAdminContactInfo): void {
   try {
+    const sanitized = sanitizeSuperAdminContact(contact);
     const updated: SuperAdminContactInfo = {
-      ...contact,
-      updatedAt: contact.updatedAt || new Date().toISOString(),
+      ...sanitized,
+      updatedAt: sanitized.updatedAt || new Date().toISOString(),
     };
     const rawNew = JSON.stringify(updated);
     const rawOld = localStorage.getItem(SUPERADMIN_CONTACT_KEY);
