@@ -68,11 +68,12 @@ function createRateLimiter(maxRequests: number, windowMs: number, message: strin
 const generalApiLimiter = createRateLimiter(600, 60000, "Límite de peticiones de API excedido. Por favor intente más tarde.");
 const aiGenerationLimiter = createRateLimiter(60, 60000, "Límite de solicitudes de IA excedido. Por favor espere un momento.");
 
-// Exclude internal heartbeat, time verification, and cloud sync routes from rate limiting
+// Exclude internal heartbeat, time verification, version check, and cloud sync routes from rate limiting
 app.use((req, res, next) => {
   if (
     req.path === "/api/health" ||
     req.path === "/api/time" ||
+    req.path === "/api/version" ||
     req.path.startsWith("/api/cloud-sync")
   ) {
     return next();
@@ -112,6 +113,19 @@ app.get("/api/time", (_req: Request, res: Response) => {
     formattedTime: now.toTimeString().split(" ")[0],
     timezoneOffset: now.getTimezoneOffset(),
     serverOnline: true,
+  });
+});
+
+// Version check endpoint for instant client auto-purge & updates
+app.get("/api/version", (_req: Request, res: Response) => {
+  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
+  res.json({
+    success: true,
+    version: "2026.09.07-v3.0",
+    buildTimestamp: 1788785000000,
+    serverTime: new Date().toISOString(),
   });
 });
 
@@ -547,8 +561,21 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
+    app.use(express.static(distPath, {
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith("index.html")) {
+          res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+          res.setHeader("Pragma", "no-cache");
+          res.setHeader("Expires", "0");
+        } else if (filePath.match(/\.(js|css|woff2?|png|jpg|svg|ico)$/)) {
+          res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+        }
+      },
+    }));
     app.get("*", (_req: Request, res: Response) => {
+      res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+      res.setHeader("Pragma", "no-cache");
+      res.setHeader("Expires", "0");
       res.sendFile(path.join(distPath, "index.html"));
     });
   }

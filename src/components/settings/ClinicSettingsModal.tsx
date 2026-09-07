@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { ClinicSettings, StaffUser, TenantLicense } from '../../types';
 import { INITIAL_CLINIC_SETTINGS, INITIAL_STAFF_USERS } from '../../data/initialData';
 import { activateLicenseKey, createDefaultTenantLicense, checkLicenseStatus } from '../../utils/license';
+import { executeAutoPurgeAndCleanCache, CURRENT_APP_VERSION } from '../../utils/autoPurge';
 import {
   Settings,
   Building2,
@@ -87,6 +88,15 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
   // License state
   const [licenseKeyInput, setLicenseKeyInput] = useState('');
   const [licenseMsg, setLicenseMsg] = useState<{ text: string; isError: boolean } | null>(null);
+  const [isPurgingCache, setIsPurgingCache] = useState(false);
+
+  const handleManualPurge = async () => {
+    setIsPurgingCache(true);
+    await executeAutoPurgeAndCleanCache(true);
+    setTimeout(() => {
+      window.location.reload();
+    }, 600);
+  };
 
   const ICON_OPTIONS = [
     { id: 'Activity', label: 'Pulso Clínico', icon: Activity },
@@ -1076,6 +1086,35 @@ export const ClinicSettingsModal: React.FC<ClinicSettingsModalProps> = ({
                       Máx. 120 peticiones/min para APIs y máx. 30 peticiones/min para generación de informes IA (Gemini).
                     </p>
                   </div>
+                </div>
+              </div>
+
+              {/* Auto-Purga y Limpieza de Caché */}
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <RefreshCw className={`w-4 h-4 text-cyan-600 ${isPurgingCache ? 'animate-spin' : ''}`} />
+                    <h4 className="text-xs font-bold text-slate-900">Auto-Purga y Actualización Inmediata de Dispositivos</h4>
+                  </div>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800 font-mono font-bold">
+                    v{CURRENT_APP_VERSION}
+                  </span>
+                </div>
+
+                <p className="text-[11px] text-slate-600 leading-relaxed">
+                  Elimina automáticamente la memoria caché del navegador (CacheStorage y Service Workers) en computadoras, tablets y celulares para asegurar que nadie vea datos antiguos o código desactualizado.
+                </p>
+
+                <div className="pt-1">
+                  <button
+                    type="button"
+                    onClick={handleManualPurge}
+                    disabled={isPurgingCache}
+                    className="px-4 py-2 bg-white hover:bg-slate-100 text-cyan-800 border border-slate-200 rounded-xl text-xs font-bold transition-all shadow-xs flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                  >
+                    <RefreshCw className={`w-3.5 h-3.5 ${isPurgingCache ? 'animate-spin' : ''}`} />
+                    <span>{isPurgingCache ? 'Purgando y Sincronizando...' : 'Forzar Auto-Purga y Recargar Dispositivo'}</span>
+                  </button>
                 </div>
               </div>
             </div>
