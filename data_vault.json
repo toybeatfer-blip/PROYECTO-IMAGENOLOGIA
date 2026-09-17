@@ -9,9 +9,13 @@
   },
   "tombstones": [
     "clinic-77873503",
-    "tenant-clinic-demo"
+    "tenant-clinic-demo",
+    "tenant-diag-norte",
+    "tenant-san-pedro",
+    "tenant-imagis-central",
+    "clinic-237cd749"
   ],
   "clinicRecords": {},
   "clinicSettings": {},
-  "lastUpdated": "2026-09-07T18:11:25.616Z"
+  "lastUpdated": "2026-09-10T05:18:58.964Z"
 }
